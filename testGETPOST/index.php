@@ -1,0 +1,1 @@
+<a href="save.php?n1=10&n2=30">ส่งค่า PHP ผ่าน Link</a>

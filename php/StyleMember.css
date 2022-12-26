@@ -1,0 +1,35 @@
+
+
+
+.navbar-brand {
+    color: #fff;
+}
+
+.navbar .navbar-expand-lg .navbar-light {
+    background-color: #116530;
+}
+
+/*พื้นหลัง*/
+body {
+    background-color: #f6f6f6;
+}
+
+div.img {
+    margin: 5px;
+    padding: 5px;  /*ระยะห่างของรูปภาพ ภายในกรอบ*/
+    border: 1px solid #0000ff;  /*ความหนาและสีของเส้นกรอบ*/
+    height: auto;  /*ความสูง ตั้งอัตโนมัติ*/
+    width: auto;  /*ความกว้างตั้งอัตโนมัติ*/
+    float: left;  /*จัดให้ชิดซ้าย*/
+    text-align: center;  /*จัดรูปภาพให้อยู่ตรงกลาง*/
+}	
+div.img a:hover img {       /*เมื่อเอาเมาส์ไปวางภาพจะขยาย*/
+    border: 1px solid #0000ff;
+    border: 1px solid #0000ff;
+}
+div.desc {
+  text-align: center; 		 /*จัดข้อความให้อยู่ตรงกลาง*/
+  font-weight: normal;  	/*ขนาดตัวหนังสือ*/
+  width: 120px; 		 /*ความกว้างตัวอักษร*/
+  margin: 5px; 		 /*ระยะห่างของข้อความทั้งสี่ด้าน*/
+}

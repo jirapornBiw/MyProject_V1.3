@@ -1,0 +1,4 @@
+CREATE TABLE type (
+    id INT(10) NOT NULL,
+    name VARCHAR(50) NOT NULL
+)

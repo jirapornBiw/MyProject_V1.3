@@ -1,0 +1,81 @@
+<?php
+namespace App\Model;
+
+use App\Database\Db;
+
+class pays extends Db {
+
+	public function getAllPay(){
+        $sql = "
+            SELECT * FROM pays
+			LEFT JOIN orders ON pays.OrderId = orders.o_id
+        ";
+        $stmt = $this->pdo->query($sql);
+        $data = $stmt->fetchAll();
+        return $data;
+    }
+
+    public function addPay($pay) {
+		$sql = "
+			INSERT INTO pays (
+				CustomerID, 
+				image,
+                OrderId,
+				status
+
+				
+			) VALUES (
+				:CustomerID, 
+				:image,
+                :OrderId,
+				'รอการตรวจสอบ'
+			)
+		";
+		
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->execute($pay);//จับคู่ รันในฐานข้อมูล
+		return $this->pdo->lastInsertId();
+	}
+	/*public function addPay($pay) {
+		$sql = "
+			INSERT INTO pays (
+				CustomerID, 
+				image,
+                OrderId,
+				status
+
+				
+			) VALUES (
+				:CustomerID, 
+				:image,
+                :OrderId,
+				'รอการตรวจสอบ'
+			)
+		";
+		
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->execute($pay);//จับคู่ รันในฐานข้อมูล
+		return $this->pdo->lastInsertId();
+	}*/
+	public function updateStatusCorrect($pay){
+		$sql = "
+			UPDATE  orders SET
+				status = :action
+			WHERE o_id = :id
+		";
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->execute($pay);//จับคู่ รันในฐานข้อมูล
+		return true;
+	}
+	/*ต้นฉบับ
+	public function updateStatusCorrect($pay){
+		$sql = "
+			UPDATE  orders SET
+				status =:action
+			WHERE id = :id
+		";
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->execute($pay);//จับคู่ รันในฐานข้อมูล
+		return true;
+	}*/
+}

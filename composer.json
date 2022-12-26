@@ -1,0 +1,19 @@
+{
+    "name": "dell_pk_top/my-project",
+    "description": "Master REST API",
+    "require": {
+        "vlucas/phpdotenv": "5.3",
+        "claviska/simpleimage": "^2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "jiraporn hinkok",
+            "email": "jirapon.jh@gmail.com"
+        }
+    ]
+}
