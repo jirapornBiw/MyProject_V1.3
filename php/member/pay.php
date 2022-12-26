@@ -53,7 +53,7 @@ if(isset($_REQUEST['action'])=='pay'){
                     </div></br>
                     
                     <?php include 'promptpay_QRcode.php' ?>
-                    <a href="#" class="btn btn-primary" onclick="render_qr(x=<?php echo $order['total'];?>)" >จ่ายเงิน</a>
+                    <a href="#" class="btn btn-primary" onclick="render_qr(x=<?php echo $order['total'];?>)" >ชำระเงิน</a>
                     <label for="name">จำนวนเงิน : <?php echo $order['total'];?></label></br>
 
 
