@@ -30,10 +30,10 @@ if(isset($_REQUEST['action'])=='pay'){
  ?>
 
 <div class="row">
-        <div class="col-sm-12 mt-5">
-          <div class="alert alert-primary" role="alert">
+        <div class="col-sm-12 mt-3">
+          <!--<div class="alert alert-primary" role="alert">
             การสั่งซื้อ
-          </div>
+          </div>-->
         </div>
   <div class="container">
 		<div class="row mt-5">
@@ -41,18 +41,20 @@ if(isset($_REQUEST['action'])=='pay'){
 				<div class="card mb-3">
 					
 					<div class="card-body">
-          <form action="save_pay.php?action=add" method="post"
+          <form action="save_pay.php" method="post"
                         enctype="multipart/form-data">
                         
                         </br>
                     <div class="form-group">
-                        <label for="topic">ช่องทางการชำระเงิน</label></br>
-                        <label for="topic">ธนาคารกรุงไทย</label></br>
-                        <label for="topic">เลขที่บัญชี : 4800453127</label></br>
-                        <label for="topic">นางสาวจิราภรณ์ หินกอก</label></br>
-                    </div></br>
+                        <button type="button" class="btn  btn-light" disabled>วิธีการชำระเงิน</button>
+                        <button type="button" class="btn  btn-secondary" disabled>QR Payment</button></div>
+
+                      <label for="name" class="text-right">ยอดรวมสินค้า : <?php echo $order['total'];?></label></br>
+
                     
-                    <?php include 'promptpay_QRcode.php' ?>
+                    
+                    
+                        <?php include 'promptpay_QRcode.php' ?>
                     <a href="#" class="btn btn-primary" onclick="render_qr(x=<?php echo $order['total'];?>)" >ชำระเงิน</a>
                     <label for="name">จำนวนเงิน : <?php echo $order['total'];?></label></br>
 
@@ -80,5 +82,7 @@ if(isset($_REQUEST['action'])=='pay'){
                     </div>
                 </div>
             </div>
+
+
 </body>
 </html>

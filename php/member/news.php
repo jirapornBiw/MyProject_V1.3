@@ -26,11 +26,11 @@ if(!$_SESSION['login']){
 	include 'script.php';
  ?>
  <div class="row">
-        <div class="col-sm-12 mt-5">
-          <div class="alert alert-primary" role="alert">
-           ข่าวสาร
+          <div class="col-sm-12 mt-5">
+            <div class="d-flex justify-content-center">
+              <h1>ข่าวสาร</h1>
+            </div>
           </div>
-        </div>
         
         <?php
         //

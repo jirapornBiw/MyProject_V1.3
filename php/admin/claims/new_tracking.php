@@ -22,12 +22,12 @@ session_start();
   </head>
 <body class="font-mali">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-<?php include 'float.php'; ?>
-  <div class="container">
-		<div class="row mt-5">
+<?php include '../float.php'; ?>
+  <div class="container-fluid">
+		<div class="row">
 			<div class="col">
 				<div class="card mb-3">
-					<div class="card-header text-white d-flex justify-content-between" style="background-color: #d0e7a3">
+					<div class="card-header text-white d-flex justify-content-between" style="background-color: #393939">
 						<h4>เพิ่มหมายเลขการจัดส่งใหม่</h4>
 						<a href="index.php" class="btn btn-light">ย้อนกลับ</a>
 					</div>

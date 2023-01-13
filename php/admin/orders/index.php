@@ -6,6 +6,66 @@ if(!$_SESSION['login']){
   header("location: ../../../auth/login.php");
   exit;
 }
+$ordersObj = new orders();
+$orders = $ordersObj->getAllOrders();
+include("../connect.php");
+$query=mysqli_query($conn,"SELECT COUNT(o_id) FROM orders");
+$row = mysqli_fetch_row($query);
+$rows = $row[0];
+ 
+	$page_rows = 9;  //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
+ 
+	$last = ceil($rows/$page_rows);
+ 
+	if($last < 1){
+		$last = 1;
+	}
+ 
+	$pagenum = 1;
+ 
+	if(isset($_GET['pn'])){
+		$pagenum = preg_replace('#[^0-9]#', '', $_GET['pn']);
+	}
+ 
+	if ($pagenum < 1) {
+		$pagenum = 1;
+	}
+	else if ($pagenum > $last) {
+		$pagenum = $last;
+	}
+ 
+	$limit = 'LIMIT ' .($pagenum - 1) * $page_rows .',' .$page_rows;
+ 
+	$nquery=mysqli_query($conn,"SELECT * from  orders $limit");
+ 
+	$paginationCtrls = '';
+ 
+	if($last != 1){
+ 
+	if ($pagenum > 1) {
+$previous = $pagenum - 1;
+		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$previous.'" class="btn btn-dark">Previous</a> &nbsp; &nbsp; ';
+ 
+		for($i = $pagenum-4; $i < $pagenum; $i++){
+			if($i > 0){
+		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'" class="btn btn-dark">'.$i.'</a> &nbsp; ';
+			}
+	}
+}
+ 
+	$paginationCtrls .= ''.$pagenum.' &nbsp; ';
+ 
+	for($i = $pagenum+1; $i <= $last; $i++){
+		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'" class="btn btn-dark">'.$i.'</a> &nbsp; ';
+		if($i >= $pagenum+4){
+			break;
+		}
+	}
+ 
+if ($pagenum != $last) {
+$next = $pagenum + 1;
+$paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next.'" class="btn btn-dark">Next</a> ';
+}}
 ?>
 
 <!DOCTYPE html>
@@ -32,14 +92,12 @@ if(!$_SESSION['login']){
 				<div class="card mb-3 ">
 					<div class="card-header text-white d-flex justify-content-between" style="background-color: #393939;">
 						<h4 class="text-light">รายงานการขายสินค้า</h4>
-						<a href="add.php?action=add" class="btn btn-outline-light">เพิ่มสินค้าใหม่</a>
 					</div>
-
 					<div class="row mt-4">
 						<div class="col-8">
 						<a href='index.php' class='btn btn-outline-secondary'>รายการทั้งหมด</a>
 						<a href='NewOrder.php' class='btn btn-outline-warning'>รายการใหม่</a>
-						<a href='Payment..php' class='btn btn-outline-success'>ชำระเงินแล้ว</a>
+						<a href='Payment.php' class='btn btn-outline-success'>ชำระเงินแล้ว</a>
 						<a href='Shipping.php' class='btn btn-outline-primary'>ส่งสินค้าแล้ว</a>
 
 						</div>
@@ -66,6 +124,7 @@ if(!$_SESSION['login']){
 									$n=0;
 									foreach($orders as $order) {
 									$n++;
+									while($order = mysqli_fetch_array($nquery)){
 									echo "
 										<tr>    
 											<td>$n</td>
@@ -74,17 +133,16 @@ if(!$_SESSION['login']){
 											<td>{$order['dttm']}</td>
 											<td>{$order['dttm']}</td>
 											<td>{$order['status']}</td>
-											
-											
 											<td>
 											<a href='orderDetail.php?id={$order['o_id']}&action=detail' class='btn btn-outline-warning'>รายละเอียด</a>
 											</td>
 										</tr>
 										";
-										}
+										}}
 									?>
 							</tbody>
 						</table>
+						<div id="pagination_controls"><?php echo $paginationCtrls; ?></div>
 					</div>
 				</div>
 			</div>

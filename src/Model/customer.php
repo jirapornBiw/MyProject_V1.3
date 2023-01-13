@@ -11,18 +11,26 @@ class customer extends Db {
 
 		$sql = "
 			INSERT INTO customers (
-				name,
+				first_name,
+				last_name,
 				email,
                 address,
-                postcode,
+				provinces,
+				amphures,
+				districts,
+                zip_code,
                 username,
 				password,
 				phone
 			) VALUES (
-				:name,
+				:first_name,
+				:last_name,
 				:email,
                 :address,
-                :postcode,
+				:provinces,
+				:amphures,
+				:districts,
+                :zip_code,
                 :username,
 				:password,
 				:phone		
@@ -34,10 +42,10 @@ class customer extends Db {
 		session_start();
 		$id = $this->pdo->lastInsertId();
 		$_SESSION['c_id'] = $id;
-		$_SESSION['c_name'] = $customer['name'];
+		$_SESSION['c_name'] = $customer['first_name'];
 		$_SESSION['c_email'] = $customer['email'];
         $_SESSION['c_address'] = $customer['address'];
-        $_SESSION['c_postcode'] = $customer['postcode'];
+        $_SESSION['c_zip_code'] = $customer['zip_code'];
 		$_SESSION['c_username'] = $customer['username'];
 		$_SESSION['userlevel'] = 'member';
 		$_SESSION['login'] = true;
@@ -51,10 +59,10 @@ class customer extends Db {
 		$sql = "
 			SELECT
 				id,
-				name,
+				first_name,
 				email,
 				address,
-				postcode,
+				zip_code,
 				username,
 				password,
 				userlevel,
@@ -72,10 +80,10 @@ class customer extends Db {
 		if(password_verify($customer['password'], $customerDB['password'])) {
 			session_start();
 			$_SESSION['c_id'] = $customerDB['id'];
-			$_SESSION['c_name'] = $customerDB['name'];
+			$_SESSION['c_name'] = $customerDB['first_name'];
 			$_SESSION['c_email'] = $customerDB['email'];
 			$_SESSION['c_address'] = $customerDB['address'];
-			$_SESSION['c_postcode'] = $customerDB['postcode'];
+			$_SESSION['c_zip_code'] = $customerDB['zip_code'];
 			$_SESSION['c_username'] = $customerDB['username'];
 			$_SESSION['userlevel'] = $customerDB['userlevel'];
 			$_SESSION['login'] = true;	
@@ -111,13 +119,7 @@ class customer extends Db {
 	public function getCustomerById($id){
 		$sql="
 			SELECT 
-				customers.id,
-				customers.name,
-				customers.email,
-				customers.address,
-				customers.postcode,
-				customers.username,
-				customers.phone
+				*
 			FROM
 				customers
 			WHERE
@@ -135,7 +137,7 @@ class customer extends Db {
 				name = :name, 
 				email = :email, 
 				address = :address,
-				postcode = :postcode,
+				zip_code = :zip_code,
 				username = :username,
 				phone = :phone
 			WHERE id = :id

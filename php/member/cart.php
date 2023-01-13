@@ -66,7 +66,7 @@ $act = mysqli_real_escape_string($conn,($_GET['action']));
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แสดงสินค้าสินค้า</title>
+    <title>ตะกร้าสินค้าของฉัน</title>
     <link rel="stylesheet" href="../../node_modules\bootstrap\dist\css\bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
@@ -79,23 +79,25 @@ $act = mysqli_real_escape_string($conn,($_GET['action']));
  ?>
 
 
-    <div class="container mt-5 pt-4">
+    <div class="container-fluid mt-5 pt-5">
 
     <!-- Content here -->
     <!--<a href="product_detail.php?id=<?php echo $product['id']?>" class="btn btn-light">ย้อนกลับ</a>-->
 
     <form id="frmcart" name="frmcart" method="post" action="?action=update">
-  <table width="600" border="0" align="center" class="square">
+  <table border="0" align="center" class="square">
     <tr>
-      <td colspan="5" bgcolor="#CCCCCC">
-      <b>ตะกร้าสินค้า</span></td>
+    	<td>
+      		<b>ตะกร้าสินค้า</span><br>
+		</td>
     </tr>
     <tr>
-      <td bgcolor="#EAEAEA">สินค้า</td>
-      <td align="center" bgcolor="#EAEAEA">ราคา</td>
-      <td align="center" bgcolor="#EAEAEA">จำนวน</td>
-      <td align="center" bgcolor="#EAEAEA">รวม(บาท)</td>
-      <td align="center" bgcolor="#EAEAEA">ลบ</td>
+	<td align="center" class="border border-secondary"></td>
+      <td class="border border-secondary">สินค้า</td>
+      <td align="center" class="border border-secondary">ราคา</td>
+      <td align="center" class="border border-secondary">จำนวน</td>
+      <td align="center" class="border border-secondary">รวม(บาท)</td>
+      <td align="center" class="border border-secondary"></td>
     </tr>
 <?php
 $total=0;
@@ -110,20 +112,23 @@ if(!empty($_SESSION['cart']))
 		$sum = $row['price'] * $qty;
 		$total += $sum;
 		echo "<tr>";
-		echo "<td width='334'>" . $row["name"] . "</td>";
-		echo "<td width='46' align='right'>" .number_format($row["price"],2) . "</td>";
-		echo "<td width='57' align='right'>";  
-		echo "<input type='text' name='amount[$p_id]' value='$qty' size='2'/></td>";
-		echo "<td width='93' align='right'>".number_format($sum,2)."</td>";
+		echo "<td width='200' class='border border-secondary'>" . "<img src='../admin/product/{$row["image"]}' width='100px'>". "</td>";
+		echo "<td width='334' class='border border-secondary'>" . $row["name"] . "</td>";
+		echo "<td width='46' align='right' class='border border-secondary'>" .number_format($row["price"],2) . "</td>";
+		echo "<td width='57' align='right' class='border border-secondary'>";  
+		echo "<input type='text' name='amount[$p_id]' value='$qty' size='2' class='border border-secondary'/></td>";
+		echo "<td width='93' align='right' class='border border-secondary'>".number_format($sum,2)."</td>";
 		//remove product
-		echo "<td width='46' align='center'><a href='cart3.php?id=$p_id&action=remove'>ลบ</a></td>";
+		echo "<td width='46' align='center' class='border border-secondary'><a href='cart3.php?id=$p_id&action=remove' class='btn btn-danger btn-sm'>ลบ</a></td>";
 		echo "</tr>";
 	}
 	echo "<tr>";
-  	echo "<td colspan='3' bgcolor='#CEE7FF' align='center'><b>ราคารวม</b></td>";
-  	echo "<td align='right' bgcolor='#CEE7FF'>"."<b>".number_format($total,2)."</b>"."</td>";
-  	echo "<td align='left' bgcolor='#CEE7FF'></td>";
+  	echo "<td colspan='4' bgcolor='#EAEAEA' align='center' class='border border-secondary'><b>ราคารวม</b></td>";
+  	echo "<td align='right' bgcolor='#EAEAEA' class='border border-secondary'>"."<b>".number_format($total,2)."</b>"."</td>";
+  	echo "<td align='left' bgcolor='#EAEAEA' class='border border-secondary'></td>";
 	echo "</tr>";
+	echo "<br>";
+	
 }
 ?>
 <tr>

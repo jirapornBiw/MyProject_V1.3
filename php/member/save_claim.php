@@ -13,7 +13,7 @@ $temp = $_FILES['txt_file']['tmp_name'];
 
 $path = "" . $image_file;
 
-move_uploaded_file($temp, 'upload_claims/'.$image_file);
+move_uploaded_file($temp, '../admin/claims/upload/'.$image_file);
 
     $claim = $_REQUEST;
     unset($claim['action']);
@@ -21,5 +21,5 @@ move_uploaded_file($temp, 'upload_claims/'.$image_file);
     $claim['image'] = $path;
     $claimObj->addClaim($claim);
 
-header("location: home.php");
+header("location: index.php");
 ?>

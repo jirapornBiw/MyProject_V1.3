@@ -44,7 +44,7 @@
     <div class="btn-float mt-3">
       <div class="d-grid gap-3">
 
-        <a href='../home.php' class='btn btn-outline-light'>
+        <a href='../index.php' class='btn btn-outline-light'>
           <i class="fa fa-tachometer" aria-hidden="true"></i>  
           Dashboard</a>
           

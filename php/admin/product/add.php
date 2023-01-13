@@ -1,11 +1,8 @@
 <?php require "../../../vendor/autoload.php"  ?>
 <?php
-use App\Model\customers;
-use App\Model\products;
 use App\Model\type;
 use App\Model\status;
 use App\Model\weight;
-
 session_start();
 ?>
 <!DOCTYPE html>
@@ -23,8 +20,7 @@ session_start();
 <body class="font-mali">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 <?php include 'float.php'; ?>
- 
-  <div class="container-fluid">
+    <div class="container-fluid">
 		<div class="row">
 			<div class="col">
 				<div class="card mb-3">
@@ -33,33 +29,28 @@ session_start();
 						<a href="index.php" class="btn btn-outline-light">ย้อนกลับ</a>
 					</div>
 					<div class="card-body">
-                        <form action="save_add.php?action=add" method="post"
-                        enctype="multipart/form-data">
-                        
-                        </br>
-                            <div class="form-group">
-                            <label for="type_id">ประเภทข้าว</label></br>
-						<select name="type_id" class="form-control" style="width: 400px">
-                            <option value="">เลือก</option>
-                            <?php
-                                $typeObj = new type;
-                                $types = $typeObj->getAllTypes();
-                                foreach($types as $type) {
-                                $selected = ($type['id'] == $product['type_id']) ? "selected" : "";
-                                echo "
-                                    <option value='{$type['id']}' {$selected} >{$type['name']}</option>
-                                ";
-                                }
-                            ?>
-                        </select></br>
-                    </div>
-                        
-                    <div class="form-group">
+                        <form action="save_add.php?action=add" method="post" enctype="multipart/form-data">
+                            <div class="form-group mb-2">
+                                <label for="type_id">ประเภทข้าว</label></br>
+                                <select name="type_id" class="form-control" style="width: 400px">
+                                    <option value="">เลือก</option>
+                                    <?php
+                                        $typeObj = new type;
+                                        $types = $typeObj->getAllTypes();
+                                        foreach($types as $type) {
+                                        $selected = ($type['id'] == $product['type_id']) ? "selected" : "";
+                                        echo "
+                                            <option value='{$type['id']}' {$selected} >{$type['name']}</option>
+                                        ";
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                    <div class="form-group mb-2">
                         <label for="name">ชื่อพันธุ์ข้าว</label></br>
                         <input type="text" name="name" id="name" class="form-contro" style="width: 400px" >
-                    </div></br>
-                    
-                    <div class="form-group">				
+                    </div>
+                    <div class="form-group mb-2">				
                         <label for="weight_id">น้ำหนัก</label></br>
                         <select name="weight_id" class="form-control" style="width: 400px">
                             <option value="">เลือก</option>
@@ -73,32 +64,27 @@ session_start();
                                 ";
                                 }
                             ?>
-                        </select></br>          
+                        </select>         
                     </div>
-
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label for="stock">จำนวนในสต็อก (ถุง)</label></br>
                         <input type="text" name="stock" id="stock" class="form-contro" style="width: 400px">
-                    </div></br>
+                    </div>
 
-                    <div class="form-group">
+                    <div class="form-group mb-2">
                         <label for="price">ราคาที่จำหน่าย (บาท)</label></br>
                         <input type="text" name="price" id="price" class="form-contro" style="width: 400px">
-                    </div></br>
-
-                    <div class="form-group">
+                    </div>
+                    <div class="form-group mb-2">
                         <label for="txt_file">ที่อยู่รูปภาพ</label></br>
                         <input type="file" name="txt_file" id="txt_file" class="form-contro">
-                    </div></br>
-                    
-                    <div class="form-group">
+                    </div>
+                    <div class="form-group mb-2">
                         <label for="Products_Detail">รายละเอียด</label></br>
-                        <textarea placeholder="กรุณากรอกรายละเอียด"style="width: 400px ;height:300px;" type="text" name="Products_Detail" id="Products_Detail" class="form-contro"></textarea>
-                    </div></br>
-                    
+                        <textarea placeholder="กรุณากรอกรายละเอียด"style="width: 400px ;height:100px;" type="text" name="Products_Detail" id="Products_Detail" class="form-contro"></textarea>
+                    </div>
                     <div class="form-group">				
                         <label for="status_id">สถานะการจำหน่าย</label></br>
-                        <!--<p class="card-text"><small class="text-muted">สถานะการจำหน่าย "1 = จำหน่าย" "0 = ไม่จำหน่าย"</small></p>-->
                         <select name="status_id" class="form-control" style="width: 400px">
                             <option value="">เลือก</option>
                             <?php
@@ -112,7 +98,6 @@ session_start();
                                 }
                             ?>
                         </select></br>
-                                    
                     </div>
                     <button class="btn btn-success" type ="submid">บันทึก</button>
 			        <button class="btn btn-outline-danger" type ="reset">ยกเลิก</button>

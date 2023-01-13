@@ -15,7 +15,7 @@ if(!$_SESSION['login']){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>แจ้งพัสดุเสียหาย</title>
     <link rel="stylesheet" href="../../../node_modules\bootstrap\dist\css\bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
@@ -24,14 +24,14 @@ if(!$_SESSION['login']){
 </head>
 <body class="font-mali">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-  <?php include 'float.php'; ?>
+  <?php include '../float.php'; ?>
 
   <article>
-  <div class="container">
-		<div class="row mt-5 ">
+  <div class="container-fluid">
+		<div class="row">
 			<div class="col ">
 				<div class="card mb-3 ">
-					<div class="card-header text-white d-flex justify-content-between" style="background-color: #d0e7a3;">
+					<div class="card-header text-white d-flex justify-content-between" style="background-color: #393939;">
 						<h4>ตรวจสอบพัสดุเสียหาย</h4>
 					</div>
 					<div class="card-body">
@@ -59,7 +59,7 @@ if(!$_SESSION['login']){
 										<tr>    
 											<td>$n</td>
 											<td>{$claim['OrderId']}</td>
-											<td><img src='../../member/upload_claims/{$claim['image']}' width='200'  height='250' class='resize'</td>
+											<td><img src='upload/{$claim['image']}' width='150'  height='175' class='//resize'</td>
 											<td>{$claim['CustomerID']}</td>
                                             <td>{$claim['details']}</td>
 											<td>{$claim['dttm']}</td>
@@ -71,6 +71,7 @@ if(!$_SESSION['login']){
 										";
 										}
 									?>
+									
 							</tbody>
 						</table>
 						</form>

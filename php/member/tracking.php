@@ -41,7 +41,6 @@ if(!$_SESSION['login']){
                 				<th>รหัสสั่งซื้อ</th>
 								<th>วันที่สั่งซื้อ</th>
 								<th>หมายเลขพัสดุ</th>
-								
 								</tr>
 							</thead>
 							<tbody>

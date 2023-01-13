@@ -71,7 +71,7 @@ $customer = $customerObj->getCustomerById($_SESSION['c_id']);
 </tr>
 <tr>
     <td bgcolor="#EEEEEE">ชื่อ</td>
-    <td><label for="name"><?php echo $customer['name'];?></label></br></td>
+    <td><label for="name"><?php echo $customer['first_name'];?></label></br></td>
 </tr>
 <tr>
     <td width="22%" bgcolor="#EEEEEE">ที่อยู่</td>

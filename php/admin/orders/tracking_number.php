@@ -59,6 +59,11 @@ if(isset($_REQUEST['action'])=='add'){
                         <label for="tracking_number">หมายเลขพัสดุ</label></br>
                         <input type="text" name="tracking_number" id="tracking_number" class="form-contro" >
                     </div></br>
+
+                    <div class="form-group">
+                        <label for="shipping_company">บริษัทขนส่งสินค้า</label></br>
+                        <input type="text" name="shipping_company" id="shipping_company" class="form-contro" >
+                    </div></br>
 				
 					<button class="btn btn-outline-success" type ="submid">บันทึก</button>
 					</from>

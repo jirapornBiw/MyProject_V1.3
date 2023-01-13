@@ -4,6 +4,8 @@ session_start();
 
 use App\Model\product;
 use App\Model\customer;
+use App\Model\weight;
+
 
 if(isset($_REQUEST['action'])=='edit'){
 	$customerObj = new customer;
@@ -42,7 +44,7 @@ if(!$_SESSION['login']){
           <div class="form-group">
                           <label for="name">ชื่อ</label></br>
                           <input type="text" name="name" id="name" class="form-control" 
-                          value="<?php echo $customer['name']; ?>">
+                          value="<?php echo $customer['first_name']; ?>">
                       </div></br>
           <div class="form-group">
                           <label for="email">อีเมลล์</label></br>
@@ -54,10 +56,28 @@ if(!$_SESSION['login']){
                           <input type="text" name="address" id="address" class="form-control" 
                           value="<?php echo $customer['address']; ?>">
                       </div></br>
+
+                      <div class="form-group">				
+                        <label for="weight_id">จังหวัด</label></br>
+                        <select name="weight_id" class="form-control" style="width: 400px;">
+                            <option value=""><?php echo $product['weight']; ?></option>
+                            <?php
+                                $weightObj = new weight;
+                                $weights = $weightObj->getAllWeight();
+                                foreach($weights as $weight) {
+                                $selected = ($weight['id'] == $product['weight_id']) ? "selected" : "";
+                                echo "
+                                    <option value='{$weight['id']}' {$selected} >{$weight['name']}</option>
+                                ";
+                                }
+                            ?>
+                        </select></br>          
+                    </div>
+
           <div class="form-group">
                           <label for="postcode">รหัสไปรษณีย์</label></br>
                           <input type="text" name="postcode" id="postcode" class="form-control" 
-                          value="<?php echo $customer['postcode']; ?>">
+                          value="<?php echo $customer['zip_code']; ?>">
                       </div></br>
           <div class="form-group">
                           <label for="phone">เบอร์โทรศัพท์</label></br>

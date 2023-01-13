@@ -2,12 +2,15 @@
 <?php
 use App\Model\orders;
 use App\Model\order_detail;
+use App\Model\pays;
 
 session_start();
 
-if(isset($_REQUEST['action'])=='add'){
+if(isset($_REQUEST['action'])=='detail'){
 	$orderObj = new orders;
 	$order = $orderObj->getOrderById($_REQUEST['id']);
+	$payObj = new pays;
+	$pay = $payObj->getAllPay($_REQUEST['id']);
 }
 /*if(isset($_REQUEST['action'])=='detail'){
 	$orderObj = new orders;
@@ -42,12 +45,17 @@ if(isset($_REQUEST['action'])=='add'){
                     <h4>ข้อมูลลูกค้า</h4>
                     <label for="name">รหัสสั่งซื้อ : <?php echo $order['o_id'];?></label></br>
                     <label for="name">วันที่ : <?php echo $order['dttm'];?></label></br>
+					<label for="name">ยอดรวมสินค้า : <?php echo $order['total'];?></label></br>
                     <label for="name">ชื่อ : <?php echo $order['name'];?></label></br>
                     <label for="name">ที่อยู่ : <?php echo $order['address'];?></label></br>
                     <label for="name">รหัสไปรษณีย์ : <?php echo $order['postcode'];?></label></br>
                     <label for="name">เบอร์โทรศัพท์ : <?php echo $order['phone'];?></label></br>
                     <label for="name">อีเมลล์ : <?php echo $order['gmail'];?></label></br>
-                    
+                    <h4>หลักฐานการชำระเงิน</h4>
+					<img src="../pays/upload/324379271_490588243195850_7819031905497031614_n.jpg"  width="300" height="800">
+					<!--<img src="upload/<?php echo $pay['image']?>">-->
+
+
                     <h4>รายการการสั่งซื้อ</h4>
                     
                     <div class="card-body">
@@ -76,14 +84,15 @@ if(isset($_REQUEST['action'])=='add'){
 											<td>{$order['product_name']}</td>
 											<td>{$order['qty']}</td>
 											<td>{$order['pricetotal']}</td><br>
-											<td><a href='tracking_number.php?id={$order['o_id']}&action=add' class='mr-2 btn btn-outline-warning'>เพิ่มเลขพัสดุ</a></td>
 										</tr>
 										";
 										
 										}
 										?>
+
 								</tbody>
 							</table>
+							<a href="tracking_number.php?id=<?php echo $order['o_id'];?>&action=add" class='mr-2 btn btn-outline-warning'>เพิ่มเลขพัสดุ</a></td>
 						</div>
                     </div></br>
                                     

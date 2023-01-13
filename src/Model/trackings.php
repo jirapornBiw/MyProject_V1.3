@@ -39,7 +39,7 @@ class trackings extends Db {
         return $data;
     }
 
-    public function addTracking($tracking) {
+    public function addTrackingold($tracking) {
 		$sql = "
 			INSERT INTO trackings (
 				OrderId,
@@ -59,45 +59,36 @@ class trackings extends Db {
 		$stmt->execute($tracking);//จับคู่ รันในฐานข้อมูล
 		return $this->pdo->lastInsertId();
 	}
-	public function addTrackingTest($tracking) {
-		$sql1 = "
-			INSERT INTO trackings (
-				OrderId,
-				customerID,
-				shipping_company, 
-				tracking
-
-				
-			) VALUES (
-				:OrderId,
-				:customerID,
-				:company, 
-				:tracking
-			)
+	public function addTracking($trackings) {
+		$sql = "
+				INSERT INTO trackings (
+					OrderId,
+					tracking,
+					shipping_company
+				) VALUES (
+					:o_id,
+					:tracking_number,
+					:shipping_company
+					
+				)
 		";
-		$stmt = $this->pdo->prepare($sql1);
-		$stmt->execute($tracking);//จับคู่ รันในฐานข้อมูล
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->execute($trackings);//จับคู่ รันในฐานข้อมูล
 		return $this->pdo->lastInsertId();
 	}
-	public function updateOrderTest($tracking){
-		include '../../src/Database/connect.php';  
-		//$OrderId = $_REQUEST['OrderId'];
-		$sql1 = "
-			INSERT INTO trackings (
-				OrderId,
-				customerID,
-				shipping_company, 
-				tracking
 
-				
-			) VALUES (
-				:OrderId,
-				:customerID,
-				:company, 
-				:tracking
-			)
+
+
+	public function updateOrderTrackingTest2($trackings2){
+		$sql = "
+			UPDATE  orders SET
+				status ='จัดส่งสินค้าสำเร็จ',
+				tracking_number =:tracking
+			WHERE OrderId = :OrderId
 		";
-		$result1 = mysqli_query($conn, $sql1);
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->execute($trackings2);//จับคู่ รันในฐานข้อมูล
+		return $this->pdo->lastInsertId();
 	}
 	public function updateTracking($tracking){
 		$sql = "

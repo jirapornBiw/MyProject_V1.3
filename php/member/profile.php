@@ -37,10 +37,13 @@ if(!$_SESSION['login']){
         <h5 class="card-header " >ข้อมูลส่วนตัว</h5>
         <div class="card-body">
         <div class="form-group">
-          <label for="name">ชื่อ : <?php echo $customer['name'];?></label></br>
+          <label for="name">ชื่อ : <?php echo $customer['first_name'];?></label></br>
           <label for="name">อีเมล์ : <?php echo $customer['email'];?></label></br>
           <label for="name">ที่อยู่ : <?php echo $customer['address'];?></label></br>
-          <label for="name">รหัสไปรษณีย์ : <?php echo $customer['postcode'];?></label></br>
+          <label for="name">จังหวัด : <?php echo $customer['provinces'];?></label></br>
+          <label for="name">อำเภอ : <?php echo $customer['amphures'];?></label></br>
+          <label for="name">ตำบล : <?php echo $customer['districts'];?></label></br>
+          <label for="name">รหัสไปรษณีย์ : <?php echo $customer['zip_code'];?></label></br>
           <label for="name">เบอร์โทรศัพท์ : <?php echo $customer['phone'];?></label></br>
           <label for="name">ชื่อผู้ใช้ : <?php echo $customer['username'];?></label>
         </div></br>

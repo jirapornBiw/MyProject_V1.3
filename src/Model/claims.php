@@ -15,7 +15,7 @@ class claims extends Db {
 			claims.details,
 			claims.dttm
 			FROM claims
-			LEFT JOIN orders ON claims.OrderId = orders.id
+			LEFT JOIN orders orders ON claims.OrderId = orders.o_id
         ";
         $stmt = $this->pdo->query($sql);
         $data = $stmt->fetchAll();
@@ -37,7 +37,7 @@ class claims extends Db {
 				:CustomerID, 
 				:image,
                 :OrderId,
-				'รอการตรวจสอบ',
+				'แจ้งพัสดุเสียหาย',
 				:details
 			)
 		";

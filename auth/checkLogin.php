@@ -13,7 +13,7 @@ if($result){
 		header("location: ../php/member/index.php?id={$_SESSION['c_id']}&action=show");
 	} 
 	if($_SESSION['userlevel']=='admin'){
-		header("location: ../php/admin/home.php");
+		header("location: ../php/admin/index.php");
 	}
 } else {
 	header("location: login.php?msg=error");

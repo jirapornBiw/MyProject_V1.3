@@ -39,7 +39,6 @@
       <!-- Content here -->
      
     <div id="qrcode" align="center">
-    <img src="https://lmrasi.files.wordpress.com/2018/03/lays-rock-original_75g.png?w=724&h=1024" width="200px"  alt="...">
 
     </div>
   </div>
@@ -54,7 +53,7 @@
       var qr_dom = document.getElementById('qrcode');
 
       function render_qr(x){
-        var acc_id = '0883945171';
+        var acc_id = '1401501237521';
         var amount = x;
         var txt = PromptPayQR.gen_text(acc_id, amount);
 
@@ -63,6 +62,7 @@
           new QRCode(qr_dom, txt);
         }
       }
+      
 
       document.getElementById('amount').addEventListener('click', render_qr, true);
 

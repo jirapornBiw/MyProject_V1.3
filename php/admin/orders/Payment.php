@@ -6,9 +6,90 @@ if(!$_SESSION['login']){
   header("location: ../../../auth/login.php");
   exit;
 }
+$ordersObj = new orders();
+$orders = $ordersObj->getPaymentOrders();
+include("../connect.php");
+$query=mysqli_query($conn,"SELECT COUNT(o_id) FROM orders");
+$row = mysqli_fetch_row($query);
+$rows = $row[0];
+ 
+	$page_rows = 10;  //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
+ 
+	$last = ceil($rows/$page_rows);
+ 
+	if($last < 1){
+		$last = 1;
+	}
+ 
+	$pagenum = 1;
+ 
+	if(isset($_GET['pn'])){
+		$pagenum = preg_replace('#[^0-9]#', '', $_GET['pn']);
+	}
+ 
+	if ($pagenum < 1) {
+		$pagenum = 1;
+	}
+	else if ($pagenum > $last) {
+		$pagenum = $last;
+	}
+ 
+	$limit = 'LIMIT ' .($pagenum - 1) * $page_rows .',' .$page_rows;
+ 
+	//$nquery = $ordersObj->getAllOrders();
+	//$nquery = $ordersObj->getPaymentOrders();
+	$nquery=mysqli_query($conn,"SELECT
+		orders.o_id,
+		orders.name,
+		orders.dttm,
+		orders.total,
+		orders.status
+		
+	FROM 
+		orders
+	WHERE status = 'รอการตรวจสอบ' $limit");
 
-
+	/*SELECT
+		orders.o_id,
+		orders.name,
+		orders.dttm,
+		orders.total,
+		orders.status
+		
+	FROM 
+		orders
+	WHERE status = 'รอการตรวจสอบ'*/
+ 
+	$paginationCtrls = '';
+ 
+	if($last != 1){
+ 
+	if ($pagenum > 1) {
+$previous = $pagenum - 1;
+		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$previous.'" class="btn btn-dark">Previous</a> &nbsp; &nbsp; ';
+ 
+		for($i = $pagenum-4; $i < $pagenum; $i++){
+			if($i > 0){
+		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'" class="btn btn-dark">'.$i.'</a> &nbsp; ';
+			}
+	}
+}
+ 
+	$paginationCtrls .= ''.$pagenum.' &nbsp; ';
+ 
+	for($i = $pagenum+1; $i <= $last; $i++){
+		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'" class="btn btn-dark">'.$i.'</a> &nbsp; ';
+		if($i >= $pagenum+4){
+			break;
+		}
+	}
+ 
+if ($pagenum != $last) {
+$next = $pagenum + 1;
+$paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next.'" class="btn btn-dark">Next</a> ';
+}}
 ?>
+
 
 <!DOCTYPE html>
 <header class="header">
@@ -68,6 +149,7 @@ if(!$_SESSION['login']){
 									$n=0;
 									foreach($orders as $order) {
 									$n++;
+									while($order = mysqli_fetch_array($nquery)){
 									echo "
 										<tr>    
 											<td>$n</td>
@@ -83,10 +165,12 @@ if(!$_SESSION['login']){
 											</td>
 										</tr>
 										";
-										}
+										}}
+									
 									?>
 							</tbody>
 						</table>
+						<div id="pagination_controls"><?php echo $paginationCtrls; ?></div>
 					</div>
 				</div>
 			</div>
