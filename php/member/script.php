@@ -1,14 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>script</title>
-</head>
-<body>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>	
-</body>
-</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+  $('#provinces').change(function() {
+    var id_province = $(this).val();
+ 
+      $.ajax({
+      type: "POST",
+      url: "ajax_db.php",
+      data: {id:id_province,function:'provinces'},
+      success: function(data){
+          $('#amphures').html(data); 
+          $('#districts').html(' '); 
+          $('#districts').val(' ');  
+          $('#zip_code').val(' '); 
+      }
+    });
+  });
+ 
+  $('#amphures').change(function() {
+    var id_amphures = $(this).val();
+ 
+      $.ajax({
+      type: "POST",
+      url: "ajax_db.php",
+      data: {id:id_amphures,function:'amphures'},
+      success: function(data){
+          $('#districts').html(data);  
+      }
+    });
+  });
+ 
+   $('#districts').change(function() {
+    var id_districts= $(this).val();
+ 
+      $.ajax({
+      type: "POST",
+      url: "ajax_db.php",
+      data: {id:id_districts,function:'districts'},
+      success: function(data){
+          $('#zip_code').val(data)
+      }
+    });
+  
+  });
+</script>

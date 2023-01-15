@@ -95,11 +95,6 @@ use App\Model\customer;
             <i class="fa fa-sign-out text-light" aria-hidden="true"></i>
             ออกจากระบบ</a>
             </li>
-                    
-            <li class="nav-item">
-            <a class="nav-link disabled text-light" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            
-            </li>
         </ul>   
         <form class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

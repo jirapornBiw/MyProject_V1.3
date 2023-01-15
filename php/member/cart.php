@@ -92,12 +92,12 @@ $act = mysqli_real_escape_string($conn,($_GET['action']));
 		</td>
     </tr>
     <tr>
-	<td align="center" class="border border-secondary"></td>
-      <td class="border border-secondary">สินค้า</td>
-      <td align="center" class="border border-secondary">ราคา</td>
-      <td align="center" class="border border-secondary">จำนวน</td>
-      <td align="center" class="border border-secondary">รวม(บาท)</td>
-      <td align="center" class="border border-secondary"></td>
+	<td align="center" class="border border-secondary" width="200">รูปภาพ</td>
+      <td class="border border-secondary" width="350">สินค้า</td>
+      <td align="center" class="border border-secondary" width="50">ราคา</td>
+      <td align="center" class="border border-secondary" width="60">จำนวน</td>
+      <td align="center" class="border border-secondary" width="100">รวม(บาท)</td>
+      <td align="center" class="border border-secondary" width="60">ตัวเลือก</td>
     </tr>
 <?php
 $total=0;
@@ -113,13 +113,12 @@ if(!empty($_SESSION['cart']))
 		$total += $sum;
 		echo "<tr>";
 		echo "<td width='200' class='border border-secondary'>" . "<img src='../admin/product/{$row["image"]}' width='100px'>". "</td>";
-		echo "<td width='334' class='border border-secondary'>" . $row["name"] . "</td>";
-		echo "<td width='46' align='right' class='border border-secondary'>" .number_format($row["price"],2) . "</td>";
-		echo "<td width='57' align='right' class='border border-secondary'>";  
+		echo "<td width='350' class='border border-secondary'>" . $row["name"] . "</td>";
+		echo "<td width='50' align='right' class='border border-secondary'>" .number_format($row["price"],2) . "</td>";
+		echo "<td width='60' align='right' class='border border-secondary'>";  
 		echo "<input type='text' name='amount[$p_id]' value='$qty' size='2' class='border border-secondary'/></td>";
-		echo "<td width='93' align='right' class='border border-secondary'>".number_format($sum,2)."</td>";
-		//remove product
-		echo "<td width='46' align='center' class='border border-secondary'><a href='cart3.php?id=$p_id&action=remove' class='btn btn-danger btn-sm'>ลบ</a></td>";
+		echo "<td width='100' align='right' class='border border-secondary'>".number_format($sum,2)."</td>";
+		echo "<td width='50' align='center' class='border border-secondary'><a href='cart.php?id=$p_id&action=remove' class='btn btn-danger btn-sm'>ลบ</a></td>";
 		echo "</tr>";
 	}
 	echo "<tr>";
@@ -132,10 +131,10 @@ if(!empty($_SESSION['cart']))
 }
 ?>
 <tr>
-<td><a href="products.php">กลับหน้ารายการสินค้า</a></td>
+<td><a href="products.php" class="btn btn-outline-info">กลับหน้ารายการสินค้า</a></td>
 <td colspan="4" align="right">
-    <input type="submit" name="button" id="button" value="ปรับปรุง" />
-    <input type="button" name="Submit2" value="สั่งซื้อ" onclick="window.location='confirm.php';" />
+    <input type="submit" name="button" id="button" value="ปรับปรุง" class="btn btn-outline-warning"/>
+    <input type="button" name="Submit2" value="สั่งซื้อ" onclick="window.location='confirm.php';" class="btn btn-outline-success"/>
 </td>
 </tr>
 </table>

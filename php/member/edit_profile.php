@@ -16,6 +16,9 @@ if(!$_SESSION['login']){
   header("location: ../../auth/login.php");
   exit;
 }
+include '../../src/Database/db_provinces.php';
+    $sql_provinces = "SELECT * FROM provinces";
+    $query = mysqli_query($conn, $sql_provinces);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +29,7 @@ if(!$_SESSION['login']){
     <title>ประวัติส่วนตัว</title>
     <link rel="stylesheet" href="../../node_modules\bootstrap\dist\css\bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
   </head>
@@ -42,9 +46,13 @@ if(!$_SESSION['login']){
           <form action="save.php" method="get">
           <input type="hidden" name="id" value="<?php echo $_REQUEST['id']?>">
           <div class="form-group">
-                          <label for="name">ชื่อ</label></br>
-                          <input type="text" name="name" id="name" class="form-control" 
+                          <label for="first_name">ชื่อ</label></br>
+                          <input type="text" name="first_name" id="first_name" class="form-control" 
                           value="<?php echo $customer['first_name']; ?>">
+                      </div></br>
+                      <label for="last_name">นามสกุล</label></br>
+                          <input type="text" name="last_name" id="last_name" class="form-control" 
+                          value="<?php echo $customer['last_name']; ?>">
                       </div></br>
           <div class="form-group">
                           <label for="email">อีเมลล์</label></br>
@@ -58,27 +66,34 @@ if(!$_SESSION['login']){
                       </div></br>
 
                       <div class="form-group">				
-                        <label for="weight_id">จังหวัด</label></br>
-                        <select name="weight_id" class="form-control" style="width: 400px;">
-                            <option value=""><?php echo $product['weight']; ?></option>
-                            <?php
-                                $weightObj = new weight;
-                                $weights = $weightObj->getAllWeight();
-                                foreach($weights as $weight) {
-                                $selected = ($weight['id'] == $product['weight_id']) ? "selected" : "";
-                                echo "
-                                    <option value='{$weight['id']}' {$selected} >{$weight['name']}</option>
-                                ";
-                                }
-                            ?>
-                        </select></br>          
+                        <label for="provinces">จังหวัด:</label>
+                          <select class="form-control" name="provinces" id="provinces">
+                                <option value="<?=$value['name_th']?>" selected disabled>-กรุณาเลือกจังหวัด-</option>
+                                <?php foreach ($query as $value) { ?>
+                                <option value="<?=$value['id']?>"><?=$value['name_th']?></option>
+                                <?php } ?>
+                          </select></br>          
                     </div>
 
-          <div class="form-group">
+                    <label for="amphures">อำเภอ:</label>
+                      <select class="form-control" name="amphures" id="amphures">
+                      </select>
+                      <br>
+                
+                      <label for="districts">ตำบล:</label>
+                      <select class="form-control" name="districts" id="districts">
+                      </select>
+                      <br>
+                
+                      <label for="zip_code">รหัสไปรษณีย์:</label>
+                      <input type="text" name="zip_code" id="zip_code" class="form-control">
+                          <br>
+
+          <!--<div class="form-group">
                           <label for="postcode">รหัสไปรษณีย์</label></br>
                           <input type="text" name="postcode" id="postcode" class="form-control" 
                           value="<?php echo $customer['zip_code']; ?>">
-                      </div></br>
+                      </div></br>-->
           <div class="form-group">
                           <label for="phone">เบอร์โทรศัพท์</label></br>
                           <input type="text" name="phone" id="phone" class="form-control" 
@@ -101,6 +116,6 @@ if(!$_SESSION['login']){
 </html>
 
           
-
+<?php include('script.php');?>
 </body>
 </html>

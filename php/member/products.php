@@ -51,10 +51,6 @@ session_start();
 
         <?php } ?>
           <br><br>
-          <!--<center>Basic PHP PDO แสดงสินค้าหน้าแรก by devbanban.com 2021
-            <br>
-          </center>-->
-          
         </div>
       </div>
     </div>

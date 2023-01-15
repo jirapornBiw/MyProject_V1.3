@@ -119,9 +119,15 @@ class customer extends Db {
 	public function getCustomerById($id){
 		$sql="
 			SELECT 
-				*
+			customers.*, 
+			provinces.name_th as provinces,
+			amphures.name_th as amphures,
+			districts.name_th as districts
 			FROM
 				customers
+			LEFT JOIN provinces ON customers.provinces = provinces.id
+			LEFT JOIN amphures ON customers.amphures = amphures.id
+			LEFT JOIN districts ON customers.districts = districts.id
 			WHERE
 				customers.id = ?
 		";
@@ -134,12 +140,16 @@ class customer extends Db {
 	public function updateCustumer($customer){
 		$sql = "
 			UPDATE  customers SET
-				name = :name, 
+				first_name = :first_name, 
+				last_name = :last_name,
 				email = :email, 
 				address = :address,
+				provinces = :provinces,
+				amphures = :amphures,
+				districts = :districts,
 				zip_code = :zip_code,
-				username = :username,
-				phone = :phone
+				phone = :phone,
+				username = :username
 			WHERE id = :id
 		";
 		$stmt = $this->pdo->prepare($sql);

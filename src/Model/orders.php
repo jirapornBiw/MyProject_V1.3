@@ -83,10 +83,17 @@ class orders extends Db {
                 orders.phone,
 				orders.total,
                 orders.gmail,
-                order_detail.p_id AS product_id
+                order_detail.p_id AS product_id,
+				provinces.name_th as provinces,
+				amphures.name_th as amphures,
+				districts.name_th as districts
 			FROM 
 				orders
                 LEFT JOIN order_detail ON orders.o_id = order_detail.d_id
+				LEFT JOIN customers ON customers.id = orders.id_customer
+				LEFT JOIN provinces ON customers.provinces = provinces.id
+				LEFT JOIN amphures ON customers.amphures = amphures.id
+				LEFT JOIN districts ON customers.districts = districts.id
 			WHERE
 				orders.o_id = ?
             
@@ -110,11 +117,17 @@ class orders extends Db {
 				order_detail.p_id AS product_id,
 				order_detail.qty AS qty,
 				order_detail.pricetotal AS pricetotal,
-				products.name AS product_name
+				products.name AS product_name,
+				provinces.name_th as provinces
+
 			FROM 
 				orders
 				LEFT JOIN order_detail ON orders.o_id = order_detail.o_id
 				LEFT JOIN products ON order_detail.p_id = products.id
+				LEFT JOIN customers ON customers.id = orders.id_customer
+				LEFT JOIN provinces ON customers.provinces = provinces.id
+				LEFT JOIN amphures ON customers.amphures = amphures.id
+				LEFT JOIN districts ON customers.districts = districts.id
 			WHERE
 				orders.o_id = '{$o_id}'
 		";
@@ -135,7 +148,7 @@ class orders extends Db {
 				LEFT JOIN order_detail ON orders.o_id = order_detail.o_id
 				LEFT JOIN products ON order_detail.p_id = products.id
 			WHERE
-				orders.id_customer = '{$id}'
+				orders.id_customer = '{$id}' 
 		";
 		$stmt = $this->pdo->query($sql);
 		$data = $stmt->fetchAll();/*ดึงข้อมูลออกมา*/

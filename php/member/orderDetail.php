@@ -30,18 +30,21 @@ if(isset($_REQUEST['action'])=='detail'){
 	include 'script.php';
  ?>
  <div class="row">
-        <div class="col-sm-12 mt-5">
-          <div class="alert alert-primary" role="alert">
-		 	 รายละเอียดการสั่งซื้อ
-          </div>
+ 		<div class="col-sm-12 mt-5">
+			<div class="d-flex justify-content-center">
+              <h1>รายละเอียดการสั่งซื้อ</h1>
+            </div>
         </div>
-        
+		<div class="container mt-5 mb-5 align-items-cente 
+		justify-content-centerr border border-secondary rounded" style="width: 40rem;">
+
         <div class="form-group">
-                    <h4>ข้อมูลลูกค้า</h4>
+                    <h4>ข้อมูลลูกค้า</h4><hr>
                     <label for="name">รหัสสั่งซื้อ : <?php echo $order['o_id'];?></label></br>
                     <label for="name">วันที่ : <?php echo $order['dttm'];?></label></br>
                     <label for="name">ชื่อ : <?php echo $order['name'];?></label></br>
-                    <label for="name">ที่อยู่ : <?php echo $order['address'];?></label></br>
+                    <label for="name">ที่อยู่ : <?php echo $order['address'] . ' ตำบล '.$order['provinces']. 
+					$order['provinces'] . $order['amphures'];?></label></br>
                     <label for="name">รหัสไปรษณีย์ : <?php echo $order['postcode'];?></label></br>
                     <label for="name">เบอร์โทรศัพท์ : <?php echo $order['phone'];?></label></br>
                     <label for="name">อีเมลล์ : <?php echo $order['gmail'];?></label></br>
@@ -91,7 +94,7 @@ if(isset($_REQUEST['action'])=='detail'){
 
 
 
-                    </div></br>
+                    </div></div></br>
           <br><br>
           <!--<center>Basic PHP PDO แสดงสินค้าหน้าแรก by devbanban.com 2021
             <br>

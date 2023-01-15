@@ -31,7 +31,6 @@ if(!$_SESSION['login']){
               <h1>ข่าวสาร</h1>
             </div>
           </div>
-        
         <?php
         //
         //คิวรี่ข้อมูลมาแสดงในตาราง
@@ -39,19 +38,21 @@ if(!$_SESSION['login']){
         $news = $newObj->getAllNew();
         foreach($news as $new) {
         ?>
-           <div class="col-sm-4" style="margin-bottom:50px;">
-            <img src="../admin/news/<?php echo $new['image'];?>" width="75%"><br>
-            <?php echo $new['topic'];?> <br>
-            <?php echo ($new['detail']);?><br>
+           <div class="col-sm-3 pl-5 pr-5">
+           <div class="text-center">
+            <img src="../admin/news/<?php echo $new['image'];?>" width="200px" height="200"><br>
+            <h5><?php echo $new['topic'];?> <br><h5>
+            <!--<span class="d-inline-block text-truncate" style="max-width: 200px;">-->
+            </div>
+            <?php echo ($new['detail']);?>
+            </span><br>
             <?php echo ($new['dttm']);?><br>
-          </div> <!-- //col -->
+          
+        </div> <!-- //col -->
 
         <?php } ?>
+      
           <br><br>
-          <!--<center>Basic PHP PDO แสดงสินค้าหน้าแรก by devbanban.com 2021
-            <br>
-          </center>-->
-          
         </div>
       </div>
     </div>

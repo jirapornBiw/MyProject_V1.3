@@ -106,44 +106,6 @@
     </div>
   </div>
 </section>
-
-
-
-	<!--<div class="card mb-3">
-		<div class="card-header bg-primary text-white">
-			<h4>สมัครใช้งาน</h4>
-		</div>
-		<div class="card-body">
-			<form action="saveRegister.php" class="mb-3" method="POST">
-				<div class="form-group">
-					<label for="name">Name</label>
-					<input type="text" name="name" id="name" class="form-control" required>
-				</div>
-				<div class="form-group">
-					<label for="email">Email</label>
-					<input type="email" name="email" id="email" class="form-control" required>
-				</div>
-				<div class="form-group">
-					<label for="adress">Adress</label>
-					<input type="text" name="adress" id="adress" class="form-control" required>
-				</div>
-				<div class="form-group">
-					<label for="postcode">Postcode</label>
-					<input type="text" name="postcode" id="postcode" class="form-control" required>
-				</div>
-				<div class="form-group">
-					<label for="username">Username</label>
-					<input type="text" name="username" id="username" class="form-control" required>
-				</div>
-				<div class="form-group">
-					<label for="password">Password</label>
-					<input type="password" name="password" id="password" class="form-control" required>
-				</div></br>
-				<button type="submit" class="btn btn-primary">Register</button>
-			</form>
-			<a href="login.php">เข้าสู่ระบบ</a>
-		</div>
-	</div>-->
   <?php include('script.php');?>
 </body>
 </html>
