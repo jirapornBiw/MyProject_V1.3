@@ -107,6 +107,7 @@ class trackings extends Db {
 			SELECT
 				orders.o_id,
 				orders.dttm,
+				orders.status,
 				orders.name,
 				trackings.tracking AS tracking
 			FROM 

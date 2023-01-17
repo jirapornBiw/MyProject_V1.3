@@ -43,14 +43,12 @@ if(isset($_REQUEST['action'])=='detail'){
                     <label for="name">รหัสสั่งซื้อ : <?php echo $order['o_id'];?></label></br>
                     <label for="name">วันที่ : <?php echo $order['dttm'];?></label></br>
                     <label for="name">ชื่อ : <?php echo $order['name'];?></label></br>
-                    <label for="name">ที่อยู่ : <?php echo $order['address'] . ' ตำบล '.$order['provinces']. 
-					$order['provinces'] . $order['amphures'];?></label></br>
+                    <label for="name">ที่อยู่ : <?php echo $order['address'] . ' ตำบล'.$order['districts']
+					. ' อำเภอ' . $order['amphures'] .' จังหวัด'. $order['provinces'];?></label></br>
                     <label for="name">รหัสไปรษณีย์ : <?php echo $order['postcode'];?></label></br>
                     <label for="name">เบอร์โทรศัพท์ : <?php echo $order['phone'];?></label></br>
-                    <label for="name">อีเมลล์ : <?php echo $order['gmail'];?></label></br>
-                    
+                    <label for="name">อีเมลล์ : <?php echo $order['gmail'];?></label></br><hr>
                     <h4>รายการการสั่งซื้อ</h4>
-                    
                     <div class="card-body">
 						<table class="table">
 							<thead>
@@ -60,7 +58,6 @@ if(isset($_REQUEST['action'])=='detail'){
 								<th>ชื่อสินค้า</th>
 								<th>จำนวน</th>
 								<th>ราคารวม</th>
-								
 								</tr>
 							</thead>
 							<tbody>
@@ -76,30 +73,19 @@ if(isset($_REQUEST['action'])=='detail'){
 											<td>{$order['product_id']}</td>
 											<td>{$order['product_name']}</td>
 											<td>{$order['qty']}</td>
-											<td>{$order['pricetotal']}</td><br>
-											
+											<td>{$order['pricetotal']}</td>
 										</tr>
 										";
-										
 										}
 										?>
 								</tbody>
 							</table>
+							<div class="container" align="right">
+								จำนวนเงินรวมทั้งหมด : <?php echo$order['pricetotal'] ?> บาท
+							</div>
+								
 						</div>
-
-						
-						
-						
-                   
-
-
-
-                    </div></div></br>
-          <br><br>
-          <!--<center>Basic PHP PDO แสดงสินค้าหน้าแรก by devbanban.com 2021
-            <br>
-          </center>-->
-          
+                    </div></div>
         </div>
       </div>
     </div>

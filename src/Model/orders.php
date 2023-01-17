@@ -113,6 +113,7 @@ class orders extends Db {
 				orders.address,
 				orders.postcode,
 				orders.phone,
+				orders.total,
 				orders.gmail,
 				order_detail.p_id AS product_id,
 				order_detail.qty AS qty,

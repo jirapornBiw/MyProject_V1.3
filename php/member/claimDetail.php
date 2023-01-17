@@ -28,11 +28,12 @@ if(!$_SESSION['login']){
  ?>
  <div class="row">
         <div class="col-sm-12 mt-5">
-          <div class="alert alert-primary" role="alert">
-          แจ้งพัสดุเสียหาย
-          </div>
+            <div class="d-flex justify-content-center">
+              <h1>แจ้งพัสดุเสียหาย</h1>
+            </div>
         </div>
-        
+        <div class="container mt-5 mb-5 align-items-cente 
+		justify-content-centerr border border-secondary rounded" style="width: 35rem;">
         <div class="card-body">
 
         <div class="card-body">
@@ -49,7 +50,7 @@ if(!$_SESSION['login']){
                     <input type="hidden" name=" OrderId" value="<?php echo $_REQUEST['id']?>">
                     <div class="form-group">
                     <label for="details">รายละเอียดความเสียหาย</label></br>
-                    <input type="text" name="details" id="details" class="form-contro" >
+                    <input placeholder="กรุณากรอกรายละเอียด" type="text" name="details" id="details" style="width: 300px;height:100px;" class="form-contro" >
                     </div></br>    
 
                     <div class="form-group">
@@ -60,7 +61,7 @@ if(!$_SESSION['login']){
 			        <button class="btn btn-danger" type ="reset">ยกเลิก</button>
         </div>
           
-        </div>
+        </div></div>
       </div>
     </div>
 </body>

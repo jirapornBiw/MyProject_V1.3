@@ -27,12 +27,13 @@ if(!$_SESSION['login']){
 	include 'script.php';
  ?>
  <div class="row">
-        <div class="col-sm-12 mt-5">
-          <div class="alert alert-primary" role="alert">
-          แจ้งพัสดุเสียหาย
-          </div>
+ 		<div class="col-sm-12 mt-5">
+			<div class="d-flex justify-content-center">
+              <h1>แจ้งพัสดุเสียหาย</h1>
+            </div>
         </div>
-        
+        <div class="container mt-5 mb-5 align-items-cente 
+		justify-content-centerr border border-secondary rounded" style="width: 45rem;">
         <div class="card-body">
 						<table class="table">
 							<thead>
@@ -66,7 +67,7 @@ if(!$_SESSION['login']){
 									?>
 							</tbody>
 						</table>
-					</div>
+					</div></div>
           <br><br>
           <!--<center>Basic PHP PDO แสดงสินค้าหน้าแรก by devbanban.com 2021
             <br>

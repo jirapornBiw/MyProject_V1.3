@@ -10,17 +10,13 @@ include 'connect.php';  ?>
 
 
 <?php
-
-session_start();
 //echo '<pre>';
 //print_r($_SESSION);
 //echo '<pre>';
-if(!$_SESSION['login']){
-  header("location: ../../auth/login.php");
-  exit;
-
-
-}
+//if(!$_SESSION['login']){
+  //header("location: ../../auth/login.php");
+  //exit;
+//}
 
 //connect db
 
@@ -36,13 +32,14 @@ $act = mysqli_real_escape_string($conn,($_GET['action']));
 	//action = add ค่า id ไม่เป็นค่าว่าง
 	if($act=='add' && !empty($p_id))
 	{
+		$qty = $_REQUEST['qty'];
 		if(isset($_SESSION['cart'][$p_id]))
 		{
 			$_SESSION['cart'][$p_id]++;
 		}
 		else
 		{
-			$_SESSION['cart'][$p_id]=1;
+			$_SESSION['cart'][$p_id]=$qty;
 		}
 	}
  
@@ -95,7 +92,7 @@ $act = mysqli_real_escape_string($conn,($_GET['action']));
 	<td align="center" class="border border-secondary" width="200">รูปภาพ</td>
       <td class="border border-secondary" width="350">สินค้า</td>
       <td align="center" class="border border-secondary" width="50">ราคา</td>
-      <td align="center" class="border border-secondary" width="60">จำนวน</td>
+      <td align="center" class="border border-secondary" width="30">จำนวน</td>
       <td align="center" class="border border-secondary" width="100">รวม(บาท)</td>
       <td align="center" class="border border-secondary" width="60">ตัวเลือก</td>
     </tr>
@@ -116,7 +113,10 @@ if(!empty($_SESSION['cart']))
 		echo "<td width='350' class='border border-secondary'>" . $row["name"] . "</td>";
 		echo "<td width='50' align='right' class='border border-secondary'>" .number_format($row["price"],2) . "</td>";
 		echo "<td width='60' align='right' class='border border-secondary'>";  
-		echo "<input type='text' name='amount[$p_id]' value='$qty' size='2' class='border border-secondary'/></td>";
+		//<input type="number" name="qty" number>
+		//echo "<input type='text' name='amount[$p_id]' value='$qty' size='2' class='border border-secondary'/></td>";
+		echo "<input type='number'name='amount[$p_id]' size='4' value='$qty' size='2' class='border border-secondary'/></td>";
+		
 		echo "<td width='100' align='right' class='border border-secondary'>".number_format($sum,2)."</td>";
 		echo "<td width='50' align='center' class='border border-secondary'><a href='cart.php?id=$p_id&action=remove' class='btn btn-danger btn-sm'>ลบ</a></td>";
 		echo "</tr>";

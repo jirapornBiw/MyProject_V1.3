@@ -39,8 +39,7 @@ if(!$_SESSION['login']){
   </head>
 <body>
 <?php 
-	include 'header.php'; 
-	include 'script.php';
+	include 'header.php';
  ?>
 
 <div class="container mt-5 pt-4"> 
@@ -64,7 +63,7 @@ if(!$_SESSION['login']){
             <p>ประเภทข้าว : <?php echo $product['type']?></p>
             <p>ชื่อสายพันธุ์ข้าว   : <?php echo $product['name']?></p>
             <p>น้ำหนัก : <?php echo $product['weight']?></p>
-            <form action="cart.php" method="get">
+            <form action="../member/cart.php" method="get">
             <input type="number" name="qty" value="1" min="1" max="<?php echo $product['stock']?>">
             <input type="hidden" name="id" value="<?php echo $product['id']?>">
             <input type="hidden" name="action" value="add">

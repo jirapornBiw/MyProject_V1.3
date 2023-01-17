@@ -1,5 +1,5 @@
 <!-- หน้าหลัก -->
-<?php require "vendor/autoload.php";?>
+<!--<?php require "vendor/autoload.php";?>
 
 
 
@@ -38,6 +38,11 @@
             <a class="nav-link active text-light" aria-current="page" href="#">
             <i class="fa fa-home text-light" aria-hidden="true"></i>
             หน้าแรก</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active text-light" aria-current="page" href="php/products.php">
+            <i class="fa fa-home text-light" aria-hidden="true"></i>
+            สินค้า</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active text-light" aria-current="page" href="auth/login.php">

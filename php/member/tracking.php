@@ -27,12 +27,13 @@ if(!$_SESSION['login']){
 	include 'script.php';
  ?>
  <div class="row">
-        <div class="col-sm-12 mt-5">
-          <div class="alert alert-primary" role="alert">
-            การสั่งซื้อ
-          </div>
+ 		<div class="col-sm-12 mt-5">
+			<div class="d-flex justify-content-center">
+              <h1>ประวัติการสั่งซื้อ</h1>
+            </div>
         </div>
-        
+        <div class="container mt-5 mb-5 align-items-cente 
+		justify-content-centerr border border-secondary rounded" style="width: 40rem;">
         <div class="card-body">
 						<table class="table">
 							<thead>
@@ -40,6 +41,7 @@ if(!$_SESSION['login']){
 								<th>ลำดับ</th>
                 				<th>รหัสสั่งซื้อ</th>
 								<th>วันที่สั่งซื้อ</th>
+								<th>สถานะ</th>
 								<th>หมายเลขพัสดุ</th>
 								</tr>
 							</thead>
@@ -55,6 +57,7 @@ if(!$_SESSION['login']){
 											<td>$n</td>
 											<td>{$tracking['o_id']}</td>
 											<td>{$tracking['dttm']}</td>
+											<td>{$tracking['status']}</td>
                                             <td>{$tracking['tracking']}</td>
 										</tr>
 										";

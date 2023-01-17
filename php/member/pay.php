@@ -38,37 +38,29 @@ if(isset($_REQUEST['action'])=='pay'){
   <div class="container">
 		<div class="row mt-5">
 			<div class="col">
-				<div class="card mb-3">
-					
-					<div class="card-body">
-          <form action="save_pay.php" method="post"
-                        enctype="multipart/form-data">
-                        
-                        </br>
-                    <div class="form-group">
+          <div class="container mt-5 mb-5 align-items-cente 
+		      justify-content-centerr border border-secondary rounded" style="width: 40rem;">
+          <form action="save_pay.php" method="post" enctype="multipart/form-data">
+            <div class="d-flex justify-content-center" >
+              <h1>ชำระเงิน</h1>
+            </div>
+            
+                    <div class="form-group mt-3">
                         <button type="button" class="btn  btn-light" disabled>วิธีการชำระเงิน</button>
-                        <button type="button" class="btn  btn-secondary" disabled>QR Payment</button></div>
-
-                      <label for="name" class="text-right">ยอดรวมสินค้า : <?php echo $order['total'];?></label></br>
-
-                    
-                    
-                    
-                        <?php include 'promptpay_QRcode.php' ?>
-                    <a href="#" class="btn btn-primary" onclick="render_qr(x=<?php echo $order['total'];?>)" >ชำระเงิน</a>
-                    <label for="name">จำนวนเงิน : <?php echo $order['total'];?></label></br>
-
-
-
+                        <button type="button" class="btn  btn-secondary" disabled>QR Payment</button>
+                    </div>
+                      <label for="name" class="text-right">รหัสสั่งซื้อสินค้า : <?php echo $order['o_id'];?></label></br>
+                      <label for="name" class="text-right">ยอดรวมสินค้า : <?php echo $order['total'];?></label></br><hr>
+                    <?php include 'promptpay_QRcode.php' ?>
+                    <a href="#" class="btn btn-secondary" onclick="render_qr(x=<?php echo $order['total'];?>)">ชำระเงินด้วย QR Payment</a>
                     <input type="hidden" name="CustomerID" value="<?php echo $_SESSION['c_id']?>">
-                    <!--<label for="name">รหัสสั่งซื้อ : <?php echo $order['id'];?></label></br>-->
                     <input type="hidden" name=" OrderId" value="<?php echo $_REQUEST['id']?>">
-                    <div class="form-group">
-                        <label for="txt_file">ที่อยู่รูปภาพ</label></br>
+                    <div class="form-group mt-5">
+                        <label for="txt_file">ที่อยู่รูปภาพ</label>
                         <input type="file" name="txt_file" id="txt_file" class="form-contro">
                     </div></br>
 
-                    
+                    <p>**กรุณาแสกน QR code ด้วยมือถือของคุณ โดยใช้ mobile banking application**</p>
                     
                     <button class="btn btn-success" type ="submid">แจ้งโอนเงิน</button>
 			        <button class="btn btn-danger" type ="reset">ยกเลิก</button>
@@ -77,8 +69,7 @@ if(isset($_REQUEST['action'])=='pay'){
 
                                     </div>
                                 </form>
-                            </div>
-                        </div>
+        </div>
                     </div>
                 </div>
             </div>

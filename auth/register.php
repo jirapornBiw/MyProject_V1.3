@@ -11,7 +11,7 @@
 </head>
 <body class="font-mali justify-content-center align-items-center">
 <?php
-    include '../src/Database/db_provinces.php';
+    include '../src/Database/connect.php';
     $sql_provinces = "SELECT * FROM provinces";
     $query = mysqli_query($conn, $sql_provinces);
 ?>
