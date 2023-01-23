@@ -81,9 +81,11 @@ if(isset($_REQUEST['action'])=='detail'){
 								</tbody>
 							</table>
 							<div class="container" align="right">
-								จำนวนเงินรวมทั้งหมด : <?php echo$order['pricetotal'] ?> บาท
+								จำนวนเงินรวมทั้งหมด : <?php echo$order['pricetotal'] ?> บาท<br>
+								<a href='cancel_order.php?id=<?php echo$order['o_id'] ?>' class='btn btn-outline-danger'>ยกเลิกการสั่งซื้อ</a>
 							</div>
-								
+							
+
 						</div>
                     </div></div>
         </div>

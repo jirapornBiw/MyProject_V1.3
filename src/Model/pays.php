@@ -15,15 +15,16 @@ class pays extends Db {
         return $data;
     }
 
-	public function getAllPayById($pay){
+	public function getAllPayById($o_id){
         $sql = "
             SELECT * FROM pays
 			LEFT JOIN orders ON pays.OrderId = orders.o_id
-			WHERE OrderId = :OrderId
+			WHERE OrderId = ?
         ";
-        $stmt = $this->pdo->query($sql);
-        $data = $stmt->fetchAll($pay);
-        return $data;
+        $stmt = $this->pdo->prepare($sql);
+		$stmt->execute([$o_id]);
+		$data = $stmt->fetchAll();
+		return $data[0];
     }
 
     public function addPay($pay) {

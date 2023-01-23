@@ -115,6 +115,7 @@ class orders extends Db {
 				orders.phone,
 				orders.total,
 				orders.gmail,
+				orders.status,
 				order_detail.p_id AS product_id,
 				order_detail.qty AS qty,
 				order_detail.pricetotal AS pricetotal,
@@ -130,7 +131,7 @@ class orders extends Db {
 				LEFT JOIN amphures ON customers.amphures = amphures.id
 				LEFT JOIN districts ON customers.districts = districts.id
 			WHERE
-				orders.o_id = '{$o_id}'
+				orders.o_id = '{$o_id}' 
 		";
 		$stmt = $this->pdo->query($sql);
 		$data = $stmt->fetchAll();/*ดึงข้อมูลออกมา*/
@@ -149,7 +150,47 @@ class orders extends Db {
 				LEFT JOIN order_detail ON orders.o_id = order_detail.o_id
 				LEFT JOIN products ON order_detail.p_id = products.id
 			WHERE
-				orders.id_customer = '{$id}' 
+				orders.id_customer = '{$id}' AND orders.status = 'รอการชำระเงิน'
+		";
+		$stmt = $this->pdo->query($sql);
+		$data = $stmt->fetchAll();/*ดึงข้อมูลออกมา*/
+		return $data;
+		/* [0] ข้อมูลแค่คนแรก*/
+	}
+	public function getAllOrderDetailByCustomerPre($id) {
+		$sql = "
+			SELECT
+				orders.*,
+				order_detail.p_id AS product_id,
+				order_detail.qty AS qty,
+				order_detail.pricetotal AS subtotal,
+				products.name AS product_name
+			FROM 
+				orders
+				LEFT JOIN order_detail ON orders.o_id = order_detail.o_id
+				LEFT JOIN products ON order_detail.p_id = products.id
+			WHERE
+				orders.id_customer = '{$id}' AND orders.status = 'รอการตรวจสอบ'
+		";
+		$stmt = $this->pdo->query($sql);
+		$data = $stmt->fetchAll();/*ดึงข้อมูลออกมา*/
+		return $data;
+		/* [0] ข้อมูลแค่คนแรก*/
+	}
+	public function getAllOrderDetailByCustomerTrack($id) {
+		$sql = "
+			SELECT
+				orders.*,
+				order_detail.p_id AS product_id,
+				order_detail.qty AS qty,
+				order_detail.pricetotal AS subtotal,
+				products.name AS product_name
+			FROM 
+				orders
+				LEFT JOIN order_detail ON orders.o_id = order_detail.o_id
+				LEFT JOIN products ON order_detail.p_id = products.id
+			WHERE
+				orders.id_customer = '{$id}' AND orders.status = 'จัดส่งสินค้าสำเร็จ'
 		";
 		$stmt = $this->pdo->query($sql);
 		$data = $stmt->fetchAll();/*ดึงข้อมูลออกมา*/
@@ -203,6 +244,17 @@ class orders extends Db {
 		//WHERE status ='จัดส่งสินค้าสำเร็จ'
 		$data = $stmt->fetchColumn();/*ดึงข้อมูลออกมา*/
 		return $data;
+	}
+
+	public function updateOrderStatusCancel($orders){
+		$sql = "
+			UPDATE  orders SET
+				status ='ยกเลิกการสั่งซื้อ'
+			WHERE o_id = :id
+		";
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->execute($orders);//จับคู่ รันในฐานข้อมูล
+		return $this->pdo->lastInsertId();
 	}
 
 	public function getAllOrdersTT() {

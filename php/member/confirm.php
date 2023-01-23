@@ -29,72 +29,87 @@ $customer = $customerObj->getCustomerById($_SESSION['c_id']);
 	include 'header.php'; 
 	include 'script.php';
  ?>
-  <h1>ยืนยันการสั่งสินค้า</h1>
+ <div class="container-fluid mt-5 pt-5" >
+      <div class="col-sm-12 mt-5">
+            <div class="d-flex justify-content-center">
+              <h1>ยืนยันการสั่งซื้อสินค้า</h1>
+            </div>
+      </div>
   <form id="frmcart" name="frmcart" method="post" action="saveorder.php">
   <table width="600" border="0" align="center" class="square">
-    <tr>
-      <td width="1558" colspan="4" bgcolor="#FFDDBB">
-      <strong>สั่งซื้อสินค้า</strong></td>
-    </tr>
-    <tr>
-      <td bgcolor="#F9D5E3">สินค้า</td>
-      <td align="center" bgcolor="#F9D5E3">ราคา</td>
-      <td align="center" bgcolor="#F9D5E3">จำนวน</td>
-      <td align="center" bgcolor="#F9D5E3">รวม/รายการ</td>
+   
+    <tr >
+      <td bgcolor="#F9D5E3" class="border border-secondary">สินค้า</td>
+      <td align="center" bgcolor="#F9D5E3" class="border border-secondary">ราคา</td>
+      <td align="center" bgcolor="#F9D5E3" class="border border-secondary">จำนวน</td>
+      <td align="center" bgcolor="#F9D5E3" class="border border-secondary">รวม/รายการ</td>
     </tr>
 <?php
 	$total=0;
+  $total_weight=0;
 	foreach($_SESSION['cart'] as $p_id=>$qty)
 	{
-		$sql	= "select * from products where id=$p_id";
-		$query	= mysqli_query($conn, $sql);
-		$row	= mysqli_fetch_array($query);
-		$sum	= $row['price']*$qty;
-		$total	+= $sum;
+		$sql = "select products.*,weight.weight from products 
+		LEFT JOIN weight ON products.weight_id = weight.id
+		where products.id=$p_id";
+		$query = mysqli_query($conn, $sql);
+		$row = mysqli_fetch_array($query);
+		$sum = $row['price'] * $qty;
+		$weight = $row['weight'] * $qty;
+		$total += $sum;
+		$total_weight += $weight;
+    $shipping_cost =($total_weight*15)+20;
+    $amount = $total+$shipping_cost;
     echo "<tr>";
-    echo "<td>" . $row["name"] . "</td>";
-    echo "<td align='right'>" .number_format($row['price'],2) ."</td>";
-    echo "<td align='right'>$qty</td>";
-    echo "<td align='right'>".number_format($sum,2)."</td>";
+    echo "<td  class='border border-secondary'>" . $row["name"] . "</td>";
+    echo "<td align='right' class='border border-secondary'>" .number_format($row['price'],2) ."</td>";
+    echo "<td align='right' class='border border-secondary'>$qty</td>";
+    echo "<td align='right' class='border border-secondary'>".number_format($sum,2)."</td>";
     echo "</tr>";
 	}
+  echo "<tr>";
+    echo "<td  align='right' class='border border-secondary' colspan='3' ><b>ค่าจัดส่ง</b></td>";
+    echo "<td align='right' class='border border-secondary' >"."<b>".number_format($shipping_cost,2)."</b>"."</td>";
+    echo "</tr>";
 	echo "<tr>";
-    echo "<td  align='right' colspan='3' bgcolor='#F9D5E3'><b>รวม</b></td>";
-    echo "<td align='right' bgcolor='#F9D5E3'>"."<b>".number_format($total,2)."</b>"."</td>";
+    echo "<td  align='right' class='border border-secondary' colspan='3' bgcolor='#F9D5E3'><b>รวม</b></td>";
+    echo "<td align='right' class='border border-secondary' bgcolor='#F9D5E3'>"."<b>".number_format($amount,2)."</b>"."</td>";
     echo "</tr>";
 ?>
 </table>
-<p>    
+<p>  
+    
 <table border="0" cellspacing="0" align="center">
 <tr>
-	<td colspan="2" bgcolor="#CCCCCC">รายละเอียดในการติดต่อ</td>
+	<td colspan="2" bgcolor="#CCCCCC" class='border border-secondary'>รายละเอียดในการติดต่อจัดส่งสินค้า</td>
+</tr>
+<tr >
+    <td bgcolor="#EEEEEE" class='border border-secondary'>ชื่อ</td>
+    <td class='border border-secondary'><label for="name"><?php echo $customer['first_name'];?></label></br></td>
 </tr>
 <tr>
-    <td bgcolor="#EEEEEE">ชื่อ</td>
-    <td><label for="name"><?php echo $customer['first_name'];?></label></br></td>
-</tr>
-<tr>
-    <td width="22%" bgcolor="#EEEEEE">ที่อยู่</td>
-    <td width="78%">
-    <label for="address"><?php echo $customer['address'];?></label>
+    <td width="22%" bgcolor="#EEEEEE" class='border border-secondary'>ที่อยู่</td>
+    <td width="78%"class='border border-secondary'>
+    <label for="address"name="address" id="address"><?php echo $customer['address'].' ต.'.$customer['districts'].' อ.'
+    .$customer['amphures'].' จ.'.$customer['provinces'];?></label>
     </td>
 </tr>
 <tr>
-  	<td bgcolor="#EEEEEE">อีเมล</td>
-  	<td><label for="address"><?php echo $customer['email'];?></label></td>
+  	<td bgcolor="#EEEEEE" class='border border-secondary'>อีเมล</td>
+  	<td class='border border-secondary'><label for="address"><?php echo $customer['email'];?></label></td>
 </tr>
 <tr>
-  	<td bgcolor="#EEEEEE">เบอร์ติดต่อ</td>
-  	<td><label for="address"><?php echo $customer['phone'];?></label></td>
+  	<td bgcolor="#EEEEEE" class='border border-secondary'>เบอร์ติดต่อ</td>
+  	<td class='border border-secondary'><label for="address"><?php echo $customer['phone'];?></label></td>
 </tr>
 <tr>
-	<td colspan="2" align="center" bgcolor="#CCCCCC">
+	<td colspan="2" align="center" bgcolor="#CCCCCC" class='border border-secondary'>
   <input type="hidden" name="total" value="<?php echo $total; ?>"/>
 	<input type="submit" name="Submit2" value="สั่งซื้อ" />
 </td>
 </tr>
 </table>
 </form>
-  
+ </div>
 </body>
 </html>

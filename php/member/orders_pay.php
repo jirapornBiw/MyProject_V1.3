@@ -1,8 +1,6 @@
-<?php require "../../vendor/autoload.php"  ?>
-<?php
+<?php require "../../vendor/autoload.php" ;
 include 'connect.php';  
 use App\Model\orders;
-use App\Model\trackings;
 session_start();
 if(!$_SESSION['login']){
   header("location: ../../auth/login.php");
@@ -16,7 +14,7 @@ if(!$_SESSION['login']){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แจ้งพัสดุเสียหาย</title>
+    <title>การสั่งซื้อ</title>
     <link rel="stylesheet" href="../../node_modules\bootstrap\dist\css\bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
@@ -26,14 +24,14 @@ if(!$_SESSION['login']){
 	include 'header.php'; 
 	include 'script.php';
  ?>
- <div class="row">
- 		<div class="col-sm-12 mt-5">
+ 	<div class="row">
+        <div class="col-sm-12 mt-5">
 			<div class="d-flex justify-content-center">
-              <h1>แจ้งพัสดุเสียหาย</h1>
+              <h1>ที่ต้องชำระ</h1>
             </div>
         </div>
-        <div class="container mt-5 mb-5 align-items-cente 
-		justify-content-centerr border border-secondary rounded" style="width: 45rem;">
+		<div class="container mt-5 mb-5 align-items-cente 
+		justify-content-centerr border border-secondary rounded" style="width: 70rem;">
 		<div class="container mt-5 mb-5 align-items-cente justify-content-centerr" style="width: 70rem;">
 		<div class="row mt-4">
 						<div class="col-12">
@@ -44,40 +42,48 @@ if(!$_SESSION['login']){
 						<a href='claim.php?id=<?php echo $_SESSION['c_id']?>' class='btn btn-outline-danger'>การคืนสินค้า</a>
 						</div>
 		</div>
-		<div class="card-body">
+        <div class="card-body">
 						<table class="table">
 							<thead>
 								<tr>
 								<th>ลำดับ</th>
                 				<th>รหัสสั่งซื้อ</th>
 								<th>วันที่สั่งซื้อ</th>
-								<th>หมายเลขพัสดุ</th>
+								<th>ชื่อ</th>
+								<th>ยอดรวมสินค้า</th>
+								<th>สถานะ</th>
 								
 								</tr>
 							</thead>
 							<tbody>
 							<?php
-								$trackinsObj = new trackings();
-									$trackins = $trackinsObj->getAllTracking($_REQUEST['id']);
+								$ordersObj = new orders();
+									$orders = $ordersObj->getAllOrderDetailByCustomer($_SESSION['c_id']);
 									$n=0;
-									foreach($trackins as $tracking) {
+									foreach($orders as $order) {
 									$n++;
 									echo "
 										<tr>    
 											<td>$n</td>
-											<td>{$tracking['o_id']}</td>
-											<td>{$tracking['dttm']}</td>
-                                            <td>{$tracking['tracking']}</td>
-                                            <td>
-                                            <a href='claimDetail.php?id={$tracking['o_id']}' class='mr-2 btn btn-info'>แจ้งพัสดุเสียหาย</a>
-                                            </td>
+											<td>{$order['o_id']}</td>
+											<td>{$order['dttm']}</td>
+											<td>{$order['name']}</td>
+											<td>{$order['total']}</td>
+											<td>{$order['status']}</td>
+											<td>
+											<a href='orderDetail.php?id={$order['o_id']}&action=detail' class='mr-2 btn btn-info'>รายละเอียด</a>
+                        					<a href='pay.php?id={$order['o_id']}&action=pay' class='mr-2 btn btn-success'>ชำระเงิน</a>
+											
+											</td>
 										</tr>
 										";
 										}
 									?>
 							</tbody>
 						</table>
-					</div></div>
+					</div>
+				</div></div>
+		</div>
           <br><br>
           <!--<center>Basic PHP PDO แสดงสินค้าหน้าแรก by devbanban.com 2021
             <br>

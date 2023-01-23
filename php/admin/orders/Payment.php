@@ -148,15 +148,16 @@ $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next
 									$orders = $ordersObj->getPaymentOrders();
 									$n=0;
 									foreach($orders as $order) {
-									$n++;
+									
 									while($order = mysqli_fetch_array($nquery)){
-									echo "
+										$n++;
+										echo "
 										<tr>    
 											<td>$n</td>
 											<td>{$order['o_id']}</td>
 											<td>{$order['name']}</td>
 											<td>{$order['dttm']}</td>
-											<td>{$order['dttm']}</td>
+											<td>{$order['total']}</td>
 											<td>{$order['status']}</td>
 											
 											

@@ -88,7 +88,7 @@ $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next
  	<div class="row">
         <div class="col-sm-12 mt-5">
 			<div class="d-flex justify-content-center">
-              <h1>การสั่งซื้อ</h1>
+              <h1>เตรียมจัดส่ง</h1>
             </div>
         </div>
 		<div class="container mt-5 mb-5 align-items-cente 
@@ -119,7 +119,7 @@ $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next
 							<tbody>
 							<?php
 								$ordersObj = new orders();
-									$orders = $ordersObj->getAllOrderDetailByCustomer($_SESSION['c_id']);
+									$orders = $ordersObj->getAllOrderDetailByCustomerPre($_SESSION['c_id']);
 									$n=0;
 									foreach($orders as $order) {
 									$n++;
@@ -131,10 +131,7 @@ $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next
 											<td>{$order['name']}</td>
 											<td>{$order['total']}</td>
 											<td>{$order['status']}</td>
-											<td>
-											<a href='orderDetail.php?id={$order['o_id']}&action=detail' class='mr-2 btn btn-info'>รายละเอียด</a>
-                        					<a href='pay.php?id={$order['o_id']}&action=pay' class='mr-2 btn btn-success'>ชำระเงิน</a>
-											
+											<td>											
 											</td>
 										</tr>
 										";
@@ -143,7 +140,7 @@ $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next
 							</tbody>
 						</table>
 					</div>
-				</div></div>
+				</div>
 		</div>
           <br><br>
           <!--<center>Basic PHP PDO แสดงสินค้าหน้าแรก by devbanban.com 2021

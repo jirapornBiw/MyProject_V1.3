@@ -1,14 +1,11 @@
-<?php require "../../vendor/autoload.php"  ?>
-<?php
+<?php require "../../vendor/autoload.php" ;
 include 'connect.php';  
-
 session_start();
 if(!$_SESSION['login']){
   header("location: ../../auth/login.php");
   exit;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,9 +20,6 @@ if(!$_SESSION['login']){
 <body>
     <div class="container">
         <div class="mt-5">
-<h1>test</h1>
-<h1>test</h1>
-<h1>test</h1>
         </div>
     </div>
 <?php 
@@ -35,22 +29,24 @@ if(!$_SESSION['login']){
 
  <!--สร้างตัวแปรสำหรับบันทึกการสั่งซื้อ -->
 <?php
-	echo '<pre>';
-    print_r($_SESSION);
-    echo '<pre>';
-
-    echo '<hr>';
+	
 
     echo '<pre>';
     print_r($_POST);
     echo '<pre>';
 
+    echo '<pre>';
+    print_r($_SESSION);
+    echo '<pre>';
+
 	$dttm = Date("Y-m-d G:i:s");
 	$address = $_SESSION["c_address"];
+    $districts = $_SESSION["c_districts"];
+    $amphures = $_SESSION["c_amphures"];
+    $provinces = $_SESSION["c_provinces"];
     $postcode = $_SESSION["c_zip_code"];
     $name = $_SESSION['c_name'];
     $phone = $_SESSION["c_phone"];
-    //$total_qty = $_REQUEST["total_qty"];
     $total = $_REQUEST["total"];
 	$email = $_SESSION["c_email"];
     $id_customer = $_SESSION["c_id"];
@@ -61,7 +57,7 @@ if(!$_SESSION['login']){
     VALUES(
         null, 
         '$dttm', 
-        '$address', 
+        '$address',
         '$postcode', 
         '$name', 
         '$phone', 
@@ -69,7 +65,10 @@ if(!$_SESSION['login']){
         '$email',
         'รอการชำระเงิน',
         '$id_customer',
-        null
+        null,
+        '$districts',
+        '$amphures',
+        '$provinces'
         )";
     //or die ("Error in query: $sql1" . mysqli_error($sql1))
 	$query1	= mysqli_query($conn, $sql1) or die ("Error in query : $query1" .mysqli_error($conn,$sql1));
@@ -128,11 +127,12 @@ if(!$_SESSION['login']){
         if($query1 && $query4 && $query9){
         mysqli_query($conn, "COMMIT");
         $msg = "ตัดสต็อกเรียบร้อยแล้ว ";
-
+        header("location: orders.php?id={$_SESSION['c_id']}");
         foreach((array)$_SESSION['cart'] as $p_id)
             { 
             unset($_SESSION['cart']);
             }
+            
         }
         else{
         mysqli_query($conn, "ROLLBACK");  
@@ -142,36 +142,7 @@ if(!$_SESSION['login']){
         mysqli_close($conn);
             
         echo '<pre>';
-    /*print_r($_SESSION);
-    print_r($have);
-    echo '<hr>';
-
-    print_r($p_id);
-    echo '<hr>';
-
-    print_r($stc);
-    echo '<pre>';
-
-    echo '<hr>';
-
-    echo '<pre>';
-    print_r($_REQUEST);
-    echo '<pre>'; */
     
-    //echo $p_id;
-	/*if($query1 && $query4){
-		mysqli_query($conn, "COMMIT");
-		$msg = "บันทึกข้อมูลเรียบร้อยแล้ว ";
-		foreach($_SESSION['cart'] as $p_id)
-		{	
-			//unset($_SESSION['cart'][$p_id]);
-			//unset($_SESSION['cart']);
-		}
-	}
-	else{
-		mysqli_query($conn, "ROLLBACK");  
-		$msg = "บันทึกข้อมูลไม่สำเร็จ กรุณาติดต่อเจ้าหน้าที่ค่ะ ";	
-	}*/
       ?> 
 
 

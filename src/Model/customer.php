@@ -45,6 +45,9 @@ class customer extends Db {
 		$_SESSION['c_name'] = $customer['first_name'];
 		$_SESSION['c_email'] = $customer['email'];
         $_SESSION['c_address'] = $customer['address'];
+		$_SESSION['c_districts'] = $customer['districts'];
+		$_SESSION['c_amphures'] = $customer['amphures'];
+		$_SESSION['c_provinces'] = $customer['provinces'];
         $_SESSION['c_zip_code'] = $customer['zip_code'];
 		$_SESSION['c_username'] = $customer['username'];
 		$_SESSION['userlevel'] = 'member';
@@ -58,15 +61,7 @@ class customer extends Db {
 	public function checkCustomer($customer) {
 		$sql = "
 			SELECT
-				id,
-				first_name,
-				email,
-				address,
-				zip_code,
-				username,
-				password,
-				userlevel,
-				phone
+			*
 			FROM
 				customers
 			WHERE
@@ -83,6 +78,9 @@ class customer extends Db {
 			$_SESSION['c_name'] = $customerDB['first_name'];
 			$_SESSION['c_email'] = $customerDB['email'];
 			$_SESSION['c_address'] = $customerDB['address'];
+			$_SESSION['c_districts'] = $customerDB['districts'];
+			$_SESSION['c_amphures'] = $customerDB['amphures'];
+			$_SESSION['c_provinces'] = $customerDB['provinces'];
 			$_SESSION['c_zip_code'] = $customerDB['zip_code'];
 			$_SESSION['c_username'] = $customerDB['username'];
 			$_SESSION['userlevel'] = $customerDB['userlevel'];

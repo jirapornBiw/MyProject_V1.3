@@ -1,7 +1,6 @@
 <?php require "../../../vendor/autoload.php"  ?>
 <?php
 use App\Model\orders;
-use App\Model\order_detail;
 use App\Model\pays;
 
 session_start();
@@ -10,7 +9,7 @@ if(isset($_REQUEST['action'])=='detail'){
 	$orderObj = new orders;
 	$order = $orderObj->getOrderById($_REQUEST['id']);
 	$payObj = new pays;
-	$pay = $payObj->getAllPay($_REQUEST['id']);
+	$pay = $payObj->getAllPayById($_REQUEST['id']);
 }
 /*if(isset($_REQUEST['action'])=='detail'){
 	$orderObj = new orders;
@@ -52,8 +51,9 @@ if(isset($_REQUEST['action'])=='detail'){
                     <label for="name">เบอร์โทรศัพท์ : <?php echo $order['phone'];?></label></br>
                     <label for="name">อีเมลล์ : <?php echo $order['gmail'];?></label></br>
                     <h4>หลักฐานการชำระเงิน</h4>
-					<img src="../pays/upload/324379271_490588243195850_7819031905497031614_n.jpg"  width="300" height="800">
+					<img src="../pays/upload/<?php echo $pay['image'];?>"  width="300" height="600">
 					<!--<img src="upload/<?php echo $pay['image']?>">-->
+					
 
 
                     <h4>รายการการสั่งซื้อ</h4>
