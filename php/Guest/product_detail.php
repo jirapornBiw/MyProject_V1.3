@@ -5,9 +5,7 @@ use App\Model\product;
 use App\Model\customer;
 use App\Model\type;
 
-require "../../vendor/autoload.php"  ?>
-
-<?php
+require "../../vendor/autoload.php";
 
 session_start();
 if(!$_SESSION['login']){
@@ -63,12 +61,11 @@ if(!$_SESSION['login']){
             <p>ประเภทข้าว : <?php echo $product['type']?></p>
             <p>ชื่อสายพันธุ์ข้าว   : <?php echo $product['name']?></p>
             <p>น้ำหนัก : <?php echo $product['weight']?></p>
-            <form action="../member/cart.php" method="get">
+            <form action="../../auth/login.php" method="get">
             <input type="number" name="qty" value="1" min="1" max="<?php echo $product['stock']?>">
-            <input type="hidden" name="id" value="<?php echo $product['id']?>">
-            <input type="hidden" name="action" value="add">
+            <input type="hidden" name="action" value="relogin">
             <!--<a href="cart.php?id=<?php echo $product['id']?>&action=add" class='mr-2 btn btn-info'>เพิ่มลงในตระกร้าสินค้า</a>-->
-            <button class="btn btn-success" type ="submid">บันทึก</button>
+            <button class="btn btn-success" type ="submid">เพิ่มลงตะกร้า</button>
             </form>
           </div>
     </div>

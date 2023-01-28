@@ -1,3 +1,12 @@
+<?php ;
+if($_REQUEST['action']='relogin'){
+  //$msg = "ตัดสต็อกเรียบร้อยแล้ว ";
+  echo '<script type ="text/JavaScript">';  
+  echo 'alert("กรุณาเข้าสู่ระบบก่อนสั่งซื้อสินค้า")';  
+  echo '</script>';  
+  //exit;
+};
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -134,5 +143,9 @@
 		<script src="../node_modules/jquery/dist/jquery.min.js"></script>
       <script src="../node_modules/popper.js/dist/popper.min.js"></script>
       <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+      <script type="text/javascript">
+	alert("<?php echo $msg;?>");
+	//window.location ='products.php';
+</script>
 </body>
 </html>

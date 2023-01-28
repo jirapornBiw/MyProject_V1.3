@@ -85,13 +85,13 @@ use App\Model\customer;
                 แจ้งพัสดุเสียหาย</a></li>
                 
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="../index.php">
+                <li><a class="dropdown-item" href="logout.php">
                 <i class="fa fa-sign-out" aria-hidden="true"></i>
                 ออกจากระบบ</a></li>
             
             </ul>
             <li class="nav-item">
-            <a class="nav-link active text-light" aria-current="page" href="../../index.php">
+            <a class="nav-link active text-light" aria-current="page" href="logout.php">
             <i class="fa fa-sign-out text-light" aria-hidden="true"></i>
             ออกจากระบบ</a>
             </li>

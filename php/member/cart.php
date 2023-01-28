@@ -2,10 +2,12 @@
 
 require "../../vendor/autoload.php";
 include 'connect.php'; 
-session_start(); ?>
+session_start();
+if(!$_SESSION['login']){
+  header("location: ../../auth/login.php");
+  exit;
+};
 
-
-<?php
 //ปิดการแจ้งเตือนต่างๆ ไม่ให้รำคาน
 error_reporting( error_reporting() & ~E_NOTICE );
 	//ฟังก์ชันสำหรับเลี่ยงการใช้ตัวอักขระพิเศษในคำสั่ง sql

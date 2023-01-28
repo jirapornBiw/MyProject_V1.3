@@ -7,6 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <?php header("location: php/Guest/index.php");?>
+    <?php 
+    session_destroy();
+    header("location: ../guest/index.php")
+    ?>
 </body>
 </html>

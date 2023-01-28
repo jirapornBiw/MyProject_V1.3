@@ -115,8 +115,7 @@
         </div>
         <div class="row mt-5">
             <div class="col text-center">
-                <a href="php/member/products.php?id=<?php
-                        echo"{$_SESSION['c_id']}";?>" class="btn btn-success btn-lg" style="width:15%">ดูสินค้าทั้งหมด</a>
+                <a href="products.php" class="btn btn-success btn-sm" style="width:15%">ดูสินค้าทั้งหมด</a>
 
             </div>
         </div>

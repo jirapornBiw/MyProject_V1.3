@@ -4,6 +4,10 @@ require "../../vendor/autoload.php"  ?>
 <?php
 //ตรวจสอบการเข้าสู่ระบบ
 session_start();
+if(!$_SESSION['login']){
+  header("location: ../../auth/login.php");
+  exit;
+}
 ?>
 
 <!DOCTYPE html>
