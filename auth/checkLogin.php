@@ -5,11 +5,12 @@ use App\Model\customer;
 $customerObj = new customer;
 $result = $customerObj->checkCustomer($_POST);
 
-$customerObj = new customer;
-$customer = $customerObj->getCustomerById($_SESSION['c_id']);
+
 
 if($result){
 	if($_SESSION['userlevel']=='member'){
+		$customerObj = new customer;
+		$customer = $customerObj->getCustomerById($_SESSION['c_id']);
 		header("location: ../php/member/index.php?id={$_SESSION['c_id']}&action=show");
 	} 
 	if($_SESSION['userlevel']=='admin'){
@@ -17,5 +18,7 @@ if($result){
 	}
 } else {
 	header("location: login.php?msg=error");
+	//echo "<script>alert('Password ไม่ถูกต้อง กรุณาลองอีกครั้ง');</script>";
+	//echo "msg=error";
 }
 ?>

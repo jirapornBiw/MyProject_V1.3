@@ -72,8 +72,6 @@ if(!$_SESSION['login']){
           </div>
     </div>
 </div>
-    
-DWS
   </body>
 </body>
 </html>

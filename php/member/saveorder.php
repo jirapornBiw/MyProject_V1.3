@@ -25,20 +25,7 @@ if(!$_SESSION['login']){
 <?php 
 	include 'header.php'; 
 	include 'script.php';
- ?>
-
- <!--สร้างตัวแปรสำหรับบันทึกการสั่งซื้อ -->
-<?php
-	
-
-    echo '<pre>';
-    print_r($_POST);
-    echo '<pre>';
-
-    echo '<pre>';
-    print_r($_SESSION);
-    echo '<pre>';
-
+ //สร้างตัวแปรสำหรับบันทึกการสั่งซื้อ 
 	$dttm = Date("Y-m-d G:i:s");
 	$address = $_SESSION["c_address"];
     $districts = $_SESSION["c_districts"];
@@ -72,7 +59,6 @@ if(!$_SESSION['login']){
         )";
     //or die ("Error in query: $sql1" . mysqli_error($sql1))
 	$query1	= mysqli_query($conn, $sql1) or die ("Error in query : $query1" .mysqli_error($conn,$sql1));
-    echo $sql1;
     //exit;
 	//ฟังก์ชั่น MAX() จะคืนค่าที่มากที่สุดในคอลัมน์ที่ระบุ ออกมา หรือจะพูดง่ายๆก็ว่า ใช้สำหรับหาค่าที่มากที่สุด นั่นเอง.
 	$sql2 = "SELECT MAX(o_id) as o_id 
@@ -83,10 +69,6 @@ if(!$_SESSION['login']){
 	$query2	= mysqli_query($conn, $sql2);
 	$row = mysqli_fetch_array($query2);
 	$o_id = $row["o_id"];//order id ล่าสุดที่อยู่ในตาราง orders
-
-    //echo $sql2;
-    //echo '<br>';
-    echo $o_id;
     //exit;
 //PHP foreach() เป็นคำสั่งเพื่อนำข้อมูลออกมาจากตัวแปลที่เป็นประเภท array โดยสามารถเรียกค่าได้ทั้ง $key และ $value ของ array
 	foreach($_SESSION['cart'] as $p_id=>$qty)
@@ -117,8 +99,6 @@ if(!$_SESSION['login']){
             $query9 = mysqli_query($conn, $sql9) or die ("Error in query : $query9" .mysqli_error($conn,$sql9));  
             }
     }
-	echo '<hr>';
-    echo $count;
     //ตัดสต็อก
     
           
@@ -127,7 +107,6 @@ if(!$_SESSION['login']){
         if($query1 && $query4 && $query9){
         mysqli_query($conn, "COMMIT");
         $msg = "ตัดสต็อกเรียบร้อยแล้ว ";
-        header("location: orders.php?id={$_SESSION['c_id']}");
         foreach((array)$_SESSION['cart'] as $p_id)
             { 
             unset($_SESSION['cart']);
@@ -140,15 +119,13 @@ if(!$_SESSION['login']){
         }
         
         mysqli_close($conn);
-            
-        echo '<pre>';
     
       ?> 
 
 
 <script type="text/javascript">
 	alert("<?php echo $msg;?>");
-	//window.location ='products.php';
+	window.location ='products.php?id=<?php echo $_SESSION['c_id']?>';
 </script>
 </body>
 </html>

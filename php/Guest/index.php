@@ -1,12 +1,4 @@
-<?php require "../../vendor/autoload.php"  ?>
-<?php
-
-
-session_start();
-if(!$_SESSION['login']){
-  header("location: ../../auth/login.php");
-  exit;
-}
+<?php require "../../vendor/autoload.php" 
 ?>
 
 <!DOCTYPE html>

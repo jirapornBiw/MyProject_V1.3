@@ -152,6 +152,20 @@ class customer extends Db {
 		";
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->execute($customer);//จับคู่ รันในฐานข้อมูล
+
+		session_start();
+		$id = $this->pdo->lastInsertId();
+		$_SESSION['c_name'] = $customer['first_name'];
+		$_SESSION['c_email'] = $customer['email'];
+        $_SESSION['c_address'] = $customer['address'];
+		$_SESSION['c_districts'] = $customer['districts'];
+		$_SESSION['c_amphures'] = $customer['amphures'];
+		$_SESSION['c_provinces'] = $customer['provinces'];
+        $_SESSION['c_zip_code'] = $customer['zip_code'];
+		$_SESSION['c_username'] = $customer['username'];
+		$_SESSION['userlevel'] = 'member';
+		$_SESSION['login'] = true;
+		$_SESSION['c_phone'] = $customer['phone'];
 		return true;
 	}
 }

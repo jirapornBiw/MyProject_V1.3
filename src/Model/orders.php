@@ -91,9 +91,9 @@ class orders extends Db {
 				orders
                 LEFT JOIN order_detail ON orders.o_id = order_detail.d_id
 				LEFT JOIN customers ON customers.id = orders.id_customer
-				LEFT JOIN provinces ON customers.provinces = provinces.id
-				LEFT JOIN amphures ON customers.amphures = amphures.id
-				LEFT JOIN districts ON customers.districts = districts.id
+				LEFT JOIN provinces ON orders.provinces = provinces.id
+				LEFT JOIN amphures ON orders.amphures = amphures.id
+				LEFT JOIN districts ON orders.districts = districts.id
 			WHERE
 				orders.o_id = ?
             

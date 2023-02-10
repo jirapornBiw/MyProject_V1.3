@@ -1,8 +1,5 @@
-<?php require "../../vendor/autoload.php"  ?>
-<?php
+<?php require "../../vendor/autoload.php";
 include 'connect.php';  
-use App\Model\orders;
-use App\Model\trackings;
 session_start();
 if(!$_SESSION['login']){
   header("location: ../../auth/login.php");

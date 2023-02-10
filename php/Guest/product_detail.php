@@ -1,28 +1,10 @@
 
 <?php //เรียกไฟล์เชื่อมต่อฐานข้อมูล
-
 use App\Model\product;
-use App\Model\customer;
-use App\Model\type;
-
 require "../../vendor/autoload.php";
-
-session_start();
-if(!$_SESSION['login']){
-  header("location: ../../auth/login.php");
-  exit;
-}
-
-//connect db
-//if(isset($_REQUEST['action'])=='detail'){
 	$productObj = new product;
 	$product = $productObj->getProductsById($_REQUEST['id']);
-
-  
-//}
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,9 +43,9 @@ if(!$_SESSION['login']){
             <p>ประเภทข้าว : <?php echo $product['type']?></p>
             <p>ชื่อสายพันธุ์ข้าว   : <?php echo $product['name']?></p>
             <p>น้ำหนัก : <?php echo $product['weight']?></p>
-            <form action="../../auth/login.php" method="get">
+            <form action="../../auth/login.php" method="post">
             <input type="number" name="qty" value="1" min="1" max="<?php echo $product['stock']?>">
-            <input type="hidden" name="action" value="relogin">
+            <input type="hidden" name="relogin" value="login">
             <!--<a href="cart.php?id=<?php echo $product['id']?>&action=add" class='mr-2 btn btn-info'>เพิ่มลงในตระกร้าสินค้า</a>-->
             <button class="btn btn-success" type ="submid">เพิ่มลงตะกร้า</button>
             </form>

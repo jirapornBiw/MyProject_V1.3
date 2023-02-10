@@ -37,7 +37,17 @@ $rows = $row[0];
  
 	$limit = 'LIMIT ' .($pagenum - 1) * $page_rows .',' .$page_rows;
  
-	$nquery=mysqli_query($conn,"SELECT * from  orders ORDER BY orders.o_id DESC $limit");
+	$nquery=mysqli_query($conn,"SELECT
+		orders.o_id,
+		orders.name,
+		orders.dttm,
+		orders.total,
+		orders.status
+		
+	FROM 
+		orders
+	WHERE status = 'รอการชำระเงิน' $limit");
+
 	//$nquery = $ordersObj->getAllOrders();
  
 	$paginationCtrls = '';
@@ -142,7 +152,7 @@ $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next
 											
 											
 											<td>
-											<a href='orderDetail.php?id={$order['o_id']}&action=detail' class='btn btn-outline-warning'>รายละเอียด</a>
+											<a href='orderDetail_NewOrder.php?id={$order['o_id']}&action=detail' class='btn btn-outline-warning'>รายละเอียด</a>
 											</td>
 										</tr>
 										";

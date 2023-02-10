@@ -1,11 +1,11 @@
 <?php ;
-if($_REQUEST['action']='relogin'){
-  //$msg = "ตัดสต็อกเรียบร้อยแล้ว ";
+
+if(isset( $_REQUEST['relogin'] )) {  
   echo '<script type ="text/JavaScript">';  
   echo 'alert("กรุณาเข้าสู่ระบบก่อนสั่งซื้อสินค้า")';  
   echo '</script>';  
-  //exit;
-};
+} else {
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

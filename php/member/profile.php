@@ -30,8 +30,6 @@ if(!$_SESSION['login']){
 	include 'header.php'; 
 	include 'script.php';
  ?>
-
-    
     <div class="d-flex">
       <div class="container mt-5 mb-5 align-items-cente justify-content-centerr" style="width: 50rem;">
         <h5 class="card-header " >ข้อมูลส่วนตัว</h5>

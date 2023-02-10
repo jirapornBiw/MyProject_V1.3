@@ -1,9 +1,6 @@
 <?php //เรียกไฟล์เชื่อมต่อฐานข้อมูล
 use App\Model\product;
-require "../../vendor/autoload.php"  ?>
-<?php
-//ตรวจสอบการเข้าสู่ระบบ
-session_start();
+require "../../vendor/autoload.php"  
 ?>
 
 <!DOCTYPE html>

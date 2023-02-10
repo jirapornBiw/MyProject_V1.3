@@ -8,8 +8,6 @@ session_start();
 if(isset($_REQUEST['action'])=='detail'){
 	$orderObj = new orders;
 	$order = $orderObj->getOrderById($_REQUEST['id']);
-	$payObj = new pays;
-	$pay = $payObj->getAllPayById($_REQUEST['id']);
 }
 /*if(isset($_REQUEST['action'])=='detail'){
 	$orderObj = new orders;
@@ -50,9 +48,6 @@ if(isset($_REQUEST['action'])=='detail'){
                     <label for="name">รหัสไปรษณีย์ : <?php echo $order['postcode'];?></label></br>
                     <label for="name">เบอร์โทรศัพท์ : <?php echo $order['phone'];?></label></br>
                     <label for="name">อีเมลล์ : <?php echo $order['gmail'];?></label></br>
-                    <h4>หลักฐานการชำระเงิน</h4>
-					<img src="../pays/upload/<?php echo $pay['image'];?>"  width="300" height="600">
-					<!--<img src="upload/<?php echo $pay['image']?>">-->
 					
 
 
@@ -92,7 +87,6 @@ if(isset($_REQUEST['action'])=='detail'){
 
 								</tbody>
 							</table>
-							<a href="tracking_number.php?id=<?php echo $order['o_id'];?>&action=add" class='mr-2 btn btn-outline-warning'>เพิ่มเลขพัสดุ</a></td>
 						</div>
                     </div></br>
                                     
