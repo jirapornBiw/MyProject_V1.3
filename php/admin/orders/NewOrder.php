@@ -1,5 +1,4 @@
-<?php require "../../../vendor/autoload.php"  ?>
-<?php
+<?php require "../../../vendor/autoload.php";
 use App\Model\orders;
 session_start();
 if(!$_SESSION['login']){
@@ -9,12 +8,12 @@ if(!$_SESSION['login']){
 $ordersObj = new orders();
 $orders = $ordersObj->getNewOrders();
 include("../connect.php");
-$query=mysqli_query($conn,"SELECT COUNT(o_id) FROM orders");
+$query=mysqli_query($conn,"SELECT COUNT(o_id) FROM orders WHERE status = 'รอการชำระเงิน' ");
 $row = mysqli_fetch_row($query);
 //print_r($row);
 $rows = $row[0];
  
-	$page_rows = 10;  //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
+	$page_rows = 7;  //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
  
 	$last = ceil($rows/$page_rows);
  
@@ -43,10 +42,10 @@ $rows = $row[0];
 		orders.dttm,
 		orders.total,
 		orders.status
-		
 	FROM 
 		orders
-	WHERE status = 'รอการชำระเงิน' $limit");
+	WHERE status = 'รอการชำระเงิน' 
+	ORDER BY o_id DESC $limit");
 
 	//$nquery = $ordersObj->getAllOrders();
  
@@ -56,11 +55,11 @@ $rows = $row[0];
  
 	if ($pagenum > 1) {
 $previous = $pagenum - 1;
-		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$previous.'" class="btn btn-dark">Previous</a> &nbsp; &nbsp; ';
+		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$previous.'" class="btn btn-secondary">ก่อนหน้า</a> &nbsp; &nbsp; ';
  
 		for($i = $pagenum-4; $i < $pagenum; $i++){
 			if($i > 0){
-		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'" class="btn btn-dark">'.$i.'</a> &nbsp; ';
+		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'" class="btn btn-secondary">'.$i.'</a> &nbsp; ';
 			}
 	}
 }
@@ -68,7 +67,7 @@ $previous = $pagenum - 1;
 	$paginationCtrls .= ''.$pagenum.' &nbsp; ';
  
 	for($i = $pagenum+1; $i <= $last; $i++){
-		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'" class="btn btn-dark">'.$i.'</a> &nbsp; ';
+		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'" class="btn btn-secondary">'.$i.'</a> &nbsp; ';
 		if($i >= $pagenum+4){
 			break;
 		}
@@ -76,7 +75,7 @@ $previous = $pagenum - 1;
  
 if ($pagenum != $last) {
 $next = $pagenum + 1;
-$paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next.'" class="btn btn-dark">Next</a> ';
+$paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next.'" class="btn btn-secondary">ต่อไป</a> ';
 }}
 ?>
 

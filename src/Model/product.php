@@ -22,11 +22,35 @@ class product extends Db {
 				LEFT JOIN type ON products.type_id = type.id
 				LEFT JOIN status ON products.status_id = status.id
 				LEFT JOIN weight ON products.weight_id = weight.id
-			
+			LIMIT 0,4;
 
 		";
 		$stmt = $this->pdo->query($sql);
-		$data = $stmt->fetchAll();/*ดึงข้อมูลออกมา*/
+		$data = $stmt->fetchAll();
+		return $data;
+	}
+	public function getAllProductTest() {
+		$sql = "
+			SELECT
+				products.id,
+				products.image,
+				type.name AS type,
+				products.name,
+				products.Products_Detail,
+				weight.name AS weight,
+				products.stock,
+				products.price,
+				status.name AS status
+			FROM 
+				products
+				LEFT JOIN type ON products.type_id = type.id
+				LEFT JOIN status ON products.status_id = status.id
+				LEFT JOIN weight ON products.weight_id = weight.id
+			LIMIT 0,4;
+
+		";
+		$stmt = $this->pdo->query($sql);
+		$data = $stmt->fetchAll();
 		return $data;
 	}
 

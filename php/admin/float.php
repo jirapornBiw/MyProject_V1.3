@@ -60,23 +60,11 @@
         <a href='../orders/index.php' class='mr-2 btn btn-outline-light'>
           <i class="fa fa-file-text-o" aria-hidden="true"></i>
           รายงานการขาย</a>
-          
-        <!--<a href='../orders/index.php' class='mr-2 btn btn-outline-light'>
-          <i class="fa fa-file-text-o" aria-hidden="true"></i>
-          รายงานการสั่งซื้อสินค้า</a>
-
-        <a href='../pays/index.php' class='mr-2 btn btn-outline-light'>
-          <i class="fa fa-money" aria-hidden="true"></i>
-          ตรวจสอบการชำระเงิน</a>
-
-          <a href='../tracking_number/index.php' class='mr-2 btn btn-outline-light'>
-        <i class="fa fa-truck" aria-hidden="true"></i>
-        เพิ่มหมายเลขการจัดส่ง</a>-->
 
         <a href='../claims/index.php' class='mr-2 btn btn-outline-light'>
           <i class="fa fa-refresh" aria-hidden="true"></i>
           รายงานพัสดุเสียหาย</a>
-          <a href='../../index.php' class='mr-2 btn btn-outline-light'>
+          <a href='../../guest/index.php' class='mr-2 btn btn-outline-light'>
         <i class="fa fa-sign-out" aria-hidden="true"></i>
           ออกจากระบบ</a>
           </div>

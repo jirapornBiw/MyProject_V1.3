@@ -62,6 +62,7 @@ class orders extends Db {
                 orders.name,
                 orders.dttm,
                 orders.total,
+				orders.tracking_number,
 				orders.status
 				
 			FROM 
@@ -117,6 +118,7 @@ class orders extends Db {
 				orders.gmail,
 				orders.status,
 				order_detail.p_id AS product_id,
+				weight.name AS weight,
 				order_detail.qty AS qty,
 				order_detail.pricetotal AS pricetotal,
 				products.name AS product_name,
@@ -126,6 +128,7 @@ class orders extends Db {
 				orders
 				LEFT JOIN order_detail ON orders.o_id = order_detail.o_id
 				LEFT JOIN products ON order_detail.p_id = products.id
+				LEFT JOIN weight ON order_detail.p_id = weight.id
 				LEFT JOIN customers ON customers.id = orders.id_customer
 				LEFT JOIN provinces ON customers.provinces = provinces.id
 				LEFT JOIN amphures ON customers.amphures = amphures.id

@@ -33,7 +33,7 @@ if(!$_SESSION['login']){
             </div>
         </div>
         <div class="container mt-5 mb-5 align-items-cente 
-		justify-content-centerr border border-secondary rounded" style="width: 45rem;">
+		justify-content-centerr border border-secondary rounded" style="width: 70rem;">
 		<div class="container mt-5 mb-5 align-items-cente justify-content-centerr" style="width: 70rem;">
 		<div class="row mt-4">
 						<div class="col-12">

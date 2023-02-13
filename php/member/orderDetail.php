@@ -82,9 +82,32 @@ if(isset($_REQUEST['action'])=='detail'){
 							</table>
 							<div class="container" align="right">
 								จำนวนเงินรวมทั้งหมด : <?php echo$order['pricetotal'] ?> บาท<br>
-								<a href='cancel_order.php?id=<?php echo$order['o_id'] ?>' class='btn btn-outline-danger'>ยกเลิกการสั่งซื้อ</a>
+								<a href='cancel_order.php?id=<?php echo$order['o_id'] ?>&action=cancel' class='btn btn-outline-danger'
+								data-bs-toggle="modal" data-bs-target="#staticBackdrop">ยกเลิกการสั่งซื้อ</a>
 							</div>
 							
+							<!-- -->
+							<div class="modal" tabindex="-1" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title">ยืนยันยกเลิกการสั่งซื้อ</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<p>หากทำการยกเลิกคำสั่งซื้อแล้ว ไม่สามารถแก้ไขได้</p>
+										<!--<form class="mb-3" action="cancel_order.php?id=<?php echo$order['o_id'] ?>&action=cancel"method="POST" 
+                    						>
+										</form>-->
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+										<!--<button type="button" class="btn btn-primary">ยืนยัน</button>-->
+										<a href="cancel_order.php?id=<?php echo$order['o_id'] ?>&action=cancel" class="btn btn-primary" role="button" aria-pressed="true">ยืนยัน</a>
+									</div>
+									</div>
+								</div>
+							</div>
 
 						</div>
                     </div></div>

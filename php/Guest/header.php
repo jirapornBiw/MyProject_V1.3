@@ -56,13 +56,6 @@ include '../../src/Database/connect.php';
             เข้าสู่ระบบ</a>
             </li>
 
-         <!--<li class="nav-item">
-            <a class="nav-link active text-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
-            <i class="fa fa-sign-in text-light" aria-hidden="true"></i>
-                เข้าสู่ระบบ</a>
-            </a>
-          </li>-->
-
           <li class="nav-item">
             <!-- Button trigger modal -->
             <a class="nav-link active text-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -74,11 +67,6 @@ include '../../src/Database/connect.php';
           
         </ul>  
 
-        <!-- ช่องค้นหา-->
-        <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
     </div>
     </div>
     </nav>
@@ -90,7 +78,7 @@ include '../../src/Database/connect.php';
 
         </header>
 
-        <!-- popup -->
+        <!-- popup สมัครสมาชิก-->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog ">
                 <div class="modal-content">
@@ -100,68 +88,93 @@ include '../../src/Database/connect.php';
                 </div>
                 <div class="modal-body">
 
-                <!-- from -->    
-                    <form class="mb-3" method="POST" 
+                <!-- from สมัครสมาชิก -->    
+                    <form class="mb-3" action="../../auth/saveRegister.php"method="POST" 
                     name=form_register onSubmit="JavaScript:return fncSubmit();">
-       
-                        <label class="form-label" for="form3Example1cg">ชื่อ</label>
-                                <div class="form-outline mb-4">
-                                <input type="text" name="first_name" id="first_name" class="form-control form-control-mg" required>
-                                </div>
-
+                        <div class="row gx-5  mt-2">
+                            <div class="col">
+                                <label class="form-label" for="form3Example1cg">ชื่อ</label>
+                                    <div class="form-outline">
+                                        <input type="text" name="first_name" id="first_name" class="form-control form-control-mg" required>
+                                    </div>                           
+                            </div>
+                            <div class="col">
                                 <label class="form-label" for="form3Example1cg">นามสกุล</label>
-                                <div class="form-outline mb-4">
-                                <input type="text" name="last_name" id="last_name" class="form-control form-control-mg" required>
-                                </div>
+                                    <div class="form-outline">
+                                        <input type="text" name="last_name" id="last_name" class="form-control form-control-mg" required>
+                                    </div>
 
+                            </div>
+                        </div>
+                        <div class="row gx-5">
+                            <div class="col mt-2">
                                 <label class="form-label" for="form3Example3cg">อีเมล</label>
-                                <div class="form-outline mb-4">
-                                <input type="email" name="email" id="email" class="form-control form-control-mg" required>
-                                </div>
-
+                                    <div class="form-outline">
+                                        <input type="email" name="email" id="email" class="form-control form-control-mg" required>
+                                    </div>
+                            </div>
+                            <div class="col mt-2">
                                 <label class="form-label" for="form3Example1cg">ที่อยู่</label>
-                                <div class="form-outline mb-4">
-                                <input type="text" name="address" id="address" class="form-control form-control-md" required>
-                                </div>
-
-                        <label for="provinces">จังหวัด:</label>
-                        <select class="form-control" name="provinces" id="provinces">
-                                <option value="<?=$value['name_th']?>" selected disabled required>-กรุณาเลือกจังหวัด-</option>
-                                <?php foreach ($query as $value) { ?>
-                                <option value="<?=$value['id']?>"><?=$value['name_th']?></option>
-                                <?php } ?>
-                        </select>
-                        <br>
-                    
-                        <label for="amphures">อำเภอ:</label>
-                        <select class="form-control" name="amphures" id="amphures" required>
-                        </select>
-                        <br>
-                    
-                        <label for="districts">ตำบล:</label>
-                        <select class="form-control" name="districts" id="districts" required>
-                        </select>
-                        <br>
-                
-                        <label for="zip_code">รหัสไปรษณีย์:</label>
-                        <input type="text" name="zip_code" id="zip_code" class="form-control" required>
-                            <br>
-                            <!--<a href="https://devtai.com/?cat=38"> <button type="button" class="btn btn-primary btn-mg btn-block">Block level button</button></a>-->
-
-                        <label class="form-label" for="form3Example1cg">เบอร์โทรศัพท์</label>
-                                <div class="form-outline mb-4">
-                                <input type="text" name="phone" id="phone" class="form-control form-control-mg" required>
-                                </div>   
-
+                                    <div class="form-outline">
+                                        <input type="text" name="address" id="address" class="form-control form-control-md" required>
+                                    </div>                            </div>
+                        </div>
+                        <div class="row gx-5">
+                            <div class="col mt-2">
+                                <label for="provinces">จังหวัด:</label>
+                                    <select class="form-control" name="provinces" id="provinces">
+                                            <option value="<?=$value['name_th']?>" selected disabled required>-กรุณาเลือกจังหวัด-</option>
+                                            <?php foreach ($query as $value) { ?>
+                                            <option value="<?=$value['id']?>"><?=$value['name_th']?></option>
+                                            <?php } ?>
+                                    </select>                            
+                            </div>
+                            <div class="col mt-2">
+                                <label for="amphures">อำเภอ:</label>
+                                    <select class="form-control" name="amphures" id="amphures" required>
+                                    </select>                            
+                            </div>
+                        </div>
+                        <div class="row gx-5">
+                            <div class="col mt-2">
+                                <label for="districts">ตำบล:</label>
+                                    <select class="form-control" name="districts" id="districts" required>
+                                    </select>
+                            </div>
+                            <div class="col mt-2">
+                                <label for="zip_code">รหัสไปรษณีย์:</label>
+                                    <input type="text" name="zip_code" id="zip_code" class="form-control" required>
+                            </div>
+                        </div>        
+                        <div class="row gx-5">
+                            <div class="col mt-2">
+                                <label class="form-label" for="form3Example1cg">เบอร์โทรศัพท์</label>
+                                    <div class="form-outline">
+                                        <input type="text" name="phone" id="phone" class="form-control form-control-mg" required>
+                                    </div> 
+                            </div>
+                            <div class="col mt-2">
+                                                          
+                            </div>
+                        </div>
+                        <div class="row gx-5">
+                            <div class="col mt-2">
                                 <label class="form-label" for="form3Example1cg">ชื่อผู้ใช้</label>
-                                <div class="form-outline mb-4">
-                                <input type="text" name="username" id="username" class="form-control form-control-mg" required>
-                                </div>
-
+                                    <div class="form-outline">
+                                        <input type="text" name="username" id="username" class="form-control form-control-mg" required>
+                                    </div>
+                            </div>
+                            <div class="col mt-2">
                                 <label class="form-label" for="form3Example4cg">รหัสผ่าน</label>
-                                <div class="form-outline mb-4">
-                                <input type="password" name="password" id="password" class="form-control form-control-mg" required>
-                                </div>
+                                    <div class="form-outline">
+                                        <input type="password" name="password" id="password" class="form-control form-control-mg" required>
+                                    </div>                         
+                            </div>
+                        </div>
+                               
+                                
+
+                                
 
                                 <p class="text-center text-muted mt-5 mb-0">หากมีบัญชีผู้ใช้อยู่แล้ว?<a href="login.php"
                                     class="fw-bold text-body"><u> เข้าสู่ระบบ</u></a></p>

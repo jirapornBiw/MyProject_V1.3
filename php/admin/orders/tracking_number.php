@@ -9,10 +9,6 @@ if(isset($_REQUEST['action'])=='add'){
 	$orderObj = new orders;
 	$order = $orderObj->getOrderById($_REQUEST['id']);
 }
-/*if(isset($_REQUEST['action'])=='detail'){
-	$orderObj = new orders;
-	$order = $orderObj->getOrderById($_REQUEST['id']);
-}*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,8 +34,10 @@ if(isset($_REQUEST['action'])=='add'){
 						<a href="index.php" class="btn btn-light">ย้อนกลับ</a>
 					</div>
 
+                    <div class="container mt-5 mb-5 align-items-cente 
+		justify-content-centerr border border-secondary rounded" style="width: 40rem;">
 					<div class="form-group">
-                    <h4>ข้อมูลลูกค้า</h4>
+                    <h4 class="mt-3">ข้อมูลลูกค้า</h4><hr>
                     <label for="name">รหัสสั่งซื้อ : <?php echo $order['o_id'];?></label></br>
                     <label for="name">วันที่ : <?php echo $order['dttm'];?></label></br>
                     <label for="name">ชื่อ : <?php echo $order['name'];?></label></br>
@@ -53,14 +51,14 @@ if(isset($_REQUEST['action'])=='add'){
 					<form action="save_add_TK.php" method="post"
                         enctype="multipart/form-data">
                         
-                        </br>
+                    <h4 class="mt-3 mb-3">ข้อมูลการจัดส่งสินค้า</h4>
 					<input type="hidden" name="o_id" value="<?php echo $order['o_id']?>">
                     <div class="form-group">
                         <label for="tracking_number">หมายเลขพัสดุ</label></br>
                         <input type="text" name="tracking_number" id="tracking_number" class="form-contro" >
-                    </div></br>
+                    </div>
 
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="shipping_company">บริษัทขนส่งสินค้า</label></br>
                         <input type="text" name="shipping_company" id="shipping_company" class="form-contro" >
                     </div></br>

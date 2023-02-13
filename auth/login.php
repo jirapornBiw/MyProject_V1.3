@@ -1,10 +1,11 @@
-<?php ;
-
+<?php
 if(isset( $_REQUEST['relogin'] )) {  
   echo '<script type ="text/JavaScript">';  
   echo 'alert("กรุณาเข้าสู่ระบบก่อนสั่งซื้อสินค้า")';  
   echo '</script>';  
-} else {
+} 
+else {
+
 }
 ?>
 <!DOCTYPE html>
@@ -12,7 +13,7 @@ if(isset( $_REQUEST['relogin'] )) {
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<style>
+<style>
 	a:hover {
 	color: #FFFFFF !important;
 	}
@@ -23,7 +24,7 @@ if(isset( $_REQUEST['relogin'] )) {
 </head>
 <body class="font-mali vh-100 d-flex justify-content-center align-items-center">
 	
-<section class="h-auto gradient-form" <!--style="background-color: #79994a;"-->>
+<section class="h-auto gradient-form" <!--style="background-color: #79994a;"-->
 	<form action="checkLogin.php" class="mb-3" method="POST">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">

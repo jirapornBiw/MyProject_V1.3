@@ -47,6 +47,9 @@ if(!$_SESSION['login']){
             <?php echo ($new['detail']);?>
             </span><br>
             <?php echo ($new['dttm']);?><br>
+            <div class="text-center">
+            <a href='new_detail.php?id=<?php echo ($new['new_id']);?>' style='width:75%' class='btn btn-success btn-sm'>รายละเอียด</a>
+            </div>
           
         </div> <!-- //col -->
 

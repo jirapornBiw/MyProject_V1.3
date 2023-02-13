@@ -113,6 +113,7 @@ $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next
 								<th>ชื่อ</th>
 								<th>ยอดรวมสินค้า</th>
 								<th>สถานะ</th>
+								<th>หมายเลขพัสดุ</th>
 								
 								</tr>
 							</thead>
@@ -131,6 +132,7 @@ $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next
 											<td>{$order['name']}</td>
 											<td>{$order['total']}</td>
 											<td>{$order['status']}</td>
+											<td>{$order['tracking_number']}</td>
 											<td>											
 											</td>
 										</tr>

@@ -37,6 +37,11 @@ if(!$_SESSION['login']){
     $total = $_REQUEST["total"];
 	$email = $_SESSION["c_email"];
     $id_customer = $_SESSION["c_id"];
+    $sqlMAX = "SELECT MAX(o_id) as o_id 
+    from orders";
+	$queryMAX	= mysqli_query($conn, $sqlMAX);
+	$rowMAX = mysqli_fetch_array($queryMAX);
+	$o_idMAX = $rowMAX["o_id"];
 
 	//บันทึกการสั่งซื้อลงใน orders
 	mysqli_query($conn, "BEGIN"); 
@@ -106,7 +111,7 @@ if(!$_SESSION['login']){
         
         if($query1 && $query4 && $query9){
         mysqli_query($conn, "COMMIT");
-        $msg = "ตัดสต็อกเรียบร้อยแล้ว ";
+        $msg = "สั่งซื้อสินค้าแล้วเรียบร้อย";
         foreach((array)$_SESSION['cart'] as $p_id)
             { 
             unset($_SESSION['cart']);
@@ -115,17 +120,18 @@ if(!$_SESSION['login']){
         }
         else{
         mysqli_query($conn, "ROLLBACK");  
-        $msg = "ตัดสต็อกไม่สำเร็จ กรุณาติดต่อเจ้าหน้าที่ค่ะ "; 
+        $msg = "สั่งซื้อไม่สำเร็จ กรุณาติดต่อเจ้าหน้าที่ค่ะ "; 
+        header("location: products.php");
         }
         
         mysqli_close($conn);
-    
       ?> 
 
 
 <script type="text/javascript">
 	alert("<?php echo $msg;?>");
-	window.location ='products.php?id=<?php echo $_SESSION['c_id']?>';
+    //orderDetail.php?id=132&action=detail
+	window.location ='orderDetail.php?id=<?php echo $o_idMAX?>&action=detail';
 </script>
 </body>
 </html>

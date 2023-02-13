@@ -21,7 +21,8 @@ session_start();
 <?php 
 	include 'header.php'; 
  ?>
- <div class="row">
+    <div class="container">
+        <div class="row">
           <div class="col-sm-12 mt-5">
             <div class="d-flex justify-content-center">
               <h1>ข่าวสาร</h1>
@@ -34,21 +35,24 @@ session_start();
         $news = $newObj->getAllNew();
         foreach($news as $new) {
         ?>
-           <div class="col-sm-3 pl-5 pr-5">
-           <div class="text-center">
-            <img src="../admin/news/<?php echo $new['image'];?>" width="200px" height="200"><br>
-            <h5><?php echo $new['topic'];?> <br><h5>
-            <!--<span class="d-inline-block text-truncate" style="max-width: 200px;">-->
+           <div class="col-sm-3">
+            <div class="text-center">
+              <img src="../admin/news/<?php echo $new['image'];?>" width="200px" height="200"><br>
+              <h5><?php echo $new['topic'];?> <br><h5>
+              <!--<span class="d-inline-block text-truncate" style="max-width: 200px;">-->
+              </div>
+              <?php echo ($new['detail']);?>
+              </span><br>
+              <?php echo ($new['dttm']);?><br>
+            <div class="text-center">
+            <a href='new_detail.php?id=<?php echo ($new['new_id']);?>' style='width:75%' class='btn btn-success btn-sm'>รายละเอียด</a>
             </div>
-            <?php echo ($new['detail']);?>
-            </span><br>
-            <?php echo ($new['dttm']);?><br>
-          
-        </div> <!-- //col -->
+          </div> <!-- //col -->
 
         <?php } ?>
       
           <br><br>
+        </div>
         </div>
       </div>
     </div>

@@ -14,11 +14,9 @@ if($result){
 		header("location: ../php/member/index.php?id={$_SESSION['c_id']}&action=show");
 	} 
 	if($_SESSION['userlevel']=='admin'){
-		header("location: ../php/admin/index.php");
+		header("location: ../php/admin/product/index.php");
 	}
 } else {
 	header("location: login.php?msg=error");
-	//echo "<script>alert('Password ไม่ถูกต้อง กรุณาลองอีกครั้ง');</script>";
-	//echo "msg=error";
 }
 ?>

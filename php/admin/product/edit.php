@@ -34,6 +34,7 @@ if(isset($_REQUEST['action'])=='edit'){
 				<div class="card mb-3">
 					<div class="card-header text-white d-flex justify-content-between" style="background-color: #393939;">
                         <h4 class="text-light">แก้ไขข้อมูลสินค้า</h4>
+                        <a href="index.php" class="btn btn-outline-light">ย้อนกลับ</a>
 					</div>
 					<div class="card-body">
                         <form action="save_edit.php" method="post"enctype="multipart/form-data">

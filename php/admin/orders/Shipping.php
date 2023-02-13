@@ -1,5 +1,4 @@
-<?php require "../../../vendor/autoload.php"  ?>
-<?php
+<?php require "../../../vendor/autoload.php";
 use App\Model\orders;
 include("../connect.php");
 session_start();
@@ -7,22 +6,18 @@ if(!$_SESSION['login']){
   header("location: ../../../auth/login.php");
   exit;
 }
-$countorderObj = new orders();
-//$orders = $ordersObj->getAllOrders();
-
-$query=mysqli_query($conn,"SELECT COUNT(o_id) FROM orders");
-$countorder = $countorderObj->getCountOrders();
-//print_r($countorder);
-//$nquery=$countorderObj->getShippingOrders();
-//	print_r($nquery);
-//print_r($query);
+$ordersObj = new orders();
+$orders = $ordersObj->getShippingOrders();
+include("../connect.php");
+$query=mysqli_query($conn,"SELECT COUNT(o_id) FROM orders WHERE status = 'จัดส่งสินค้าสำเร็จ'");
+$row = mysqli_fetch_row($query);
+$rows = $row[0];
 
 $row = mysqli_fetch_row($query);
-//$countorders = $countorder[0];
  
-	$page_rows = 9;  //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
+	$page_rows = 7;  //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
  
-	$last = ceil($countorder/$page_rows);
+	$last = ceil($rows/$page_rows);
  
 	if($last < 1){
 		$last = 1;
@@ -43,7 +38,17 @@ $row = mysqli_fetch_row($query);
  
 	$limit = 'LIMIT ' .($pagenum - 1) * $page_rows .',' .$page_rows;
  
-	$nquery=$countorderObj->getShippingOrders();
+	$nquery=mysqli_query($conn,"SELECT
+		orders.o_id,
+		orders.name,
+		orders.dttm,
+		orders.total,
+		orders.tracking_number,
+		orders.status
+	FROM 
+		orders
+	WHERE status = 'จัดส่งสินค้าสำเร็จ' 
+	ORDER BY o_id DESC $limit");
 	//print_r($nquery);
  //exit;
 	$paginationCtrls = '';
@@ -52,11 +57,11 @@ $row = mysqli_fetch_row($query);
  
 	if ($pagenum > 1) {
 $previous = $pagenum - 1;
-		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$previous.'" class="btn btn-dark">Previous</a> &nbsp; &nbsp; ';
+		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$previous.'" class="btn btn-secondary">ก่อนหน้า</a> &nbsp; &nbsp; ';
  
 		for($i = $pagenum-4; $i < $pagenum; $i++){
 			if($i > 0){
-		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'" class="btn btn-dark">'.$i.'</a> &nbsp; ';
+		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'" class="btn btn-secondary">'.$i.'</a> &nbsp; ';
 			}
 	}
 }
@@ -64,7 +69,7 @@ $previous = $pagenum - 1;
 	$paginationCtrls .= ''.$pagenum.' &nbsp; ';
  
 	for($i = $pagenum+1; $i <= $last; $i++){
-		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'" class="btn btn-dark">'.$i.'</a> &nbsp; ';
+		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'" class="btn btn-secondary">'.$i.'</a> &nbsp; ';
 		if($i >= $pagenum+4){
 			break;
 		}
@@ -72,7 +77,7 @@ $previous = $pagenum - 1;
  
 if ($pagenum != $last) {
 $next = $pagenum + 1;
-$paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next.'" class="btn btn-dark">Next</a> ';
+$paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next.'" class="btn btn-secondary">Next</a> ';
 }}
 
 ?>
@@ -124,6 +129,7 @@ $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next
 								<th>ชื่อลูกค้า</th>
 								<th>วันที่สั่งซื้อ</th>
 								<th>ยอดรวมสินค้า</th>
+								<th>หมายเลขพัสดุ</th>
 								<th>สถานะ</th>
 								
 								</tr>
@@ -143,11 +149,12 @@ $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next
 											<td>{$order['name']}</td>
 											<td>{$order['dttm']}</td>
 											<td>{$order['dttm']}</td>
+											<td>{$order['tracking_number']}</td>
 											<td>{$order['status']}</td>
 											
 											
 											<td>
-											<a href='orderDetail.php?id={$order['o_id']}&action=detail' class='btn btn-outline-warning'>รายละเอียด</a>
+											<a href='orderDetail_SS.php?id={$order['o_id']}&action=detail' class='btn btn-outline-warning'>รายละเอียด</a>
 											</td>
 										</tr>
 										";

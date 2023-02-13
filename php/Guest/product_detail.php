@@ -52,8 +52,6 @@ require "../../vendor/autoload.php";
           </div>
     </div>
 </div>
-    
-DWS
   </body>
 </body>
 </html>

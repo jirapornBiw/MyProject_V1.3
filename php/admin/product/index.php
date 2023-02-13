@@ -1,7 +1,5 @@
-<?php require "../../../vendor/autoload.php"  ?>
-<?php
+<?php require "../../../vendor/autoload.php";
 use App\Model\product;
-
 session_start();
 if(!$_SESSION['login']){
   header("location: ../../../auth/login.php");
@@ -36,8 +34,23 @@ $rows = $row[0];
 	}
  
 	$limit = 'LIMIT ' .($pagenum - 1) * $page_rows .',' .$page_rows;
- 
-	$nquery=mysqli_query($conn,"SELECT * from  products $limit");
+	$nquery=mysqli_query($conn,
+	"SELECT
+	products.id,
+	products.image,
+	type.name AS type,
+	products.name,
+	products.Products_Detail,
+	weight.name AS weight,
+	products.stock,
+	products.price,
+	status.name AS status
+FROM 
+	products
+	LEFT JOIN type ON products.type_id = type.id
+	LEFT JOIN status ON products.status_id = status.id
+	LEFT JOIN weight ON products.weight_id = weight.id
+ $limit");
  
 	$paginationCtrls = '';
  
@@ -45,7 +58,7 @@ $rows = $row[0];
  
 	if ($pagenum > 1) {
 $previous = $pagenum - 1;
-		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$previous.'" class="btn btn-secondary">Previous</a> &nbsp; &nbsp; ';
+		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$previous.'" class="btn btn-secondary">ก่อนหน้า</a> &nbsp; &nbsp; ';
  
 		for($i = $pagenum-4; $i < $pagenum; $i++){
 			if($i > 0){
@@ -65,7 +78,7 @@ $previous = $pagenum - 1;
  
 if ($pagenum != $last) {
 $next = $pagenum + 1;
-$paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next.'" class="btn btn-secondary">Next</a> ';
+$paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next.'" class="btn btn-secondary">ต่อไป</a> ';
 }}
 ?>
 
@@ -117,12 +130,10 @@ $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next
 							<tbody>
 							<?php
 								$productsObj = new product();
-									$filters = array_intersect_key($_REQUEST, array_flip(['search', 'type_id', 'status_id']));
+									//$filters = array_intersect_key($_REQUEST, array_flip(['search', 'type_id', 'status_id']));
 									$products = $productsObj->getAllproduct();
-									$n=0;
-									foreach($products as $product) {
-									$n++;
-									while($crow = mysqli_fetch_array($nquery)){
+									$n=1;
+									while($product = mysqli_fetch_array($nquery)){
 									echo "
 										<tr>    
 											<td>$n</td>
@@ -141,7 +152,8 @@ $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next
 											</td>
 										</tr>
 										";
-										}}
+										$n++;
+										}
 									?>
 							</tbody>
 						</table>
