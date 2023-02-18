@@ -117,6 +117,7 @@ class customer extends Db {
 	public function getCustomerById($id){
 		$sql="
 			SELECT 
+			customers.id,
 			customers.*, 
 			provinces.name_th as provinces,
 			amphures.name_th as amphures,

@@ -100,7 +100,7 @@ $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next
 						<a href='orders_pay.php' class='btn btn-outline-warning'>ที่ต้องชำระเงิน</a>
 						<a href='orders_pre.php' class='btn btn-outline-success'>เตรียมจัดส่ง</a>
 						<a href='orders_track.php' class='btn btn-outline-primary'>ระหว่างขนส่ง</a>
-						<a href='claim.php?id=<?php echo $_SESSION['c_id']?>' class='btn btn-outline-danger'>การคืนสินค้า</a>
+						<a href='claim.php?id=<?php echo $_SESSION['c_id']?>' class='btn btn-outline-danger'>แจ้งพัสดุเสียหาย</a>
 						</div>
 		</div>
         <div class="card-body">

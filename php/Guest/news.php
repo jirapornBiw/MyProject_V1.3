@@ -24,7 +24,7 @@ session_start();
     <div class="container">
         <div class="row">
           <div class="col-sm-12 mt-5">
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center ">
               <h1>ข่าวสาร</h1>
             </div>
           </div>
@@ -36,19 +36,18 @@ session_start();
         foreach($news as $new) {
         ?>
            <div class="col-sm-3">
-            <div class="text-center">
+            <div class="text-center shadow p-3 mb-5 bg-body rounded"style="margin: 10px;">
               <img src="../admin/news/<?php echo $new['image'];?>" width="200px" height="200"><br>
               <h5><?php echo $new['topic'];?> <br><h5>
               <!--<span class="d-inline-block text-truncate" style="max-width: 200px;">-->
-              </div>
-              <?php echo ($new['detail']);?>
+              
               </span><br>
-              <?php echo ($new['dttm']);?><br>
+              วันที่โพส : <?php echo ($new['dttm']);?><br>
             <div class="text-center">
             <a href='new_detail.php?id=<?php echo ($new['new_id']);?>' style='width:75%' class='btn btn-success btn-sm'>รายละเอียด</a>
             </div>
           </div> <!-- //col -->
-
+          </div>
         <?php } ?>
       
           <br><br>

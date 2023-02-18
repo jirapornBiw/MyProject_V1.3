@@ -37,7 +37,7 @@ if(!$_SESSION['login']){
         foreach($products as $product) {
         ?>
            <div class="col-sm-3 ml-5"> <!--***แสดงข้อมูลแบบ 3 3 3 3***-->
-            <div class="text-center">
+            <div class="text-center shadow p-3 mb-5 bg-body rounded"style="margin: 10px;" >
               <img src="../admin/product/<?php echo $product['image'];?>" width="200px"><br>
               <h5><?php echo $product['name'];?><br></h5>
               ราคา <?php echo number_format($product['price'],2);?> บาท<br>

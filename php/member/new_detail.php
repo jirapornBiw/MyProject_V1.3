@@ -35,6 +35,7 @@ $newObj = new news;
             <div class="row mt-3">
                 <div class="col-7 pt-3 pb-3">
                         <label for="name" class="h1"><?php echo $new['topic'];?></label></br>
+                        <label for="name" class="h5">วันที่โพส : <?php echo $new['dttm'];?></label></br>
                         <label for="name" class="h5"><?php echo $new['detail'];?></label></br>
                       </div>
                 </div>

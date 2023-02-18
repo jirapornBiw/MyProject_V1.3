@@ -1,51 +1,54 @@
 <?php
-if(isset( $_REQUEST['relogin'] )) {  
-  echo '<script type ="text/JavaScript">';  
-  echo 'alert("กรุณาเข้าสู่ระบบก่อนสั่งซื้อสินค้า")';  
-  echo '</script>';  
-} 
-else {
-
+if (isset($_REQUEST['relogin'])) {
+  echo '<script type ="text/JavaScript">';
+  echo 'alert("กรุณาเข้าสู่ระบบก่อนสั่งซื้อสินค้า")';
+  echo '</script>';
+} else {
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-	a:hover {
-	color: #FFFFFF !important;
-	}
-</style>
-	<title>Login</title>
-	<link rel="stylesheet" href="../node_modules\bootstrap\dist\css\bootstrap.min.css">
-	<link rel="stylesheet"  href="/css/login.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    a:hover {
+      color: #FFFFFF !important;
+    }
+  </style>
+  <title>Login</title>
+  <link rel="stylesheet" href="../node_modules\bootstrap\dist\css\bootstrap.min.css">
+  <link rel="stylesheet" href="/css/login.css">
 </head>
-<body class="font-mali vh-100 d-flex justify-content-center align-items-center">
-	
-<section class="h-auto gradient-form" <!--style="background-color: #79994a;"-->
-	<form action="checkLogin.php" class="mb-3" method="POST">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-xl-10">
-        <div class="card rounded-3 text-black">
-          <div class="row g-0">
-            <div class="col-lg-6">
-              <div class="card-body p-md-1 mx-md-4">
+<body class="font-mali d-flex justify-content-center align-items-center fullscreen-block" style="background-image: url('image/nature-3450440_960_720.jpg');
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-position:center center;">
+ <!-- Section: Design Block -->
+<section class="">
+  <!-- Jumbotron -->
+  <div class="px-4 py-5 px-md-5 text-center text-lg-start mt-5 border" style="background-color: hsl(0, 0%, 96%)">
+    <div class="container">
+      <div class="row gx-lg-5 align-items-center">
+        <div class="col-lg-6 mb-5 mb-lg-0">
+        <img src="image/logo.png" style="width: 20%;" alt="logo">
 
-                <div class="text-center">
-                  <img src="../img/Green Black Minimalist Leaf Farm Logo .png"
-                    style="width: 185px;" alt="logo">
-                  <h4 class="mt-1 mb-1 pb-1">ยินดีต้อนรับเข้าสู่ หมู่บ้านบ้านกอก</h4>
-                </div>
-                <?php
-                  if(isset($_GET['msg'])) {
-                    echo "<h5 class='my-3 text-danger'>Password ไม่ถูกต้อง กรุณาลองอีกครั้ง</h5>";
-                  }
-                ?>
-                <form>
-                  <p>กรุณาเข้าสู่ระบบ</p>
+          <h1 class="my-5 display-3 fw-bold ls-tight">
+          หมู่บ้าน บ้านกอก <br />
+            <span class="text-primary">bankhaohomrice</span>
+          </h1>
+          <p style="color: hsl(217, 10%, 50.8%)">
+          ดำเนินธุรกิจด้านการผลิตสินค้าข้าวสารบรรจุถุง ภายใต้แบรนด์ บ้านข้าวหอม 
+          เพื่อตอบสนองความต้องการที่หลากหลายของผู้บริโภค          </p>
+        </div>
+
+        <div class="col-lg-6 mb-5 mb-lg-0 ">
+          <div class="card">
+            <div class="card-body py-5 px-md-5 border">
+              <div class="container">
+                <h1 class="mb-5">เข้าสู่ระบบ</h1>
+              </div>
+              <form action="checkLogin.php" class="mb-3" method="POST">
                   <label class="form-label" for="form2Example11">อีเมล</label>
                   <div class="form-outline mb-4">
                     <input type="email" id="form2Example11" name="email" class="form-control"
@@ -74,32 +77,15 @@ else {
                   </div>
 
                 </form>
-
-              </div>
             </div>
-            <div class="col-lg-6 d-flex align-items-center gradient-custom-2" 
-            style= "background: conic-gradient(  #67a272 72deg, #88b288 72deg 142deg, #bfd575 72deg 214deg, #d0e7a3 72deg 286deg, #336359 72deg);"
-            >
-  <!-- style="background-image: url('https://www.img.in.th/images/98f0ad8b7f02863cd6ee6917a6313dfe.jpg');"
-"background: conic-gradient(  #ffa69e 72deg, #faf3dd 72deg 142deg, #b8f2e6 72deg 214deg, #aed9e0 72deg 286deg, #5e6472 72deg);"
--->
-              <div class="img-login">
-              <div class="text-black px-3 py-4 p-md-5 mx-md-4" 
-               >
-                
-
-                
-                <h4 class="mb-4">ASIA INTER RICE CO., LTD</h4>
-                <p class="small mb-0">ภายใต้แบรนด์ ..... เพื่อตอบสนองความต้องการที่หลากหลายของผู้บริโภค เรามุ่งมั่นและพัฒนาในการดำเนินการผลิตให้เป็นไปตามระบบคุณภาพ GMP HACCP และ HALAL ซึ่งมีความสำคัญต่อผลิตภัณฑ์ข้าวสารบรรจุถุง เนื่องจากระบบจะให้ความสำคัญต่อการใช้เครื่องจักรอุปกรณ์ที่มีประสิทธิภาพควบคุมทุกขั้นตอนของกระบวนการผลิต
-           
-			        </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</from>
+  <!-- Jumbotron -->
 </section>
+<!-- Section: Design Block -->
 
 
 
@@ -110,7 +96,7 @@ else {
 
 
 
-	<!--<div class="card mb-3">
+  <!--<div class="card mb-3">
 
 		<div class="card-header bg-primary text-white">
 			<h4>เข้าสู่ระบบ</h4>
@@ -124,10 +110,10 @@ else {
 				if(isset( $_GET['msg'] ) )
 				 
 				<?php
-					if(isset($_GET['msg'])) {
-						echo "<h5 class='my-3 text-danger'>Password ไม่ถูกต้อง กรุณาลองอีกครั้ง</h5>";
-					}
-				?>
+        if (isset($_GET['msg'])) {
+          echo "<h5 class='my-3 text-danger'>Password ไม่ถูกต้อง กรุณาลองอีกครั้ง</h5>";
+        }
+        ?>
 				<div class="form-group">
 					<label for="username">Email</label>
 					<input type="email" name="email" id="email" class="form-control" required>
@@ -141,12 +127,13 @@ else {
 			<a href="register.php">สมัครใช้งานใหม่</a>
 		</div>
 	</div>-->
-		<script src="../node_modules/jquery/dist/jquery.min.js"></script>
-      <script src="../node_modules/popper.js/dist/popper.min.js"></script>
-      <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-      <script type="text/javascript">
-	alert("<?php echo $msg;?>");
-	//window.location ='products.php';
-</script>
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="../node_modules/popper.js/dist/popper.min.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+    alert("<?php echo $msg; ?>");
+    //window.location ='products.php';
+  </script>
 </body>
+
 </html>

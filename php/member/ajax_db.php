@@ -1,6 +1,6 @@
 <?php
  
- include '../../src/Database/db_provinces.php'; 
+ include '../../src/Database/connect.php'; 
  
  
   if (isset($_POST['function']) && $_POST['function'] == 'provinces') {

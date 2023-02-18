@@ -6,7 +6,12 @@ use App\Database\Db;
 class news extends Db {
     public function getAllNew(){
         $sql = "
-            SELECT * FROM news
+            SELECT 
+				new_id,
+				topic,
+				CAST(dttm AS DATE) AS dttm,
+				image 
+			FROM news
         ";
         $stmt = $this->pdo->query($sql);
         $data = $stmt->fetchAll();
@@ -18,7 +23,7 @@ class news extends Db {
                  new_id,
                  topic,
                  detail,
-                 dttm,
+                 CAST(dttm AS DATE) AS dttm,
 				 image
 			FROM 
 				news

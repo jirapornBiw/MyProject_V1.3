@@ -1,16 +1,12 @@
-<?php require "../../vendor/autoload.php"  ?>
-<?php
-
-
+<?php require "../../vendor/autoload.php";
 session_start();
 if(!$_SESSION['login']){
   header("location: ../../auth/login.php");
   exit;
 }
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

@@ -1,9 +1,11 @@
 <?php require "../../vendor/autoload.php"  ?>
 <?php
-include 'connect.php';  
+include 'connect.php';
+
 use App\Model\news;
+
 session_start();
-if(!$_SESSION['login']){
+if (!$_SESSION['login']) {
   header("location: ../../auth/login.php");
   exit;
 }
@@ -11,53 +13,55 @@ if(!$_SESSION['login']){
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ข่าวสาร</title>
-    <link rel="stylesheet" href="../../node_modules\bootstrap\dist\css\bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
-  </head>
-<body>
-<?php 
-	include 'header.php'; 
-	include 'script.php';
- ?>
- <div class="row">
-          <div class="col-sm-12 mt-5">
-            <div class="d-flex justify-content-center">
-              <h1>ข่าวสาร</h1>
-            </div>
-          </div>
-        <?php
-        //
-        //คิวรี่ข้อมูลมาแสดงในตาราง
-        $newObj = new news;
-        $news = $newObj->getAllNew();
-        foreach($news as $new) {
-        ?>
-           <div class="col-sm-3 pl-5 pr-5">
-           <div class="text-center">
-            <img src="../admin/news/<?php echo $new['image'];?>" width="200px" height="200"><br>
-            <h5><?php echo $new['topic'];?> <br><h5>
-            <!--<span class="d-inline-block text-truncate" style="max-width: 200px;">-->
-            </div>
-            <?php echo ($new['detail']);?>
-            </span><br>
-            <?php echo ($new['dttm']);?><br>
-            <div class="text-center">
-            <a href='new_detail.php?id=<?php echo ($new['new_id']);?>' style='width:75%' class='btn btn-success btn-sm'>รายละเอียด</a>
-            </div>
-          
-        </div> <!-- //col -->
 
-        <?php } ?>
-      
-          <br><br>
-        </div>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ข่าวสาร</title>
+  <link rel="stylesheet" href="../../node_modules\bootstrap\dist\css\bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <?php
+  include 'header.php';
+  include 'script.php';
+  ?>
+  <div class="row">
+    <div class="col-sm-12 mt-5">
+      <div class="d-flex justify-content-center">
+        <h1>ข่าวสาร</h1>
       </div>
     </div>
+    <?php
+    //
+    //คิวรี่ข้อมูลมาแสดงในตาราง
+    $newObj = new news;
+    $news = $newObj->getAllNew();
+    foreach ($news as $new) {
+    ?>
+      <div class="col-sm-3 pl-5 pr-5">
+        <div class="text-center shadow p-3 mb-5 bg-body rounded" style="margin: 10px;">
+          <img src="../admin/news/<?php echo $new['image']; ?>" width="200px" height="200"><br>
+          <h5 class="mt-3"><?php echo $new['topic']; ?> <br>
+          </h5>
+          <!--<span class="d-inline-block text-truncate" style="max-width: 200px;">-->
+          <p>วันที่โพส : <?php echo ($new['dttm']); ?><br></p>
+
+          
+            <a href='new_detail.php?id=<?php echo ($new['new_id']); ?>' style='width:75%' class='btn btn-success btn-sm'>รายละเอียด</a>
+        
+        </div>
+      </div> <!-- //col -->
+
+    <?php } ?>
+
+    <br><br>
+  </div>
+  </div>
+  </div>
 </body>
+
 </html>

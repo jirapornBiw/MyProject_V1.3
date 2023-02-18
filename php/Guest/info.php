@@ -83,29 +83,29 @@
                 <h2>ผลิตภัณฑ์ของเรา</h2>
             </div>
             <div class="row">
-                <div class="col">
+                <div class="col mt-3">
                     <div class="row">
                         <div class="col-sm-4 ml-5">
                             <div class="d-flex justify-content-center">
-                            <img src="https://www.benjarongrice.com/img/pro230f4.png?v=3" width="300px">
+                            <img src="image/หอมมะลิ5.png" width="200px">
                             </div>
-                            <div class="container text-center">
+                            <div class="container text-center mt-2">
                                 <h4>ข้าวขาวหอมมะลิ 100%</h4>
                             </div>
                         </div>
                         <div class="col-sm-4 ml-5">
                             <div class="d-flex justify-content-center">
-                            <img src="http://localhost/MyWeb/MyProject_V1.2/img/pro15e1f.png" width="300px">
+                            <img src="image/เสาไห้5.png" width="200px">
                             </div>
-                            <div class="container text-center">
+                            <div class="container text-center mt-2">
                                 <h4>ข้าวขาวเสาไห้</h4>
                             </div>
                         </div>
                         <div class="col-sm-4 ml-5">
                             <div class="d-flex justify-content-center">
-                            <img src="https://www.benjarongrice.com/img/pro3.png" width="300px">
+                            <img src="image/ข้าวเหนียว5.png" width="200px">
                             </div>
-                            <div class="container text-center">
+                            <div class="container text-center mt-2">
                                 <h4>ข้าวเหนียว</h4>
                             </div>
                         </div>
@@ -113,45 +113,14 @@
             </div>
 
         </div>
-        <div class="row mt-5">
+        <div class="row mt-5 mb-5">
             <div class="col text-center">
                 <a href="products.php" class="btn btn-success btn-sm" style="width:15%">ดูสินค้าทั้งหมด</a>
-
             </div>
         </div>
-        <div class="row mt-5">
-            <div class="col">
-                        <div class="row">
-                            <div class="col-sm-4 ml-5" style="background-color: #116530 ;">
-                                <div class="text-light mt-2 ">
-                                    <p>BANKAOHOMRICE CO., LTD</p>
-                                    <p>บริษัท บ้านข้ามหอม จำกัด</p>
-                                    <p>LINE : @BANKAOHOMRICE</p>
-                                    <p>PHONE : 095-395-4854</p>
-                                    <p>FACEBOOK : BANKAOHOMRICE</p>
-                                </div>
-                            </div>
-                            <div class="col-sm-4 ml-5" style="background-color: #116530; border-left: 5px solid white;">
-                                <div class="text-light mt-2">
-                                        
-                                </div>
-                            </div>
-                            <div class="col-sm-4 ml-5" style="background-color: #116530; border-left: 5px solid white;">
-                                <div class="text-light mt-2">
-                                    <p>ติดต่อเรา</p> 
-                                    <div class="row">
-                                        <div class="col">
-                                                    <p><i class="fa fa-facebook-official" aria-hidden="true"></i>
-                                                    FACEBOOK : BANKAOHOMRICE</p>
-                                                    <p><i class="fa fa-envelope" aria-hidden="true"></i>
-                                                    GMAIL : BANKAOHOMRICE@GMAIL.COM </p>
-                                        </div>
-                                    </div>
-                                </div> 
-                            </div>
-                        </div>
-                    </div>
-                </div>
+       <?php 
+       include ("footer.php")
+       ?>
         </div>
 </body>
 </html>
