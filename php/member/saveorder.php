@@ -25,6 +25,7 @@ if (!$_SESSION['login']) {
         </div>
     </div>
     <?php
+    
     include 'header.php';
     include 'script.php';
     //สร้างตัวแปรสำหรับบันทึกการสั่งซื้อ 
@@ -36,7 +37,7 @@ if (!$_SESSION['login']) {
     $postcode = $_SESSION["c_zip_code"];
     $name = $_SESSION['c_name'];
     $phone = $_SESSION["c_phone"];
-    $total = $_REQUEST["total"];
+    $total = $_REQUEST["amount"];
     $email = $_SESSION["c_email"];
     $id_customer = $_SESSION["c_id"];
     $sqlMAX = "SELECT MAX(o_id) as o_id 
@@ -44,7 +45,6 @@ if (!$_SESSION['login']) {
     $queryMAX    = mysqli_query($conn, $sqlMAX);
     $rowMAX = mysqli_fetch_array($queryMAX);
     $o_idMAX = $rowMAX["o_id"];
-
     //บันทึกการสั่งซื้อลงใน orders
     mysqli_query($conn, "BEGIN");
     $sql1    = "INSERT INTO orders 
@@ -122,6 +122,7 @@ if (!$_SESSION['login']) {
         header("location: products.php");
     }
 
+
     mysqli_close($conn);
     ?>
 
@@ -129,7 +130,7 @@ if (!$_SESSION['login']) {
     <script type="text/javascript">
         alert("<?php echo $msg; ?>");
         //orderDetail.php?id=132&action=detail
-        window.location = 'orderDetail.php?id=<?php echo $o_idMAX ?>&action=detail';
+        window.location = 'orderDetail.php?id=<?php echo $o_id ?>&action=detail';
     </script>
 </body>
 

@@ -10,7 +10,7 @@ if (!$_SESSION['login']) {
 }
 $ordersObj = new orders();
 $orders = $ordersObj->getAllOrders();
-$query = mysqli_query($conn, "SELECT COUNT(o_id) FROM orders");
+$query = mysqli_query($conn, "SELECT COUNT(o_id) FROM orders ");
 $row = mysqli_fetch_row($query);
 $rows = $row[0];
 
@@ -36,7 +36,7 @@ if ($pagenum < 1) {
 
 $limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
 
-$nquery = mysqli_query($conn, "SELECT * from  orders $limit");
+$nquery = mysqli_query($conn, "SELECT * from  orders ORDER BY o_id DESC $limit");
 
 $paginationCtrls = '';
 
@@ -44,11 +44,11 @@ if ($last != 1) {
 
 	if ($pagenum > 1) {
 		$previous = $pagenum - 1;
-		$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $previous . '" class="btn btn-dark">Previous</a> &nbsp; &nbsp; ';
+		$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $previous . '" class="btn btn-secondary">ก่อนหน้า</a> &nbsp; &nbsp; ';
 
 		for ($i = $pagenum - 4; $i < $pagenum; $i++) {
 			if ($i > 0) {
-				$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $i . '" class="btn btn-dark">' . $i . '</a> &nbsp; ';
+				$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $i . '" class="btn btn-secondary">' . $i . '</a> &nbsp; ';
 			}
 		}
 	}
@@ -56,7 +56,7 @@ if ($last != 1) {
 	$paginationCtrls .= '' . $pagenum . ' &nbsp; ';
 
 	for ($i = $pagenum + 1; $i <= $last; $i++) {
-		$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $i . '" class="btn btn-dark">' . $i . '</a> &nbsp; ';
+		$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $i . '" class="btn btn-secondary">' . $i . '</a> &nbsp; ';
 		if ($i >= $pagenum + 4) {
 			break;
 		}
@@ -64,7 +64,7 @@ if ($last != 1) {
 
 	if ($pagenum != $last) {
 		$next = $pagenum + 1;
-		$paginationCtrls .= ' &nbsp; &nbsp; <a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $next . '" class="btn btn-dark">Next</a> ';
+		$paginationCtrls .= ' &nbsp; &nbsp; <a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $next . '" class="btn btn-secondary">ต่อไป</a> ';
 	}
 }
 ?>
@@ -125,7 +125,9 @@ if ($last != 1) {
 							$orders = $ordersObj->getAllOrderDetailByCustomer($_SESSION['c_id']);
 							$n = 0;
 							foreach ($orders as $order) {
-								$n++;
+								while ($order = mysqli_fetch_array($nquery)) {
+
+								
 								echo "
 										<tr>    
 											<td>$n</td>
@@ -141,10 +143,13 @@ if ($last != 1) {
 											</td>
 										</tr>
 										";
+										$n++;
+								}
 							}
 							?>
 						</tbody>
 					</table>
+					<div id="pagination_controls"><?php echo $paginationCtrls; ?></div>
 				</div>
 			</div>
 		</div>

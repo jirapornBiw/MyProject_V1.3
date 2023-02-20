@@ -43,8 +43,8 @@ if (isset($_REQUEST['action']) == 'detail') {
 
 			<div class="form-group mt-3">
 				<h4>ข้อมูลลูกค้า</h4>
-				<hr>
-				<label for="name">รหัสสั่งซื้อ : <?php echo $order['o_id']; ?></label></br>
+				<hr>				
+				<label for="name">รหัสสั่งซื้อสินค้า : <?php echo $order['o_id']; ?></label></br>
 				<label for="name">วันที่ : <?php echo $order['dttm']; ?></label></br>
 				<label for="name">ชื่อ : <?php echo $order['name']; ?></label></br>
 				<label for="name">ที่อยู่ : <?php echo $order['address'] . ' ตำบล' . $order['districts']
@@ -71,8 +71,11 @@ if (isset($_REQUEST['action']) == 'detail') {
 							$ordersObj = new orders();
 							$orders = $ordersObj->getAllOrderDetail($_REQUEST['id']);
 							$n = 0;
+							$sumpricetotal = 0;
+							$amount = 0;
 							foreach ($orders as $order) {
 								$n++;
+								
 								echo "
 										<tr>    
 											<td>$n</td>
@@ -83,11 +86,15 @@ if (isset($_REQUEST['action']) == 'detail') {
 										</tr>
 										";
 							}
+							$sumpricetotal = (integer)$order['pricetotal'];
+							$amount = $order['total']-$sumpricetotal;
 							?>
 						</tbody>
 					</table>
 					<div class="container" align="right">
-						จำนวนเงินรวมทั้งหมด : <?php echo $order['pricetotal'] ?> บาท<br>
+						ราคาสินค้ารวม : <?php echo $sumpricetotal;?><br>
+						ค่าจัดส่งสินค้า : <?php echo $amount;?><br>
+						จำนวนเงินรวมทั้งหมด : <?php echo $order['total'] ?> บาท<br>
 						
 
 						<?php

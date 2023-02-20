@@ -2,7 +2,6 @@
 include 'connect.php';
 
 use App\Model\customer;
-use App\Model\order;
 
 session_start();
 
@@ -70,6 +69,7 @@ $customer = $customerObj->getCustomerById($_SESSION['c_id']);
         <?php
         $total = 0;
         $total_weight = 0;
+        $amount = 0;
         foreach ($_SESSION['cart'] as $p_id => $qty) {
           $sql = "select products.*,weight.weight from products 
 		LEFT JOIN weight ON products.weight_id = weight.id
@@ -81,7 +81,13 @@ $customer = $customerObj->getCustomerById($_SESSION['c_id']);
           $total += $sum;
           $total_weight += $weight;
           $shipping_cost = ($total_weight * 15) + 20;
+          if ($total_weight >= 1) {
+						$shipping_cost = (($total_weight - 1) * 15) + 20;
+					} else {
+						$shipping_cost = ($total_weight + 20);
+					}
           $amount = $total + $shipping_cost;
+          
           echo "<tr>";
           echo "<td  class='border'>" . $row["name"] . "</td>";
           echo "<td align='right' class='border'>" . number_format($row['price'], 2) . "</td>";
@@ -100,10 +106,9 @@ $customer = $customerObj->getCustomerById($_SESSION['c_id']);
         ?>
       </table>
       <p>
-
       <table border="0" cellspacing="0" align="center">
        
-            <input type="hidden" name="total" value="<?php echo $total; ?>" />
+            <input type="hidden" name="amount" value="<?php echo $amount; ?>" />
 						<input type="button" name="Submit2" value="แก้ไขที่อยู่" onclick="window.location='edit_profile.php?id=<?php echo $_SESSION['c_id']?>&action=edit';" class="btn btn-light" />
             <input type="submit" name="Submit2" value="สั่งซื้อ" class="btn btn-secondary"/>
         </tr>
