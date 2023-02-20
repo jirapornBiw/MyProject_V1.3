@@ -22,7 +22,7 @@ class product extends Db {
 				LEFT JOIN type ON products.type_id = type.id
 				LEFT JOIN status ON products.status_id = status.id
 				LEFT JOIN weight ON products.weight_id = weight.id
-			LIMIT 0,4;
+			
 
 		";
 		$stmt = $this->pdo->query($sql);

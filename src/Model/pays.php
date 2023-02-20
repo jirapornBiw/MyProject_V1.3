@@ -81,27 +81,7 @@ class pays extends Db {
 		$stmt->execute($pay);//จับคู่ รันในฐานข้อมูล
 		return $this->pdo->lastInsertId();
 	}
-	/*public function addPay($pay) {
-		$sql = "
-			INSERT INTO pays (
-				CustomerID, 
-				image,
-                OrderId,
-				status
-
-				
-			) VALUES (
-				:CustomerID, 
-				:image,
-                :OrderId,
-				'รอการตรวจสอบ'
-			)
-		";
-		
-		$stmt = $this->pdo->prepare($sql);
-		$stmt->execute($pay);//จับคู่ รันในฐานข้อมูล
-		return $this->pdo->lastInsertId();
-	}*/
+	
 	public function updateStatusCorrect($pay2){
 		$sql = "
 			UPDATE  orders SET
@@ -112,15 +92,5 @@ class pays extends Db {
 		$stmt->execute($pay2);//จับคู่ รันในฐานข้อมูล
 		return true;
 	}
-	/*ต้นฉบับ
-	public function updateStatusCorrect($pay){
-		$sql = "
-			UPDATE  orders SET
-				status =:action
-			WHERE id = :id
-		";
-		$stmt = $this->pdo->prepare($sql);
-		$stmt->execute($pay);//จับคู่ รันในฐานข้อมูล
-		return true;
-	}*/
+	
 }

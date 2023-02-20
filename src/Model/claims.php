@@ -21,6 +21,22 @@ class claims extends Db {
         $data = $stmt->fetchAll();
         return $data;
     }
+	public function getClaimsByID(){
+        $sql = "
+            SELECT 
+			claims.CustomerID,
+			claims.image,
+			claims. OrderId,
+			claims.status,
+			claims.details,
+			claims.dttm
+			FROM claims
+			LEFT JOIN orders orders ON claims.OrderId = orders.o_id
+        ";
+        $stmt = $this->pdo->query($sql);
+        $data = $stmt->fetchAll();
+        return $data;
+    }
 
 
     public function addClaim($claim) {

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>หน้าแรก</title>
 </head>
 <body>
     <div class="container mt-5">
@@ -87,7 +87,7 @@
                     <div class="row">
                         <div class="col-sm-4 ml-5">
                             <div class="d-flex justify-content-center">
-                            <img src="image/หอมมะลิ5.png" width="200px">
+                            <img src="image/หอมมะลิ.jpg" width="200px">
                             </div>
                             <div class="container text-center mt-2">
                                 <h4>ข้าวขาวหอมมะลิ 100%</h4>
@@ -95,15 +95,15 @@
                         </div>
                         <div class="col-sm-4 ml-5">
                             <div class="d-flex justify-content-center">
-                            <img src="image/เสาไห้5.png" width="200px">
+                            <img src="image/กล้องหอมมะลิ.jpg" width="200px">
                             </div>
                             <div class="container text-center mt-2">
-                                <h4>ข้าวขาวเสาไห้</h4>
+                                <h4>ข้าวกล้องหอมมะลิ</h4>
                             </div>
                         </div>
                         <div class="col-sm-4 ml-5">
                             <div class="d-flex justify-content-center">
-                            <img src="image/ข้าวเหนียว5.png" width="200px">
+                            <img src="image/ข้าวเหนียว.jpg" width="200px">
                             </div>
                             <div class="container text-center mt-2">
                                 <h4>ข้าวเหนียว</h4>

@@ -62,7 +62,7 @@
                                 <i class="fa-solid fa-bag-shopping">
                                 <?php if(isset($_SESSION['cart'])&&$_SESSION['cart']!=0){
                                     ?>
-                                    <span class="badge"><?php echo $_SESSION['c_id']?></span>
+                                    <span class="cart-quantuty"><?php echo $_SESSION['c_id']?></span>
                                 <?php }?>
                                 </i>
                                     ตระกร้าสินค้า</a>

@@ -84,10 +84,12 @@ class orders extends Db {
                 orders.phone,
 				orders.total,
                 orders.gmail,
+				orders.status,
                 order_detail.p_id AS product_id,
 				provinces.name_th as provinces,
 				amphures.name_th as amphures,
-				districts.name_th as districts
+				districts.name_th as districts,
+				claims.image AS imageClaim
 			FROM 
 				orders
                 LEFT JOIN order_detail ON orders.o_id = order_detail.d_id
@@ -95,6 +97,7 @@ class orders extends Db {
 				LEFT JOIN provinces ON orders.provinces = provinces.id
 				LEFT JOIN amphures ON orders.amphures = amphures.id
 				LEFT JOIN districts ON orders.districts = districts.id
+				LEFT JOIN claims ON claims.OrderId = orders.o_id 
 			WHERE
 				orders.o_id = ?
             

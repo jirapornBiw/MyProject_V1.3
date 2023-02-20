@@ -124,7 +124,7 @@ $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next
 								<th>จำนวน</th>
 								<th>ราคา</th>
 								<th>สถานะ</th>
-								<th>จัดการ</th>
+								<th width="150">จัดการ</th>
 								</tr>
 							</thead>
 							<tbody>

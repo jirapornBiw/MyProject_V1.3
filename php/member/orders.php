@@ -135,7 +135,7 @@ if ($last != 1) {
 											<td>{$order['total']}</td>
 											<td>{$order['status']}</td>
 											<td>
-											<a href='orderDetail.php?id={$order['o_id']}&action=detail' class='mr-2 btn btn-info'>รายละเอียด</a>
+											<a href='orderDetail.php?id={$order['o_id']}&action=detail' class='mr-2 btn btn-outline-secondary'>รายละเอียด</a>
                         					<a href='pay.php?id={$order['o_id']}&action=pay' class='mr-2 btn btn-success'>ชำระเงิน</a>
 											
 											</td>
@@ -150,10 +150,6 @@ if ($last != 1) {
 		</div>
 	</div>
 	<br><br>
-	<!--<center>Basic PHP PDO แสดงสินค้าหน้าแรก by devbanban.com 2021
-            <br>
-          </center>-->
-
 	</div>
 	</div>
 	</div>
