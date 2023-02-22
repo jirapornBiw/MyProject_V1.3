@@ -130,6 +130,7 @@ if ($action == 'detailN') {
 								} else if ($action == 'addTK') {
 									echo "
 									<a href='tracking_number.php?id={$order['o_id']}&action=add' class='mr-2 btn btn-outline-warning'>เพิ่มเลขพัสดุ</a></td>
+									<a href='tracking_number.php?id={$order['o_id']}&action=not_pass' class='mr-2 btn btn-outline-danger'>การตรวจสอบไม่ผ่าน</a></td>
 									";
 								} else if ($action == 'detailTK') {
 									echo "

@@ -1,14 +1,21 @@
-<?php require "../../../vendor/autoload.php"  ?>
-<?php
+<?php require "../../../vendor/autoload.php" ;
 use App\Model\orders;
-use App\Model\order_detail;
-
+$orderObj = new orders;
+$order = $orderObj->getOrderById($_REQUEST['id']);
 session_start();
-
-if(isset($_REQUEST['action'])=='add'){
-	$orderObj = new orders;
+$action = htmlspecialchars($_REQUEST['action']);
+if($action =='add'){
+    // unset ($action);
 	$order = $orderObj->getOrderById($_REQUEST['id']);
 }
+else if($action =='not_pass'){
+    unset ($_REQUEST['action']);
+    $ordersObj = new orders;
+    $orders = $_REQUEST;
+    $ordersObj->UpdateNoPass($orders);
+    header("location: index.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

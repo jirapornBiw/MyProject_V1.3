@@ -123,7 +123,7 @@ if ($last != 1) {
 							<?php
 							$ordersObj = new orders();
 							$orders = $ordersObj->getAllOrderDetailByCustomer($_SESSION['c_id']);
-							$n = 0;
+							$n = 1;
 							foreach ($orders as $order) {
 								while ($order = mysqli_fetch_array($nquery)) {
 
@@ -138,7 +138,7 @@ if ($last != 1) {
 											<td>{$order['status']}</td>
 											<td>
 											<a href='orderDetail.php?id={$order['o_id']}&action=detail' class='mr-2 btn btn-outline-secondary'>รายละเอียด</a>
-                        					<a href='pay.php?id={$order['o_id']}&action=pay' class='mr-2 btn btn-success'>ชำระเงิน</a>
+                        					<!--<a href='pay.php?id={$order['o_id']}&action=pay' class='mr-2 btn btn-success'>ชำระเงิน</a>-->
 											
 											</td>
 										</tr>

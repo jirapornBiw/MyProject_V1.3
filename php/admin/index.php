@@ -1,6 +1,4 @@
-<?php require "../../vendor/autoload.php"  ?>
-<?php
-use App\Model\customers;
+<?php require "../../vendor/autoload.php" ;
 session_start();
 if(!$_SESSION['login']){
   header("location: ../../auth/login.php");
@@ -21,8 +19,9 @@ if(!$_SESSION['login']){
     
   </head>
 <body style="background-color: #ebeff4;">
-  <?php include 'floatIndex.php'; ?>
-  <?php include 'dashboard.php'; ?>
+  <!-- <?php include 'floatIndex.php'; ?>
+  <?php include 'dashboard.php'; ?> -->
+  <?php include 'orders/index.php'; ?>
 
 
   

@@ -101,20 +101,7 @@ class product extends Db {
 		$stmt->execute($product);//จับคู่ รันในฐานข้อมูล
 		return $this->pdo->lastInsertId();
 	}
-	//ตั้งต้น
-	/*public function updateProduct($product) {
-		$sql = "
-			UPDATE  products SET 
-				type_id = :type_id,
-				name = :name, 
-				image = :image, 
-				status_id = :status_id
-			WHERE id = :id
-		";
-		$stmt = $this->pdo->prepare($sql);
-		$stmt->execute($product);//จับคู่ รันในฐานข้อมูล
-		return true;
-	}*/
+	
 	public function updateProduct($product) {
 		$sql = "
 			UPDATE  products SET 
@@ -170,7 +157,7 @@ class product extends Db {
 				products.name,
 				weight.name AS weight,
 				products.stock,
-				products.Products_Detail,
+				products.Products_Detail AS Products_Detail,
 				products.price,
 				status.name AS status
 			FROM 

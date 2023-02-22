@@ -1,5 +1,4 @@
 <?php //เรียกไฟล์เชื่อมต่อฐานข้อมูล
-
 require "../../vendor/autoload.php";
 include 'connect.php';
 session_start();
@@ -13,7 +12,6 @@ error_reporting(error_reporting() & ~E_NOTICE);
 //ฟังก์ชันสำหรับเลี่ยงการใช้ตัวอักขระพิเศษในคำสั่ง sql
 @$p_id = mysqli_real_escape_string($conn, ($_GET['id']));
 $act = mysqli_real_escape_string($conn, ($_GET['action']));
-
 //เพิ่มสินค้าลงตะกร้า
 //action = add ค่า id ไม่เป็นค่าว่าง
 if ($act == 'add' && !empty($p_id)) {
@@ -25,12 +23,12 @@ if ($act == 'add' && !empty($p_id)) {
 	}
 }
 
-if ($act == 'remove' && !empty($p_id))  //ยกเลิกการสั่งซื้อ
+if ($act == 'remove' && !empty($p_id))  //ลบสินค้า
 {
 	unset($_SESSION['cart'][$p_id]);
 }
 
-if ($act == 'update') {
+if ($act == 'update') { //อัพเดตสินค้า
 	$amount_array = $_POST['amount'];
 	foreach ($amount_array as $p_id => $amount) {
 		$_SESSION['cart'][$p_id] = $amount;
@@ -76,49 +74,61 @@ if ($act == 'update') {
 					<td class="border border-secondary" width="350">สินค้า</td>
 					<td align="center" class="border border-secondary" width="50">ราคา</td>
 					<td align="center" class="border border-secondary" width="30">จำนวน</td>
+					<td align="center" class="border border-secondary" width="30">น้ำหนัก</td>
 					<td align="center" class="border border-secondary" width="100">รวม(บาท)</td>
 					<td align="center" class="border border-secondary" width="60">ตัวเลือก</td>
 				</tr>
 				<?php
 				$total = 0;
 				$total_weight = 0;
+				$sumqty = 0; //น้ำหนักสินค้ารวม
 				if (!empty($_SESSION['cart'])) {
 					include("connect.php");
 					foreach ($_SESSION['cart'] as $p_id => $qty) {
-						$sql = "select products.*,weight.weight from products 
-		LEFT JOIN weight ON products.weight_id = weight.id
-		where products.id=$p_id";
+						$sql = "
+						select 
+						products.*,weight.weight 
+						from products 
+						LEFT JOIN weight ON products.weight_id = weight.id
+						where products.id=$p_id";
 						$query = mysqli_query($conn, $sql);
 						$row = mysqli_fetch_array($query);
+
+						
+						
+
 						$sum = $row['price'] * $qty;
-						$weight = $row['weight'] * $qty;
+						
+						$weight = $row['weight'] * $qty;//น้ำหนักสินค้ารวมต่อชิ้น
+						$sumqty += $row['weight']*$qty;//น้ำหนักสินค้ารวมทุกชิ้น
 						$total += $sum;
-						$total_weight += $weight;
 
 						echo "<tr>";
-						echo "<td width='200' class='border border-secondary'>" . "<img src='../admin/product/{$row["image"]}' width='100px'>" . "</td>";
-						echo "<td width='350' class='border border-secondary'>" . $row["name"] . "</td>";
-						echo "<td width='50' align='right' class='border border-secondary'>" . number_format($row["price"], 2) . "</td>";
+						echo "<td width='200' class='border border-secondary'>" . "<img src='../admin/product/{$row["image"]}' width='100px'>" . "</td>";//รูปภาพ
+						echo "<td width='350' class='border border-secondary'>" . $row["name"] . "</td>";//ชื่อสินค้า
+						echo "<td width='50' align='right' class='border border-secondary'>" . number_format($row["price"], 2) . "</td>";//ราคา
 						echo "<td width='60' align='right' class='border border-secondary'>";
-						echo "<input type='number' style='width: 3em;'name='amount[$p_id]' value='$qty' min='0' max='$row[stock]' class='border border-secondary'/></td>";
-
-						echo "<td width='100' align='right' class='border border-secondary'>" . number_format($sum, 2) . "</td>";
+						echo "<input type='number' style='width: 3em;'name='amount[$p_id]' value='$qty' min='0' max='$row[stock]' class='border border-secondary'/></td>";//จำนวน
+						echo "<td width='100' align='right' class='border border-secondary'>" . number_format($weight) . "</td>";//น้ำหนัก
+						echo "<td width='100' align='right' class='border border-secondary'>" . number_format($sum, 2) . "</td>";//รวม(บาท)
 						echo "<td width='50' align='center' class='border border-secondary'><a href='cart.php?id=$p_id&action=remove' class='btn btn-danger btn-sm'>ลบ</a></td>";
 						echo "</tr>";
 					}
 					echo "<tr>";
 					//$shipping_cost = 20;
 					//ค่าจัดส่งเริ่มต้น 20 ทุก1 กิโลกรัม จะคิดเพิ่ม 15 บาท
-					if ($total_weight >= 1) {
-						$shipping_cost = (($total_weight - 1) * 15) + 20;
+					if ($sumqty >= 1) {
+						$shipping_cost = (($sumqty - 1) * 15) + 20;
 					} else {
-						$shipping_cost = ($total_weight + 20);
+						$shipping_cost = ($sumqty + 20);
 					}
 					//น้ำหนักสินค้ารวม
-					echo "<td colspan='4'  align='right' class='border border-secondary text-right'><b>น้ำหนักสินค้ารวม</b></td>";
-					echo "<td colspan='2' align='right'  class='border border-secondary'>" . "<b>" . number_format($weight, 2) . "</b>" . "</td>";
+					echo "<td colspan='4'  align='right' class='border border-secondary'><b>ค่าจัดส่งสินค้า</b></td>";
+					echo "<td colspan='4' align='right'  class='border border-secondary'>" . "<b>" . number_format($sumqty, 2) . "</b>" . "</td>";
 					echo "</tr>";
 					//ค่าจัดส่งสินค้า
+					
+
 					echo "<td colspan='4'  align='right' class='border border-secondary'><b>ค่าจัดส่งสินค้า</b></td>";
 					echo "<td colspan='4' align='right'  class='border border-secondary'>" . "<b>" . number_format($shipping_cost, 2) . "</b>" . "</td>";
 					echo "</tr>";

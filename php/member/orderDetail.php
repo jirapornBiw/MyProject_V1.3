@@ -43,7 +43,7 @@ if (isset($_REQUEST['action']) == 'detail') {
 
 			<div class="form-group mt-3">
 				<h4>ข้อมูลลูกค้า</h4>
-				<hr>				
+				<hr>
 				<label for="name">รหัสสั่งซื้อสินค้า : <?php echo $order['o_id']; ?></label></br>
 				<label for="name">วันที่ : <?php echo $order['dttm']; ?></label></br>
 				<label for="name">ชื่อ : <?php echo $order['name']; ?></label></br>
@@ -75,7 +75,7 @@ if (isset($_REQUEST['action']) == 'detail') {
 							$amount = 0;
 							foreach ($orders as $order) {
 								$n++;
-								
+
 								echo "
 										<tr>    
 											<td>$n</td>
@@ -86,27 +86,26 @@ if (isset($_REQUEST['action']) == 'detail') {
 										</tr>
 										";
 							}
-							$sumpricetotal = (integer)$order['pricetotal'];
-							$amount = $order['total']-$sumpricetotal;
+							$sumpricetotal = (int)$order['pricetotal'];
+							$amount = $order['total'] - $sumpricetotal;
 							?>
 						</tbody>
 					</table>
 					<div class="container" align="right">
-						ราคาสินค้ารวม : <?php echo $sumpricetotal;?><br>
-						ค่าจัดส่งสินค้า : <?php echo $amount;?><br>
+						ราคาสินค้ารวม : <?php echo $sumpricetotal; ?><br>
+						ค่าจัดส่งสินค้า : <?php echo $amount; ?><br>
 						จำนวนเงินรวมทั้งหมด : <?php echo $order['total'] ?> บาท<br>
-						
+
 
 						<?php
 						$action = htmlspecialchars($_REQUEST['action']);
 						if ($action == 'detail') {
 							echo "
-								<a href='cancel_order.php?id={$order['o_id']}&action=cancel' class='btn btn-outline-danger' data-bs-toggle='modal' data-bs-target='#staticBackdrop'>ยกเลิกการสั่งซื้อ</a>
+								<a href='cancel_order.php?id={$order['o_id']}&action=cancel' class='btn btn-outline-danger' data-bs-toggle='modal' data-bs-target='#BackdropCancelOrder'>ยกเลิกการสั่งซื้อ</a>
 								<a href='pay.php?id={$order['o_id']}&action=pay' class='mr-2 btn btn-success'>ชำระเงิน</a>
 								";
 						}
-						if($action == 'detail_pre'){
-							
+						if ($action == 'detail_pre') {
 						}
 						?>
 					</div>
@@ -114,23 +113,7 @@ if (isset($_REQUEST['action']) == 'detail') {
 
 
 					<!-- -->
-					<div class="modal" tabindex="-1" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title">ยืนยันยกเลิกการสั่งซื้อ</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-								</div>
-								<div class="modal-body">
-									<p>หากทำการยกเลิกคำสั่งซื้อแล้ว ไม่สามารถแก้ไขได้</p>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-									<a href="cancel_order.php?id=<?php echo $order['o_id'] ?>&action=cancel" class="btn btn-primary" role="button" aria-pressed="true">ยืนยัน</a>
-								</div>
-							</div>
-						</div>
-					</div>
+
 
 				</div>
 			</div>
@@ -138,6 +121,9 @@ if (isset($_REQUEST['action']) == 'detail') {
 	</div>
 	</div>
 	</div>
+	<?php
+	include 'modal.php';
+	?>
 </body>
 
 </html>

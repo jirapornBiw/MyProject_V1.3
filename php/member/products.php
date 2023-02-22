@@ -41,6 +41,7 @@ if(!$_SESSION['login']){
               <img src="../admin/product/<?php echo $product['image'];?>" width="200px"><br>
               <h5><?php echo $product['name'];?><br></h5>
               ราคา <?php echo number_format($product['price'],2);?> บาท<br>
+              น้ำหนัก <?php echo $product['weight'];?><br>
               พร้อมจัดส่ง <?php echo $product['stock'];?> ชิ้น <br>
               <?php if($product['stock'] > 0){
                 

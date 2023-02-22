@@ -1,10 +1,14 @@
 <?php
+
 namespace App\Model;
 
 use App\Database\Db;
-class orders extends Db {
 
-    public function getAllOrders() {
+class orders extends Db
+{
+
+	public function getAllOrders()
+	{
 		$sql = "
 			SELECT
                 orders.o_id,
@@ -20,7 +24,8 @@ class orders extends Db {
 		$data = $stmt->fetchAll();/*ดึงข้อมูลออกมา*/
 		return $data;
 	}
-	public function getNewOrders() {
+	public function getNewOrders()
+	{
 		$sql = "
 			SELECT
                 orders.o_id,
@@ -37,7 +42,8 @@ class orders extends Db {
 		$data = $stmt->fetchAll();/*ดึงข้อมูลออกมา*/
 		return $data;
 	}
-	public function getPaymentOrders() {
+	public function getPaymentOrders()
+	{
 		$sql = "
 			SELECT
                 orders.o_id,
@@ -54,8 +60,9 @@ class orders extends Db {
 		$data = $stmt->fetchAll();/*ดึงข้อมูลออกมา*/
 		return $data;
 	}
-	
-	public function getShippingOrders() {
+
+	public function getShippingOrders()
+	{
 		$sql = "
 			SELECT
                 orders.o_id,
@@ -73,7 +80,9 @@ class orders extends Db {
 		$data = $stmt->fetchAll();/*ดึงข้อมูลออกมา*/
 		return $data;
 	}
-    public function getOrderById($o_id){
+	public function getOrderById($o_id)
+	{
+		
 		$sql = "
 			SELECT
 				orders.o_id,
@@ -108,7 +117,8 @@ class orders extends Db {
 		return $data[0];
 		/* [0] ข้อมูลแค่คนแรก*/
 	}
-	public function getAllOrderDetail($o_id) {
+	public function getAllOrderDetail($o_id)
+	{
 		$sql = "
 			SELECT
 				orders.o_id,
@@ -143,7 +153,8 @@ class orders extends Db {
 		$data = $stmt->fetchAll();/*ดึงข้อมูลออกมา*/
 		return $data;
 	}
-	public function getAllOrderDetailByCustomer($id) {
+	public function getAllOrderDetailByCustomer($id)
+	{
 		$sql = "
 			SELECT
 				orders.*,
@@ -163,7 +174,8 @@ class orders extends Db {
 		return $data;
 		/* [0] ข้อมูลแค่คนแรก*/
 	}
-	public function getAllOrderDetailByCustomerPre($id) {
+	public function getAllOrderDetailByCustomerPre($id)
+	{
 		$sql = "
 			SELECT
 				orders.*,
@@ -183,7 +195,8 @@ class orders extends Db {
 		return $data;
 		/* [0] ข้อมูลแค่คนแรก*/
 	}
-	public function getAllOrderDetailByCustomerTrack($id) {
+	public function getAllOrderDetailByCustomerTrack($id)
+	{
 		$sql = "
 			SELECT
 				orders.*,
@@ -203,7 +216,8 @@ class orders extends Db {
 		return $data;
 		/* [0] ข้อมูลแค่คนแรก*/
 	}
-	public function addNewTK($order) {
+	public function addNewTK($order)
+	{
 		$sql = "
 			UPDATE  trackings SET 
 			tracking_number = :tracking_number,
@@ -211,11 +225,12 @@ class orders extends Db {
 			WHERE o_id = :o_id
 			";
 		$stmt = $this->pdo->prepare($sql);
-		$stmt->execute($order);//จับคู่ รันในฐานข้อมูล
+		$stmt->execute($order); //จับคู่ รันในฐานข้อมูล
 		return $this->pdo->lastInsertId();
 	}
 
-	public function addNewTK2($order) {
+	public function addNewTK2($order)
+	{
 		$sql = "
 			UPDATE  orders SET 
 			tracking_number = :tracking_number,
@@ -223,11 +238,12 @@ class orders extends Db {
 			WHERE OrderId = :o_id
 			";
 		$stmt = $this->pdo->prepare($sql);
-		$stmt->execute($order);//จับคู่ รันในฐานข้อมูล
+		$stmt->execute($order); //จับคู่ รันในฐานข้อมูล
 		return $this->pdo->lastInsertId();
 	}
 
-	public function updateOrderTrackingTest($orders){
+	public function updateOrderTrackingTest($orders)
+	{
 		$sql = "
 			UPDATE  orders SET
 				status ='จัดส่งสินค้าสำเร็จ',
@@ -235,11 +251,12 @@ class orders extends Db {
 			WHERE o_id = :o_id
 		";
 		$stmt = $this->pdo->prepare($sql);
-		$stmt->execute($orders);//จับคู่ รันในฐานข้อมูล
+		$stmt->execute($orders); //จับคู่ รันในฐานข้อมูล
 		return $this->pdo->lastInsertId();
 	}
 
-	public function getCountOrders() {
+	public function getCountOrders()
+	{
 		//include("../Database/connect.php");
 		$sql = "
 			SELECT COUNT(o_id) 
@@ -252,86 +269,99 @@ class orders extends Db {
 		return $data;
 	}
 
-	public function updateOrderStatusCancel($orders){
+	public function updateOrderStatusCancel($orders)
+	{
 		$sql = "
 			UPDATE  orders SET
 				status ='ยกเลิกการสั่งซื้อ'
 			WHERE o_id = :id
 		";
 		$stmt = $this->pdo->prepare($sql);
-		$stmt->execute($orders);//จับคู่ รันในฐานข้อมูล
+		$stmt->execute($orders); //จับคู่ รันในฐานข้อมูล
+		return $this->pdo->lastInsertId();
+	}
+	public function UpdateNoPass($order2)
+	{
+		$sql = "
+			UPDATE  orders SET
+				status ='ตรวจสอบไม่ผ่าน'
+			WHERE o_id = :id
+			";
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->execute($order2); //จับคู่ รันในฐานข้อมูล
 		return $this->pdo->lastInsertId();
 	}
 
-	public function getAllOrdersTT() {
-		
-		$countorderObj = new orders();
-$countorder = $countorderObj->getCountOrders();
-//$orders = $ordersObj->getAllOrders();
-//$query=mysqli_query($conn,"SELECT COUNT(o_id) FROM orders");
-//print_r($countorder);
-//$nquery=$countorderObj->getShippingOrders();
-//	print_r($nquery);
-//print_r($query);
+	public function getAllOrdersTT()
+	{
 
-//$row = mysqli_fetch_row($query);
-//$countorders = $countorder[0];
-$page_rows = 9;  //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
- 
-	$last = ceil($countorder/$page_rows);
- 
-	if($last < 1){
-		$last = 1;
-	}
- 
-	$pagenum = 1;
- 
-	if(isset($_GET['pn'])){
-		$pagenum = preg_replace('#[^0-9]#', '', $_GET['pn']);
-	}
- 
-	if ($pagenum < 1) {
-		$pagenum = 1;
-	}
-	else if ($pagenum > $last) {
-		$pagenum = $last;
-	}
- 
-	$limit = 'LIMIT ' .($pagenum - 1) * $page_rows .',' .$page_rows;
- 
-	$nquery=$countorderObj->getNewOrders();
-	//print_r($nquery);
- 	//exit;
-	$paginationCtrls = '';
-	//print_r($nquery);
- 	//exit;
-	$paginationCtrls = '';
- 
-	if($last != 1){
- 
-	if ($pagenum > 1) {
-$previous = $pagenum - 1;
-		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$previous.'" class="btn btn-dark">Previous</a> &nbsp; &nbsp; ';
- 
-		for($i = $pagenum-4; $i < $pagenum; $i++){
-			if($i > 0){
-		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'" class="btn btn-dark">'.$i.'</a> &nbsp; ';
-			}
-	}
-}
- 
-	$paginationCtrls .= ''.$pagenum.' &nbsp; ';
- 
-	for($i = $pagenum+1; $i <= $last; $i++){
-		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'" class="btn btn-dark">'.$i.'</a> &nbsp; ';
-		if($i >= $pagenum+4){
-			break;
+		$countorderObj = new orders();
+		$countorder = $countorderObj->getCountOrders();
+		//$orders = $ordersObj->getAllOrders();
+		//$query=mysqli_query($conn,"SELECT COUNT(o_id) FROM orders");
+		//print_r($countorder);
+		//$nquery=$countorderObj->getShippingOrders();
+		//	print_r($nquery);
+		//print_r($query);
+
+		//$row = mysqli_fetch_row($query);
+		//$countorders = $countorder[0];
+		$page_rows = 9;  //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
+
+		$last = ceil($countorder / $page_rows);
+
+		if ($last < 1) {
+			$last = 1;
 		}
-	}
- 
-if ($pagenum != $last) {
-$next = $pagenum + 1;
-$paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next.'" class="btn btn-dark">Next</a> ';
-}}
+
+		$pagenum = 1;
+
+		if (isset($_GET['pn'])) {
+			$pagenum = preg_replace('#[^0-9]#', '', $_GET['pn']);
+		}
+
+		if ($pagenum < 1) {
+			$pagenum = 1;
+		} else if ($pagenum > $last) {
+			$pagenum = $last;
+		}
+
+		$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
+
+		$nquery = $countorderObj->getNewOrders();
+		//print_r($nquery);
+		//exit;
+		$paginationCtrls = '';
+		//print_r($nquery);
+		//exit;
+		$paginationCtrls = '';
+
+		if ($last != 1) {
+
+			if ($pagenum > 1) {
+				$previous = $pagenum - 1;
+				$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $previous . '" class="btn btn-dark">Previous</a> &nbsp; &nbsp; ';
+
+				for ($i = $pagenum - 4; $i < $pagenum; $i++) {
+					if ($i > 0) {
+						$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $i . '" class="btn btn-dark">' . $i . '</a> &nbsp; ';
+					}
+				}
+			}
+
+			$paginationCtrls .= '' . $pagenum . ' &nbsp; ';
+
+			for ($i = $pagenum + 1; $i <= $last; $i++) {
+				$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $i . '" class="btn btn-dark">' . $i . '</a> &nbsp; ';
+				if ($i >= $pagenum + 4) {
+					break;
+				}
+			}
+
+			if ($pagenum != $last) {
+				$next = $pagenum + 1;
+				$paginationCtrls .= ' &nbsp; &nbsp; <a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $next . '" class="btn btn-dark">Next</a> ';
+			}
+		}
 	}
 }
