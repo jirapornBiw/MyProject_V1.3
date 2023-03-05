@@ -62,7 +62,7 @@ if (!$_SESSION['login']) {
 										<tr>    
 											<td>$n</td>
 											<td>{$claim['OrderId']}</td>
-											<td><img src='upload/{$claim['image']}' width='150'  height='175' class='//resize'</td>
+											<td><video src='upload/{$claim['url']}' width='150'  height='175' class='//resize'</td>
 											<td>{$claim['CustomerID']}</td>
                                             <td>{$claim['details']}</td>
 											<td>{$claim['dttm']}</td>

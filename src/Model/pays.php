@@ -27,14 +27,14 @@ class pays extends Db {
 		return $data[0];
     }
 
-	public function getAllPayById($o_id){
+	public function getAllPayById($id){
         $sql = "
             SELECT * FROM pays
 			LEFT JOIN orders ON pays.OrderId = orders.o_id
 			WHERE OrderId = ?
         ";
         $stmt = $this->pdo->prepare($sql);
-		$stmt->execute([$o_id]);
+		$stmt->execute([$id]);
 		$data = $stmt->fetchAll();
 		return $data[0];
     }

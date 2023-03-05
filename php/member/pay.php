@@ -24,6 +24,7 @@ if (isset($_REQUEST['action']) == 'pay') {
   <title>ชำระเงิน</title>
   <link rel="stylesheet" href="../../../node_modules\bootstrap\dist\css\bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
   <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
 </head>
 
@@ -43,28 +44,30 @@ if (isset($_REQUEST['action']) == 'pay') {
 		      justify-content-centerr border border-secondary rounded" style="width: 40rem;">
             <form action="save_pay.php" method="post" enctype="multipart/form-data">
               <div class="d-flex justify-content-center">
-                <h1>ชำระเงิน</h1>
+                <h1 style="color: #9b631b;">ชำระเงิน</h1>
               </div>
 
               <div class="form-group mt-3">
                 <button type="button" class="btn  btn-light" disabled>วิธีการชำระเงิน</button>
-                <button type="button" class="btn  btn-secondary" disabled>QR Payment</button>
+                <button type="button" class="btn" style="background-color: #efe5db;" disabled>QR Payment</button>
               </div>
               <label for="name" class="text-right">รหัสสั่งซื้อสินค้า : <?php echo $order['o_id']; ?></label></br>
               <label for="name" class="text-right">ยอดรวมสินค้า : <?php echo $order['total']; ?></label></br>
               <hr>
               <?php include 'promptpay_QRcode.php' ?>
-              <a href="#" class="btn btn-secondary" onclick="render_qr(x=<?php echo $order['total']; ?>)">ชำระเงินด้วย QR Payment</a>
+              <div class="container d-flex justify-content-center mt-5">
+              <a href="#" class="btn" style="background-color: #efe5db;" onclick="render_qr(x=<?php echo $order['total']; ?>)">ชำระเงินด้วย QR Payment</a>
+              </div>
               <input type="hidden" name="CustomerID" value="<?php echo $_SESSION['c_id'] ?>">
               <input type="hidden" name=" OrderId" value="<?php echo $_REQUEST['id'] ?>">
               <div class="form-group mt-5">
                 <label for="txt_file">ที่อยู่รูปภาพ</label>
-                <input type="file" name="txt_file" id="txt_file" class="form-contro">
+                <input type="file" name="txt_file" id="txt_file" class="form-contro" required>
               </div></br>
 
               <p>**กรุณาแสกน QR code ด้วยมือถือของคุณ โดยใช้ mobile banking application**</p>
               <div class="container">
-                <button class="btn btn-success" type="submid">แจ้งโอนเงิน</button>
+                <button class="btn text-light" style="background-color: #9b631b;"type="submid">แจ้งโอนเงิน</button>
                 <button class="btn btn-outline-danger" type="reset">ยกเลิก</button>
 
               </div>

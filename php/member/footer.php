@@ -23,7 +23,7 @@
         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
           <!-- Content -->
           <h6 class="text-uppercase fw-bold mb-4">
-            <i class="fas fa-gem me-3"></i>บริษัท บ้านข้าวหอม จำกัด
+            <i class="fas fa-gem me-3"></i>บ้านข้าวหอม
           </h6>
           <p>
           ดำเนินธุรกิจด้านการผลิตสินค้าข้าวสารบรรจุถุง ภายใต้แบรนด์ บ้านข้าวหอม 
@@ -77,7 +77,7 @@
   <!-- Section: Links  -->
 
   <!-- Copyright -->
-  <div class="text-center text-light p-4" style="background-color: #116530;">
+  <div class="text-center text-light p-4" style="background-color: #9b631b;">
     © 2022 Copyright:
     <a class="text-reset fw-bold" href="https://bankhaohomrice.com/">bankhaohomrice.com</a>
   </div>

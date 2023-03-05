@@ -45,7 +45,7 @@ require "../../vendor/autoload.php";
             <p>น้ำหนัก : <?php echo $product['weight']?></p>
             <form action="../../auth/login.php" method="post">
             <input type="number" name="qty" value="1" min="1" max="<?php echo $product['stock']?>">
-            <input type="hidden" name="relogin" value="login">
+            <input type="hidden" name="action" value="login">
             <!--<a href="cart.php?id=<?php echo $product['id']?>&action=add" class='mr-2 btn btn-info'>เพิ่มลงในตระกร้าสินค้า</a>-->
             <button class="btn btn-success" type ="submid">เพิ่มลงตะกร้า</button>
             </form>

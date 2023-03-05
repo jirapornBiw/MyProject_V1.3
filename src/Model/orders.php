@@ -24,6 +24,24 @@ class orders extends Db
 		$data = $stmt->fetchAll();/*ดึงข้อมูลออกมา*/
 		return $data;
 	}
+	public function getCountOrdersByIDALL($id_customer)
+	{
+		$sql = "
+		SELECT COUNT(o_id) FROM orders WHERE id_customer = '{$id_customer}'
+		";
+		$stmt = $this->pdo->query($sql);
+		$data = $stmt->fetchColumn($id_customer);/*ดึงข้อมูลออกมา*/
+		return $data;
+	}
+	public function getCountOrdersByID($id)
+	{
+		$sql = "
+		SELECT COUNT(o_id) FROM orders WHERE id_customer = '{$id}' AND status = ''
+		";
+		$stmt = $this->pdo->query($sql);
+		$data = $stmt->fetchAll($id);/*ดึงข้อมูลออกมา*/
+		return $data;
+	}
 	public function getNewOrders()
 	{
 		$sql = "
@@ -82,33 +100,37 @@ class orders extends Db
 	}
 	public function getOrderById($o_id)
 	{
-		
+
 		$sql = "
-			SELECT
-				orders.o_id,
-                orders.dttm,
-                orders.name,
-                orders.address,
-                orders.postcode,
-                orders.phone,
-				orders.total,
-                orders.gmail,
-				orders.status,
-                order_detail.p_id AS product_id,
-				provinces.name_th as provinces,
-				amphures.name_th as amphures,
-				districts.name_th as districts,
-				claims.image AS imageClaim
-			FROM 
-				orders
-                LEFT JOIN order_detail ON orders.o_id = order_detail.d_id
-				LEFT JOIN customers ON customers.id = orders.id_customer
-				LEFT JOIN provinces ON orders.provinces = provinces.id
-				LEFT JOIN amphures ON orders.amphures = amphures.id
-				LEFT JOIN districts ON orders.districts = districts.id
-				LEFT JOIN claims ON claims.OrderId = orders.o_id 
-			WHERE
-				orders.o_id = ?
+		SELECT
+		orders.o_id,
+		orders.dttm,
+		orders.name,
+		orders.address,
+		orders.postcode,
+		orders.phone,
+		orders.total,
+		orders.gmail,
+		orders.status,
+		orders.tracking_number,
+		order_detail.p_id AS product_id,
+		provinces.name_th as provinces,
+		amphures.name_th as amphures,
+		districts.name_th as districts,
+		claims.image AS imageClaim,
+		claims.url AS videoClaim,
+		trackings.shipping_company AS shipping_company
+	FROM 
+		orders
+		LEFT JOIN order_detail ON orders.o_id = order_detail.d_id
+		LEFT JOIN customers ON customers.id = orders.id_customer
+		LEFT JOIN provinces ON orders.provinces = provinces.id
+		LEFT JOIN amphures ON orders.amphures = amphures.id
+		LEFT JOIN districts ON orders.districts = districts.id
+		LEFT JOIN claims ON claims.OrderId = orders.o_id 
+		LEFT JOIN trackings ON trackings.OrderId = orders.o_id 
+	WHERE
+		orders.o_id = ?
             
 		";
 		$stmt = $this->pdo->prepare($sql);
@@ -135,7 +157,11 @@ class orders extends Db
 				order_detail.qty AS qty,
 				order_detail.pricetotal AS pricetotal,
 				products.name AS product_name,
-				provinces.name_th as provinces
+				provinces.name_th as provinces,
+				orders.tracking_number AS tracking_number,
+				trackings.tracking AS shipping_company,
+				claims.url AS videoClaim
+				
 
 			FROM 
 				orders
@@ -146,6 +172,8 @@ class orders extends Db
 				LEFT JOIN provinces ON customers.provinces = provinces.id
 				LEFT JOIN amphures ON customers.amphures = amphures.id
 				LEFT JOIN districts ON customers.districts = districts.id
+				LEFT JOIN claims ON claims.OrderId = orders.o_id 
+				LEFT JOIN trackings ON orders.o_id = trackings.OrderId
 			WHERE
 				orders.o_id = '{$o_id}' 
 		";
@@ -252,6 +280,28 @@ class orders extends Db
 		";
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->execute($orders); //จับคู่ รันในฐานข้อมูล
+		return $this->pdo->lastInsertId();
+	}
+	public function updateOrderTrackingClaim($orders)
+	{
+		$sql = "
+			UPDATE  orders SET
+				status ='รอการตรวจสอบพัสดุเสียหาย'
+			WHERE o_id = :OrderId
+		";
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->execute($orders); //จับคู่ รันในฐานข้อมูล
+		return $this->pdo->lastInsertId();
+	}
+	public function updateOrderTrackingClaimAdmin($tracking)
+	{
+		$sql = "
+			UPDATE  orders SET
+				status ='จัดส่งสินค้าสำเร็จ'
+			WHERE o_id = :id
+		";
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->execute($tracking); //จับคู่ รันในฐานข้อมูล
 		return $this->pdo->lastInsertId();
 	}
 

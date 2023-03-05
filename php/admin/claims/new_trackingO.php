@@ -1,10 +1,4 @@
-<?php require "../../../vendor/autoload.php"  ?>
-<?php
-use App\Model\customers;
-use App\Model\products;
-use App\Model\type;
-use App\Model\status;
-use App\Model\weight;
+<?php require "../../../vendor/autoload.php";
 
 session_start();
 ?>

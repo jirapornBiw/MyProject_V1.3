@@ -24,9 +24,9 @@
         
       </style>
 <title>PromptPay QR-Code Javascript Library</title>
-    <script src="promptpay_QRcodeweb/promptpay-qr.js"></script>
-    <script src="promptpay_QRcodeweb/qrcode.min.js"></script>
-    <link href="promptpay_QRcodeweb/app.css" media="all" rel="stylesheet" />
+    <script src="../../promptpay_QRcodeweb/promptpay-qr.js"></script>
+    <script src="../../promptpay_QRcodeweb/qrcode.min.js"></script>
+    <link href="../../promptpay_QRcodeweb/app.css" media="all" rel="stylesheet" />
   </head>
   <body>
     

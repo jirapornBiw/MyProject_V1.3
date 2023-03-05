@@ -11,7 +11,9 @@ if (!$_SESSION['login']) {
 if (isset($_REQUEST['action']) == 'detail') {
 	$orderObj = new orders;
 	$order = $orderObj->getOrderById($_REQUEST['id']);
+	$status = $order['status'];
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -28,13 +30,16 @@ if (isset($_REQUEST['action']) == 'detail') {
 </head>
 
 <body>
-	<?php
-	include 'header.php';
-	include 'script.php';
-	?>
-	<div class="row">
+
+	<div class="container">
+		<?php
+		include 'header.php';
+		include 'script.php';
+		?>
+	</div>
+	<div class="row mt-5">
 		<div class="col-sm-12 mt-5">
-			<div class="d-flex justify-content-center">
+			<div class="d-flex justify-content-center mt-2" style="color: #9b631b;">
 				<h1>รายละเอียดการสั่งซื้อ</h1>
 			</div>
 		</div>
@@ -42,7 +47,7 @@ if (isset($_REQUEST['action']) == 'detail') {
 		justify-content-centerr border border-secondary rounded" style="width: 40rem;">
 
 			<div class="form-group mt-3">
-				<h4>ข้อมูลลูกค้า</h4>
+				<h4 style="color: #9b631b;">ข้อมูลลูกค้า</h4>
 				<hr>
 				<label for="name">รหัสสั่งซื้อสินค้า : <?php echo $order['o_id']; ?></label></br>
 				<label for="name">วันที่ : <?php echo $order['dttm']; ?></label></br>
@@ -53,8 +58,18 @@ if (isset($_REQUEST['action']) == 'detail') {
 				<label for="name">เบอร์โทรศัพท์ : <?php echo $order['phone']; ?></label></br>
 				<label for="name">อีเมลล์ : <?php echo $order['gmail']; ?></label></br>
 				<label for="name">สถานะ : <?php echo $order['status']; ?></label></br>
+				<?php
+				if ($status == 'จัดส่งสินค้าสำเร็จ') {
+					echo "
+					<label for='name'>หมายเลขพัสดุ : {$order['tracking_number']}</label></br>
+					<label for='name'>บริษัทขนส่ง : {$order['shipping_company']}</label></br>
+
+					";
+				} else {
+				}
+				?>
 				<hr>
-				<h4>รายการการสั่งซื้อ</h4>
+				<h4 style="color: #9b631b;">รายการการสั่งซื้อ</h4>
 				<div class="card-body">
 					<table class="table">
 						<thead>
@@ -92,29 +107,31 @@ if (isset($_REQUEST['action']) == 'detail') {
 						</tbody>
 					</table>
 					<div class="container" align="right">
-						ราคาสินค้ารวม : <?php echo $sumpricetotal; ?><br>
-						ค่าจัดส่งสินค้า : <?php echo $amount; ?><br>
-						จำนวนเงินรวมทั้งหมด : <?php echo $order['total'] ?> บาท<br>
+						<label>ราคาสินค้ารวม : <?php echo $sumpricetotal; ?></label><br>
+						<label>ค่าจัดส่งสินค้า : <?php echo $amount; ?></label><br>
+						<label>จำนวนเงินรวมทั้งหมด : <?php echo $order['total'] ?> บาท</lavel><br>
+							<div class="container mt-3">
 
+							</div>
+							<?php
+							$action = htmlspecialchars($_REQUEST['action']);
+							// echo $status;
 
-						<?php
-						$action = htmlspecialchars($_REQUEST['action']);
-						if ($action == 'detail') {
-							echo "
+							if ($status == 'รอการชำระเงิน' || $status == 'ตรวจสอบไม่ผ่าน') {
+								echo "
 								<a href='cancel_order.php?id={$order['o_id']}&action=cancel' class='btn btn-outline-danger' data-bs-toggle='modal' data-bs-target='#BackdropCancelOrder'>ยกเลิกการสั่งซื้อ</a>
-								<a href='pay.php?id={$order['o_id']}&action=pay' class='mr-2 btn btn-success'>ชำระเงิน</a>
+								<a href='pay.php?id={$order['o_id']}&action=pay' class='mr-2 btn text-light' style='background-color: #9b631b;'>ชำระเงิน</a>
 								";
-						}
-						if ($action == 'detail_pre') {
-						}
-						?>
+							} 
+							else if ($status == 'จัดส่งสินค้าสำเร็จ' ){
+								echo "
+								<a href='claimDetail.php?id={$order['o_id']}' class='btn btn-outline-danger'>แจ้งพัสดุเสียหาย</a>
+								";
+							}
+							else {
+							}
+							?>
 					</div>
-
-
-
-					<!-- -->
-
-
 				</div>
 			</div>
 		</div>

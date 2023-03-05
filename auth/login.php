@@ -4,6 +4,7 @@ if (isset($_REQUEST['relogin'])) {
   echo 'alert("กรุณาเข้าสู่ระบบก่อนสั่งซื้อสินค้า")';
   echo '</script>';
 } else {
+
 }
 ?>
 <!DOCTYPE html>
@@ -37,7 +38,7 @@ if (isset($_REQUEST['relogin'])) {
 
             <h1 class="my-5 display-3 fw-bold ls-tight">
               หมู่บ้าน บ้านกอก <br />
-              <span class="text-primary">bankhaohomrice</span>
+              <span style="color: #116530;">bankhaohomrice</span>
             </h1>
             <p style="color: hsl(217, 10%, 50.8%)">
               ดำเนินธุรกิจด้านการผลิตสินค้าข้าวสารบรรจุถุง ภายใต้แบรนด์ บ้านข้าวหอม
@@ -50,8 +51,8 @@ if (isset($_REQUEST['relogin'])) {
                 <div class="container">
                   <h1 class="mb-5">เข้าสู่ระบบ</h1>
                 </div>
-                <form action="checkLogin.php" class="mb-3" method="POST">
-                  <label class="form-label" for="form2Example11">อีเมล</label>
+                <form action="checkLogin.php" class="mb-3 text-left" method="POST">
+                  <label class="formGroupExampleInput" for="form2Example11" style="text-align: left">อีเมล</label>
                   <div class="form-outline mb-4">
                     <input type="email" id="form2Example11" name="email" class="form-control" placeholder="Email address" />
 

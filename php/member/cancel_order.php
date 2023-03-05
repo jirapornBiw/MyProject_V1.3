@@ -45,7 +45,6 @@
             if ($query = mysqli_query($conn, $stockOld)) {
                 while ($stockOldRow = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
                     $stockOld = $stockOldRow['stock'];
-                    print_r($stockOld);
                 }
             }
             $stockNew = mysqli_real_escape_string($conn, $stockOld) + mysqli_real_escape_string($conn, $stock);

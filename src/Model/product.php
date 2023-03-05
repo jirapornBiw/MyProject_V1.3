@@ -29,7 +29,7 @@ class product extends Db {
 		$data = $stmt->fetchAll();
 		return $data;
 	}
-	public function getAllProductTest() {
+	public function getAllProductJS($action) {
 		$sql = "
 			SELECT
 				products.id,
@@ -46,14 +46,14 @@ class product extends Db {
 				LEFT JOIN type ON products.type_id = type.id
 				LEFT JOIN status ON products.status_id = status.id
 				LEFT JOIN weight ON products.weight_id = weight.id
-			LIMIT 0,4;
+			WHERE
+				type.name = '{$action}'
 
 		";
 		$stmt = $this->pdo->query($sql);
 		$data = $stmt->fetchAll();
 		return $data;
 	}
-
 
 	public function addProduct($product) {
 		$sql = "

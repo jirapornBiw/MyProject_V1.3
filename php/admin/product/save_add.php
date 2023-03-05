@@ -1,5 +1,4 @@
-<?php require "../../../vendor/autoload.php"  ?>
-<?php
+<?php require "../../../vendor/autoload.php";
 
 use App\Model\product;
 $productObj = new product;;

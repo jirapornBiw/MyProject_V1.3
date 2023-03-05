@@ -4,10 +4,10 @@ use App\Model\product;
 
 require "../../vendor/autoload.php";
 session_start();
-if (!$_SESSION['login']) {
-  header("location: ../../auth/login.php");
-  exit;
-}
+// if (!$_SESSION['login']) {
+//   header("location: ../../auth/login.php");
+//   exit;
+// }
 
 //connect db
 //if(isset($_REQUEST['action'])=='detail'){
@@ -34,42 +34,139 @@ $product = $productObj->getProductsById($_REQUEST['id']);
 </head>
 
 <body>
-  <?php
-  include 'header.php';
-  include 'script.php';
-  ?>
 
-  <div class="container mt-5 pt-4">
-    <div class="row mt-3">
-      <div class="col pt-3 pb-3 text-center">
-        <img src="../admin/product/<?php echo $product['image']; ?>" width="40%">
-        <br>
-      </div>
+
+  <div class="row mb-5">
+    <div class="col">
+      <?php
+      if ($_SESSION['login'] == 1) {
+        include 'header.php';
+      } else {
+        include '../guest/header.php';
+      }
+      include 'script.php';
+
+
+      ?>
     </div>
-    <div class="row mt-3">
-      <div class="col-7 pt-3 pb-3">
-        <label for="name" class="h1"><?php echo $product['type'] . $product['name']; ?></label></br>
-        <!--<h5>ข้อมูลจำเพราะของสินค้า</h5>-->
-        <h3 class="text-danger">฿<?php echo $product['price'] ?></h3>
+  </div>
+  <div class="row">
+    <article class="col-lg-12 col-md-12 col-sm-12 col-xs-12 "></article>
+    <div class="text-align:left; margin-bottom:10px;"></div>
+    <div class="spt-text-body01" style="margin-left: 50px;">
+      <h1 class="sp-text-title03 ">
+        <span style="color:#9b631b;"><?php echo  $product['name']; ?></span>
+      </h1>
+      <a href="../member/index.php?login=<?php echo $_SESSION['login'] ?>" title="หน้าแรก" class="text-muted" style="text-decoration: none; ">หน้าแรก > </a>
+      <a href="../member/products.php?login=<?php echo $_SESSION['login'] ?>" title="สินค้า" class="text-muted" style="text-decoration: none; ">สินค้า</a>
 
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 border">
+      <div class="container d-flex justify-content-end">
+        <img src="../admin/product/<?php echo $product['image']; ?>" width="100%">
+      </div>
 
-        <p style="color:darkgrey;"><i class="fa fa-archive" aria-hidden="true"></i> จำนวน / พร้อมจัดส่ง
-          <?php echo $product['stock'] ?> ชิ้น</p>
-        <h4>รายละเอียด</h4>
-        <p>ประเภทข้าว : <?php echo $product['type'] ?></p>
-        <p>ชื่อสายพันธุ์ข้าว : <?php echo $product['name'] ?></p>
-        <p>น้ำหนัก : <?php echo $product['weight'] ?></p>
-        <p>รายละเอียด : <?php echo $product['Products_Detail'] ?></p>
-        <form action="cart.php" method="get">
-          <input type="number" name="qty" value="1" min="1" max="<?php echo $product['stock'] ?>">
-          <input type="hidden" name="id" value="<?php echo $product['id'] ?>">
-          <input type="hidden" name="action" value="add">
-          <!--<a href="cart.php?id=<?php echo $product['id'] ?>&action=add" class='mr-2 btn btn-info'>เพิ่มลงในตระกร้าสินค้า</a>-->
-          <button class="btn btn-success" type="submid">เพิ่มลงในตะกร้า</button>
-        </form>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 border">
+      <div class="container d-flex justify-content-start mt-5">
+        <table border="0" class="table table-striped" id="product" style="border:1px #eee solid;">
+          <tbody class="sp-text-body01">
+            <tr>
+              <td align="right"><strong style="color:#333;">ชื่อสินค้า </strong></td>
+              <td align="center" valign="middle"><strong>:</strong></td>
+              <td align="left" valign="middle" style="padding-left:10px; color:#9b631b;">
+                <strong><?php echo  $product['name']; ?></strong>
+              </td>
+            </tr>
+
+            <tr>
+              <td align="right"><strong style="color:#333;">ประเภทสินค้า</strong></td>
+              <td align="center" valign="middle"><strong>:</strong></td>
+              <td align="left" valign="middle" style="padding-left:10px; color:#9b631b;">
+                <strong><?php echo $product['type'] ?></strong>
+              </td>
+            </tr>
+
+            <tr>
+              <td width="25%" align="right"><strong style="color:#333;">ราคา</strong></td>
+              <td width="1%" align="center" valign="middle"><strong>:</strong></td>
+              <td width="74%" align="left" valign="middle" style="padding-left:10px;">
+                <h3 class="sp-text-body01" style="color:#F00; font-size:20px;"><strong>฿ <?php echo number_format((float)$product['price'], 2, '.', ''); ?></strong></h3>
+              </td>
+            </tr>
+
+            <tr>
+              <td width="25%" align="right"><strong style="color:#333;">น้ำหนัก</strong></td>
+              <td width="1%" align="center" valign="middle"><strong>:</strong></td>
+              <td width="74%" align="left" valign="middle" style="padding-left:10px;">
+                <h3 class="sp-text-body01" style="color:#9b631b; font-size:20px;"><strong><?php echo $product['weight'] ?></strong></h3>
+              </td>
+            </tr>
+
+            <tr>
+              <td align="right"><strong style="color:#333;">จำนวนสินค้าคงเหลือ</strong></td>
+              <td align="center" valign="middle"><strong>:</strong></td>
+              <td align="left" valign="middle" style="padding-left:10px; color:#9b631b;">
+                <strong><?php echo $product['stock'] ?> ชิ้น</strong>
+              </td>
+            </tr>
+
+            <tr>
+              <td align="right"><strong style="color:#333;">รายละเอียด</strong></td>
+              <td align="center" valign="middle"><strong>:</strong></td>
+              <td align="left" valign="middle" style="padding-left:10px;">
+                <strong><?php echo $product['Products_Detail'] ?></strong>
+              </td>
+            </tr>
+            <?php
+            if ($_SESSION['login'] == 0) {
+              $form = "../../auth/login.php?action=relogin";
+              $action = 'relogin';
+              $name = 'relogin';
+            } else if ($_SESSION['login'] == 1) {
+              echo $_SESSION['login'];
+              $form = "cart.php";
+              $action = 'add';
+              $name = 'action';
+            }
+            ?>
+            <tr>
+              <td width="25%" align="right"><strong style="color:#333;">จำนวน</strong></td>
+              <td width="1%" align="center" valign="middle"><strong>:</strong></td>
+              <td width="74%" align="left" valign="middle" style="padding-left:10px;">
+                <form action="<?php echo $form ?>" method="GET">
+                  <input type="number" name="qty" value="1" min="1" max="<?php echo $product['stock'] ?>">
+                  <input type="hidden" name="id" value="<?php echo $product['id'] ?>">
+                  <input type="hidden" name="<?php echo $name ?>" value="<?php echo $action ?>">
+                  <button class="btn text-light" type="submid" style="background-color: #9b631b;">เพิ่มลงในตะกร้า</button>
+                </form>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+
+      </div>
+      <div class="container m-2">
+        <h4 class="sp-text-title10" style="color:#9b631b;">รายละเอียดสินค้า</h4>
+        <table border="0" class="table" id="product" style="border:1px #FFFFFF;">
+          <tbody class="sp-text-body01">
+            <tr>
+              <td align="left"><label style="color:#333;"><?php echo $product['Products_Detail'] ?></label></td>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
+  </div>
+
+
+
+
 </body>
 </body>
 

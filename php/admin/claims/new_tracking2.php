@@ -55,9 +55,10 @@ session_start();
 								<div class="col">
 									<h4 class="mt-3">หลักฐานการรับพัสดุ</h4>
 									<hr>
-
-									<img src="../claims/upload/<?php echo $order['imageClaim'] ?>" width="220" height="230">
-
+									<video width="320" height="240" controls>
+										<source src="../<?php echo $order['videoClaim']?>" type="video/mp4">
+										Your browser does not support HTML video.
+									</video>
 								</div>
 							</div>
 							<h4 class="mb-0">รายการการสั่งซื้อ</h4>
@@ -97,7 +98,7 @@ session_start();
 							</table>
 						</div>
 
-						<form action="save_tracking.php" method="post" enctype="multipart/form-data">
+						<form action="save_tracking.php" method="GET" enctype="multipart/form-data">
 							<input type="hidden" name="OrderId" value="<?php echo $_REQUEST['id'] ?>">
 							<div class="row">
 								<div class="col">

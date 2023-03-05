@@ -10,6 +10,7 @@ class claims extends Db {
             SELECT 
 			claims.CustomerID,
 			claims.image,
+			claims.url,
 			claims. OrderId,
 			claims.status,
 			claims.details,
@@ -43,7 +44,7 @@ class claims extends Db {
 		$sql = "
 			INSERT INTO claims (
 				CustomerID, 
-				image,
+				url,
                 OrderId,
 				status,
 				details
@@ -51,9 +52,9 @@ class claims extends Db {
 				
 			) VALUES (
 				:CustomerID, 
-				:image,
+				:url,
                 :OrderId,
-				'แจ้งพัสดุเสียหาย',
+				'อยู่ระหว่างการตรวจสอบพัสดุเสียหาย',
 				:details
 			)
 		";

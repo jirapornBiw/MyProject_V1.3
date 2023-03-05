@@ -10,8 +10,25 @@ class news extends Db {
 				new_id,
 				topic,
 				CAST(dttm AS DATE) AS dttm,
-				image 
+				image,
+				detail
 			FROM news
+        ";
+        $stmt = $this->pdo->query($sql);
+        $data = $stmt->fetchAll();
+        return $data;
+    }
+	public function getAllNewTOP5(){
+        $sql = "
+            SELECT 
+				new_id,
+				topic,
+				CAST(dttm AS DATE) AS dttm,
+				image,
+				detail
+			FROM news
+			ORDER BY new_id DESC
+			LIMIT 5
         ";
         $stmt = $this->pdo->query($sql);
         $data = $stmt->fetchAll();
@@ -53,14 +70,14 @@ class news extends Db {
 		$stmt->execute($new);//จับคู่ รันในฐานข้อมูล
 		return $this->pdo->lastInsertId();
 	}
-    public function deleteNew($New_Id) {
+    public function deleteNew($id) {
 		$sql ="
 			DELETE FROM news 
 			WHERE New_Id = ?
 		";
 		$stmt = $this->pdo->prepare($sql);
-		$stmt->execute([$New_Id]);
-		echo 'บันทึกข้อมูลของท่านเรียบร้อย'.'<br>';
+		$stmt->execute([$id]);
+		// echo 'บันทึกข้อมูลของท่านเรียบร้อย'.'<br>';
 		return true;
 	}
 	public function updateNew($new) {

@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <?php header("location: php/Guest/index.php");?>
+    <?php header("location: php/member/index.php");?>
 </body>
 </html>

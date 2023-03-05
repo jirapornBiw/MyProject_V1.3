@@ -1,19 +1,23 @@
-<?php require "../../../vendor/autoload.php"  ?>
-<?php
+<?php require "../../../vendor/autoload.php";
 use App\Model\trackings;
-$trackingObj = new trackings;;
-$tracking = $_REQUEST;
-$trackingObj->updateTracking($_REQUEST);
-
-unset ($_REQUEST['company']);
+use App\Model\orders;
+$trackingObj = new trackings;
+$ordersObj = new orders;
 echo '<pre>';
 print_r($_REQUEST);
-echo '<pre>';
+echo '<pre>'; 
+$tracking = $_REQUEST;
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $trackingObj->updateTracking($tracking);
+}
 
-echo '<ht>';
+unset ($_REQUEST['company']);
+unset ($_REQUEST['tracking']);
 
-echo '<pre>';
-var_dump($_REQUEST);
-echo '<pre>';
-header("location: index.php")
+$tracking = $_REQUEST;
+$ordersObj->updateOrderTrackingClaimAdmin($tracking);
+echo "<script>alert('อัพเดตสถานะใหม่สำเร็จ');
+window.location='..order/index.php';</script>";
+
+// header("location: index.php")
 ?>

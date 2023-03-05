@@ -96,7 +96,7 @@ class trackings extends Db {
 			UPDATE  trackings SET
 				shipping_company =:company,
 				tracking =:tracking
-			WHERE OrderId = :OrderId
+			WHERE OrderId = :id
 		";
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->execute($tracking);//จับคู่ รันในฐานข้อมูล
