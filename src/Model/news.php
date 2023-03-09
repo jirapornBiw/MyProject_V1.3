@@ -7,11 +7,11 @@ class news extends Db {
     public function getAllNew(){
         $sql = "
             SELECT 
-				new_id,
-				topic,
+				NewID AS new_id,
+				Topic AS topic,
 				CAST(dttm AS DATE) AS dttm,
 				image,
-				detail
+				Detail AS detail
 			FROM news
         ";
         $stmt = $this->pdo->query($sql);
@@ -21,11 +21,11 @@ class news extends Db {
 	public function getAllNewTOP5(){
         $sql = "
             SELECT 
-				new_id,
-				topic,
+				NewID AS new_id,
+				Topic AS topic,
 				CAST(dttm AS DATE) AS dttm,
 				image,
-				detail
+				Detail AS detail
 			FROM news
 			ORDER BY new_id DESC
 			LIMIT 5
@@ -37,15 +37,15 @@ class news extends Db {
     public function getNewById($new_id){
 		$sql = "
 			SELECT
-                 new_id,
-                 topic,
+                 NewID AS new_id,
+                 Topic AS topic,
                  detail,
                  CAST(dttm AS DATE) AS dttm,
 				 image
 			FROM 
 				news
 			WHERE
-			new_id = ?
+			NewID = ?
 		";
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->execute([$new_id]);
@@ -56,8 +56,8 @@ class news extends Db {
     public function addNew($new) {
 		$sql = "
 			INSERT INTO news (
-				topic, 
-				detail, 
+				Topic, 
+				Detail, 
 				image
 				
 			) VALUES (
@@ -73,7 +73,7 @@ class news extends Db {
     public function deleteNew($id) {
 		$sql ="
 			DELETE FROM news 
-			WHERE New_Id = ?
+			WHERE NewID = ?
 		";
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->execute([$id]);
@@ -83,10 +83,10 @@ class news extends Db {
 	public function updateNew($new) {
 		$sql = "
 			UPDATE  news SET 
-				topic = :topic, 
-				detail = :detail,
+				Topic = :topic, 
+				Detail = :detail,
 				image = :image
-			WHERE new_id = :new_id
+			WHERE NewID = :new_id
 		";
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->execute($new);//จับคู่ รันในฐานข้อมูล

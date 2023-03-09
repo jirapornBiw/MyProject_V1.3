@@ -10,18 +10,18 @@ class product extends Db {
 			SELECT
 				products.id,
 				products.image,
-				type.name AS type,
+				ProductType.Name AS type,
 				products.name,
 				products.Products_Detail,
-				weight.name AS weight,
+				productweight.Name AS weight,
 				products.stock,
 				products.price,
 				status.name AS status
 			FROM 
 				products
-				LEFT JOIN type ON products.type_id = type.id
+				LEFT JOIN ProductType ON products.type_id = ProductType.TypeID
 				LEFT JOIN status ON products.status_id = status.id
-				LEFT JOIN weight ON products.weight_id = weight.id
+				LEFT JOIN productweight ON products.weight_id = productweight.WeightID
 			
 
 		";
@@ -34,20 +34,20 @@ class product extends Db {
 			SELECT
 				products.id,
 				products.image,
-				type.name AS type,
+				ProductType.Name AS type,
 				products.name,
 				products.Products_Detail,
-				weight.name AS weight,
+				productweight.Name AS weight,
 				products.stock,
 				products.price,
 				status.name AS status
 			FROM 
 				products
-				LEFT JOIN type ON products.type_id = type.id
+				LEFT JOIN ProductType ON products.type_id = ProductType.TypeID
 				LEFT JOIN status ON products.status_id = status.id
-				LEFT JOIN weight ON products.weight_id = weight.id
+				LEFT JOIN productweight ON products.weight_id = productweight.WeightID
 			WHERE
-				type.name = '{$action}'
+				ProductType.name = '{$action}'
 
 		";
 		$stmt = $this->pdo->query($sql);
@@ -102,23 +102,23 @@ class product extends Db {
 		return $this->pdo->lastInsertId();
 	}
 	
+	// public function updateProduct($product) {
+	// 	$sql = "
+	// 		UPDATE  products SET 
+	// 			type_id = :type_id,
+	// 			name = :name, 
+	// 			image = :image, 
+	// 			status_id = :status_id,
+	// 			stock = :stock,
+	// 			price = :price,
+	// 			weight_id = :weight_id
+	// 		WHERE id = :id
+	// 	";
+	// 	$stmt = $this->pdo->prepare($sql);
+	// 	$stmt->execute($product);//จับคู่ รันในฐานข้อมูล
+	// 	return true;
+	// }
 	public function updateProduct($product) {
-		$sql = "
-			UPDATE  products SET 
-				type_id = :type_id,
-				name = :name, 
-				image = :image, 
-				status_id = :status_id,
-				stock = :stock,
-				price = :price,
-				weight_id = :weight_id
-			WHERE id = :id
-		";
-		$stmt = $this->pdo->prepare($sql);
-		$stmt->execute($product);//จับคู่ รันในฐานข้อมูล
-		return true;
-	}
-	public function updateProduct2($product) {
 		$sql = "
 			UPDATE  products SET 
 				type_id = :type_id,
@@ -153,18 +153,18 @@ class product extends Db {
 			SELECT
 				products.id,
 				products.image,
-				type.name AS type,
+				ProductType.Name AS type,
 				products.name,
-				weight.name AS weight,
+				productweight.Name AS weight,
 				products.stock,
 				products.Products_Detail AS Products_Detail,
 				products.price,
 				status.name AS status
 			FROM 
 				products
-				LEFT JOIN type ON products.type_id = type.id
+				LEFT JOIN ProductType ON products.type_id = ProductType.TypeID
 				LEFT JOIN status ON products.status_id = status.id
-				LEFT JOIN weight ON products.weight_id = weight.id
+				LEFT JOIN productweight ON products.weight_id = productweight.WeightID
 			WHERE
 				products.id = ?
 		";
@@ -180,17 +180,17 @@ class product extends Db {
 		SELECT
 			products.id,
 			products.image,
-			type.name AS type,
+			ProductType.Name AS type,
 			products.name,
-			weight.name AS weight,
+			productweight.Name AS weight,
 			products.stock,
 			products.price,
 			status.name AS status
 		FROM 
 			products
-			LEFT JOIN type ON products.type_id = type.id
+			LEFT JOIN ProductType ON products.type_id = ProductType.TypeID
 			LEFT JOIN status ON products.status_id = status.id
-			LEFT JOIN weight ON products.weight_id = weight.id;	
+			LEFT JOIN productweight ON products.weight_id = productweight.WeightID;	
 		WHERE
 			products.id = 12
 		";

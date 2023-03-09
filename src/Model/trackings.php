@@ -11,8 +11,8 @@ class trackings extends Db {
 			pays.OrderId,
 			pays.CustomerID,
 			trackings.dttm AS dttm,
-			trackings.shipping_company AS shipping_company,
-			trackings.tracking AS tracking
+			trackings.ShippingCompany AS shipping_company,
+			trackings.Tracking AS tracking
 			FROM pays
 			LEFT JOIN orders ON pays.OrderId = orders.id
 			LEFT JOIN trackings ON pays.OrderId = trackings.OrderId
@@ -26,8 +26,8 @@ class trackings extends Db {
 		SELECT *,
 		orders.o_id,
 		orders.id_customer,
-		trackings.shipping_company,
-		trackings.tracking,
+		trackings.ShippingCompany AS shipping_company,
+		trackings.Tracking AS tracking,
 		trackings.dttm AS dttm
 					FROM orders
 					LEFT JOIN pays ON orders.o_id = pays.OrderId
@@ -44,10 +44,8 @@ class trackings extends Db {
 			INSERT INTO trackings (
 				OrderId,
 				customerID,
-				shipping_company, 
-				tracking
-
-				
+				ShippingCompany, 
+				Tracking
 			) VALUES (
 				:OrderId,
 				:company, 
@@ -63,8 +61,8 @@ class trackings extends Db {
 		$sql = "
 				INSERT INTO trackings (
 					OrderId,
-					tracking,
-					shipping_company
+					Tracking,
+					ShippingCompany
 				) VALUES (
 					:o_id,
 					:tracking_number,
@@ -94,8 +92,8 @@ class trackings extends Db {
 		$sql = "
 		
 			UPDATE  trackings SET
-				shipping_company =:company,
-				tracking =:tracking
+				ShippingCompany =:company,
+				Tracking =:tracking
 			WHERE OrderId = :id
 		";
 		$stmt = $this->pdo->prepare($sql);
@@ -109,7 +107,7 @@ class trackings extends Db {
 				orders.dttm,
 				orders.status,
 				orders.name,
-				trackings.tracking AS tracking
+				trackings.Tracking AS tracking
 			FROM 
 				orders
 				LEFT JOIN order_detail ON orders.o_id = order_detail.o_id

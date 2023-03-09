@@ -2,14 +2,14 @@
 namespace App\Model;
 use App\Database\Db;
 
-class weight extends Db{
+class productweight extends Db{
      public function getAllWeight(){
          $sql = "
             SELECT 
-                weight.id,
-                weight.weight,
-                weight.name
-            FROM weight
+                productweight.WeightID AS id,
+                productweight.Weight AS weight,
+                productweight.Name AS name
+            FROM productweight
           
          ";
          $stmt = $this->pdo->query($sql);

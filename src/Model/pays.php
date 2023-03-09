@@ -8,7 +8,7 @@ class pays extends Db {
 	public function getAllPay(){
         $sql = "
             SELECT * FROM pays
-			LEFT JOIN orders ON pays.OrderId = orders.o_id
+			LEFT JOIN orders ON pays.OrderID = orders.o_id
         ";
         $stmt = $this->pdo->query($sql);
         $data = $stmt->fetchAll();
@@ -18,8 +18,8 @@ class pays extends Db {
 	public function getAllPayByIdNew($o_id){
         $sql = "
             SELECT * FROM pays
-			LEFT JOIN orders ON pays.OrderId = orders.o_id
-			WHERE OrderId = ?
+			LEFT JOIN orders ON pays.OrderID = orders.o_id
+			WHERE OrderID = ?
         ";
         $stmt = $this->pdo->prepare($sql);
 		$stmt->execute([$o_id]);
@@ -30,8 +30,8 @@ class pays extends Db {
 	public function getAllPayById($id){
         $sql = "
             SELECT * FROM pays
-			LEFT JOIN orders ON pays.OrderId = orders.o_id
-			WHERE OrderId = ?
+			LEFT JOIN orders ON pays.OrderID = orders.o_id
+			WHERE OrderID = ?
         ";
         $stmt = $this->pdo->prepare($sql);
 		$stmt->execute([$id]);
@@ -44,8 +44,8 @@ class pays extends Db {
 			INSERT INTO pays (
 				CustomerID, 
 				image,
-                OrderId,
-				status
+                OrderID,
+				Status
 
 				
 			) VALUES (
@@ -65,8 +65,8 @@ class pays extends Db {
 			INSERT INTO pays (
 				CustomerID, 
 				image,
-                OrderId,
-				status
+                OrderID,
+				Status
 
 				
 			) VALUES (

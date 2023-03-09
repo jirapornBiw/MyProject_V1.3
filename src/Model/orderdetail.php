@@ -8,13 +8,13 @@ class type extends Db {
 	public function getAllOrder_detail() {
 		$sql = "
 			SELECT
-				order_detail.id,
-				order_detail.order_id,
-				order_detail.product_id,
-				order_detail.qty,
-				order_detail.subtotal,
+				orderdetail.id,
+				orderdetail.order_id,
+				orderdetail.product_id,
+				orderdetail.qty,
+				orderdetail.subtotal,
 			FROM 
-				order_detail
+				orderdetail
 		";
 		$stmt = $this->pdo->query($sql);
 		$data = $stmt->fetchAll();

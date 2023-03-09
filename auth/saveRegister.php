@@ -10,19 +10,8 @@
     <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
   </head>
   
-<?php require "../vendor/autoload.php"  ?>
-<?php
-
+<?php require "../vendor/autoload.php" ;
 use App\Model\customer;
-echo '<pre>';
-print_r($_REQUEST);
-echo '<pre>';
-
-echo '<ht>';
-
-echo '<pre>';
-var_dump($_REQUEST);
-echo '<pre>';
 
 $customer_obj = new customer;
 $result = $customer_obj->CreateCustomer($_POST);

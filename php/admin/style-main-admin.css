@@ -136,7 +136,7 @@ h3 {
 }
 
 img {
-  width: 50%;
+  width: 100%;
 }
 
 img .image_product {
@@ -144,6 +144,9 @@ img .image_product {
 }
 img .image_new {
   width: 200%;
+}
+img .image_product {
+  width: 100%;
 }
 
 .card .card-header {

@@ -27,7 +27,9 @@ class orders extends Db
 	public function getCountOrdersByIDALL($id_customer)
 	{
 		$sql = "
-		SELECT COUNT(o_id) FROM orders WHERE id_customer = '{$id_customer}'
+		SELECT COUNT(o_id) 
+		FROM orders 
+		WHERE id_customer = '{$id_customer}'
 		";
 		$stmt = $this->pdo->query($sql);
 		$data = $stmt->fetchColumn($id_customer);/*ดึงข้อมูลออกมา*/
@@ -36,7 +38,9 @@ class orders extends Db
 	public function getCountOrdersByID($id)
 	{
 		$sql = "
-		SELECT COUNT(o_id) FROM orders WHERE id_customer = '{$id}' AND status = ''
+		SELECT COUNT(o_id) 
+		FROM orders 
+		WHERE id_customer = '{$id}' AND status = ''
 		";
 		$stmt = $this->pdo->query($sql);
 		$data = $stmt->fetchAll($id);/*ดึงข้อมูลออกมา*/
@@ -100,35 +104,34 @@ class orders extends Db
 	}
 	public function getOrderById($o_id)
 	{
-
-		$sql = "
+ 		$sql = "
 		SELECT
-		orders.o_id,
-		orders.dttm,
-		orders.name,
-		orders.address,
-		orders.postcode,
-		orders.phone,
-		orders.total,
-		orders.gmail,
-		orders.status,
-		orders.tracking_number,
-		order_detail.p_id AS product_id,
-		provinces.name_th as provinces,
-		amphures.name_th as amphures,
-		districts.name_th as districts,
-		claims.image AS imageClaim,
-		claims.url AS videoClaim,
-		trackings.shipping_company AS shipping_company
+			orders.o_id,
+			orders.dttm,
+			orders.name,
+			orders.address,
+			orders.postcode,
+			orders.phone,
+			orders.total,
+			orders.gmail,
+			orders.status,
+			orders.tracking_number,
+			orderdetail.p_id AS product_id,
+			provinces.name_th as provinces,
+			amphures.name_th as amphures,
+			districts.name_th as districts,
+			claims.image AS imageClaim,
+			claims.url AS videoClaim,
+			trackings.ShippingCompany AS shipping_company
 	FROM 
 		orders
-		LEFT JOIN order_detail ON orders.o_id = order_detail.d_id
-		LEFT JOIN customers ON customers.id = orders.id_customer
-		LEFT JOIN provinces ON orders.provinces = provinces.id
-		LEFT JOIN amphures ON orders.amphures = amphures.id
-		LEFT JOIN districts ON orders.districts = districts.id
-		LEFT JOIN claims ON claims.OrderId = orders.o_id 
-		LEFT JOIN trackings ON trackings.OrderId = orders.o_id 
+			LEFT JOIN orderdetail ON orders.o_id = orderdetail.d_id
+			LEFT JOIN customers ON customers.id = orders.id_customer
+			LEFT JOIN provinces ON orders.provinces = provinces.id
+			LEFT JOIN amphures ON orders.amphures = amphures.id
+			LEFT JOIN districts ON orders.districts = districts.id
+			LEFT JOIN claims ON claims.OrderId = orders.o_id 
+			LEFT JOIN trackings ON trackings.OrderId = orders.o_id 
 	WHERE
 		orders.o_id = ?
             
@@ -152,10 +155,10 @@ class orders extends Db
 				orders.total,
 				orders.gmail,
 				orders.status,
-				order_detail.p_id AS product_id,
-				weight.name AS weight,
-				order_detail.qty AS qty,
-				order_detail.pricetotal AS pricetotal,
+				orderdetail.p_id AS product_id,
+				productweight.Name AS weight,
+				orderdetail.qty AS qty,
+				orderdetail.pricetotal AS pricetotal,
 				products.name AS product_name,
 				provinces.name_th as provinces,
 				orders.tracking_number AS tracking_number,
@@ -165,9 +168,9 @@ class orders extends Db
 
 			FROM 
 				orders
-				LEFT JOIN order_detail ON orders.o_id = order_detail.o_id
-				LEFT JOIN products ON order_detail.p_id = products.id
-				LEFT JOIN weight ON order_detail.p_id = weight.id
+				LEFT JOIN orderdetail ON orders.o_id = orderdetail.o_id
+				LEFT JOIN products ON orderdetail.p_id = products.id
+				LEFT JOIN productweight ON orderdetail.p_id = productweight.WeightID
 				LEFT JOIN customers ON customers.id = orders.id_customer
 				LEFT JOIN provinces ON customers.provinces = provinces.id
 				LEFT JOIN amphures ON customers.amphures = amphures.id
@@ -186,14 +189,14 @@ class orders extends Db
 		$sql = "
 			SELECT
 				orders.*,
-				order_detail.p_id AS product_id,
-				order_detail.qty AS qty,
-				order_detail.pricetotal AS subtotal,
+				orderdetail.p_id AS product_id,
+				orderdetail.qty AS qty,
+				orderdetail.pricetotal AS subtotal,
 				products.name AS product_name
 			FROM 
 				orders
-				LEFT JOIN order_detail ON orders.o_id = order_detail.o_id
-				LEFT JOIN products ON order_detail.p_id = products.id
+				LEFT JOIN orderdetail ON orders.o_id = orderdetail.o_id
+				LEFT JOIN products ON orderdetail.p_id = products.id
 			WHERE
 				orders.id_customer = '{$id}' AND orders.status = 'รอการชำระเงิน'
 		";
@@ -207,14 +210,14 @@ class orders extends Db
 		$sql = "
 			SELECT
 				orders.*,
-				order_detail.p_id AS product_id,
-				order_detail.qty AS qty,
-				order_detail.pricetotal AS subtotal,
+				orderdetail.p_id AS product_id,
+				orderdetail.qty AS qty,
+				orderdetail.pricetotal AS subtotal,
 				products.name AS product_name
 			FROM 
 				orders
-				LEFT JOIN order_detail ON orders.o_id = order_detail.o_id
-				LEFT JOIN products ON order_detail.p_id = products.id
+				LEFT JOIN orderdetail ON orders.o_id = orderdetail.o_id
+				LEFT JOIN products ON orderdetail.p_id = products.id
 			WHERE
 				orders.id_customer = '{$id}' AND orders.status = 'รอการตรวจสอบ'
 		";
@@ -228,14 +231,14 @@ class orders extends Db
 		$sql = "
 			SELECT
 				orders.*,
-				order_detail.p_id AS product_id,
-				order_detail.qty AS qty,
-				order_detail.pricetotal AS subtotal,
+				orderdetail.p_id AS product_id,
+				orderdetail.qty AS qty,
+				orderdetail.pricetotal AS subtotal,
 				products.name AS product_name
 			FROM 
 				orders
-				LEFT JOIN order_detail ON orders.o_id = order_detail.o_id
-				LEFT JOIN products ON order_detail.p_id = products.id
+				LEFT JOIN orderdetail ON orders.o_id = orderdetail.o_id
+				LEFT JOIN products ON orderdetail.p_id = products.id
 			WHERE
 				orders.id_customer = '{$id}' AND orders.status = 'จัดส่งสินค้าสำเร็จ'
 		";
@@ -257,18 +260,18 @@ class orders extends Db
 		return $this->pdo->lastInsertId();
 	}
 
-	public function addNewTK2($order)
-	{
-		$sql = "
-			UPDATE  orders SET 
-			tracking_number = :tracking_number,
-			shipping_company = :shipping_company
-			WHERE OrderId = :o_id
-			";
-		$stmt = $this->pdo->prepare($sql);
-		$stmt->execute($order); //จับคู่ รันในฐานข้อมูล
-		return $this->pdo->lastInsertId();
-	}
+	// public function addNewTK2($order)
+	// {
+	// 	$sql = "
+	// 		UPDATE  orders SET 
+	// 		tracking_number = :tracking_number,
+	// 		shipping_company = :shipping_company
+	// 		WHERE OrderId = :o_id
+	// 		";
+	// 	$stmt = $this->pdo->prepare($sql);
+	// 	$stmt->execute($order); //จับคู่ รันในฐานข้อมูล
+	// 	return $this->pdo->lastInsertId();
+	// }
 
 	public function updateOrderTrackingTest($orders)
 	{
@@ -340,78 +343,5 @@ class orders extends Db
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->execute($order2); //จับคู่ รันในฐานข้อมูล
 		return $this->pdo->lastInsertId();
-	}
-
-	public function getAllOrdersTT()
-	{
-
-		$countorderObj = new orders();
-		$countorder = $countorderObj->getCountOrders();
-		//$orders = $ordersObj->getAllOrders();
-		//$query=mysqli_query($conn,"SELECT COUNT(o_id) FROM orders");
-		//print_r($countorder);
-		//$nquery=$countorderObj->getShippingOrders();
-		//	print_r($nquery);
-		//print_r($query);
-
-		//$row = mysqli_fetch_row($query);
-		//$countorders = $countorder[0];
-		$page_rows = 9;  //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
-
-		$last = ceil($countorder / $page_rows);
-
-		if ($last < 1) {
-			$last = 1;
-		}
-
-		$pagenum = 1;
-
-		if (isset($_GET['pn'])) {
-			$pagenum = preg_replace('#[^0-9]#', '', $_GET['pn']);
-		}
-
-		if ($pagenum < 1) {
-			$pagenum = 1;
-		} else if ($pagenum > $last) {
-			$pagenum = $last;
-		}
-
-		$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
-
-		$nquery = $countorderObj->getNewOrders();
-		//print_r($nquery);
-		//exit;
-		$paginationCtrls = '';
-		//print_r($nquery);
-		//exit;
-		$paginationCtrls = '';
-
-		if ($last != 1) {
-
-			if ($pagenum > 1) {
-				$previous = $pagenum - 1;
-				$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $previous . '" class="btn btn-dark">Previous</a> &nbsp; &nbsp; ';
-
-				for ($i = $pagenum - 4; $i < $pagenum; $i++) {
-					if ($i > 0) {
-						$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $i . '" class="btn btn-dark">' . $i . '</a> &nbsp; ';
-					}
-				}
-			}
-
-			$paginationCtrls .= '' . $pagenum . ' &nbsp; ';
-
-			for ($i = $pagenum + 1; $i <= $last; $i++) {
-				$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $i . '" class="btn btn-dark">' . $i . '</a> &nbsp; ';
-				if ($i >= $pagenum + 4) {
-					break;
-				}
-			}
-
-			if ($pagenum != $last) {
-				$next = $pagenum + 1;
-				$paginationCtrls .= ' &nbsp; &nbsp; <a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $next . '" class="btn btn-dark">Next</a> ';
-			}
-		}
 	}
 }

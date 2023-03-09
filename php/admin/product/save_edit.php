@@ -25,7 +25,7 @@ if($_FILES['txt_file']['tmp_name']){
     }
     $product['image'] = $path;
 }
-$productObj->updateProduct2($product);
+$productObj->updateProduct($product);
 
 header("location: index.php");
 ?>

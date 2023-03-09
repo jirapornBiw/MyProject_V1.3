@@ -1,7 +1,7 @@
 <?php require "../../../vendor/autoload.php"  ?>
 <?php
 
-use App\Model\type;
+use App\Model\ProductType;
 use App\Model\status;
 use App\Model\weight;
 
@@ -59,7 +59,7 @@ session_start();
                                                 <select name="type_id" class="form-control" style="width: 400px" required>
                                                     <option value="">เลือก</option>
                                                     <?php
-                                                    $typeObj = new type;
+                                                    $typeObj = new ProductType;
                                                     $types = $typeObj->getAllTypes();
                                                     foreach ($types as $type) {
                                                         $selected = ($type['id'] == $product['type_id']) ? "selected" : "";

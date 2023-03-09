@@ -40,7 +40,7 @@ $nquery = mysqli_query(
 	"SELECT
 	products.id,
 	products.image,
-	type.name AS type,
+	ProductType.Name AS type,
 	products.name,
 	products.Products_Detail,
 	weight.name AS weight,
@@ -49,7 +49,7 @@ $nquery = mysqli_query(
 	status.name AS status
 FROM 
 	products
-	LEFT JOIN type ON products.type_id = type.id
+	LEFT JOIN ProductType ON products.type_id = ProductType.TypeID
 	LEFT JOIN status ON products.status_id = status.id
 	LEFT JOIN weight ON products.weight_id = weight.id
  $limit"
